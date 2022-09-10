@@ -4,6 +4,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\BatchController;
 use App\Http\Controllers\MajorController;
+use App\Http\Controllers\AlumniController;
+use App\Http\Controllers\UserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -22,3 +24,5 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 Route::apiResource('/batch',BatchController::class);
 Route::apiResource('/major',MajorController::class);
+Route::apiResource('/alumni',AlumniController::class);
+Route::apiResource('/user',UserController::class);
