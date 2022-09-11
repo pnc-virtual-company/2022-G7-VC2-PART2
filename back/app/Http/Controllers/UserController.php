@@ -1,9 +1,9 @@
 <?php
 
 namespace App\Http\Controllers;
+use App\Models\User;
 
 use Illuminate\Http\Request;
-use App\Models\User;
 
 class UserController extends Controller
 {
@@ -25,13 +25,13 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        $class = new User();
-        $class->name = $request->name;
-        $class->email = $request->email;
-        $class->password = $request->password;
-        
-        $class->save();
-        return response()->json(['message'=>'Create Successful']);
+        $user = new User();
+        $user->firstName = $request->firstName;
+        $user->lastName = $request->lastName;
+        $user->email = $request->email;
+        $user->password = $request->password;
+        $user->save();
+        return response()->json(["message" => 'create successfully']);
     }
 
     /**
@@ -42,7 +42,7 @@ class UserController extends Controller
      */
     public function show($id)
     {
-        //
+        return User::find($id);
     }
 
     /**
@@ -54,13 +54,13 @@ class UserController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $class = User::findOrFail($id);
-        $class->name = $request->name;
-        $class->email = $request->email;
-        $class->password = $request->password;
-        
-        $class->save();
-        return response()->json(['message'=>'Update Successful']);
+        $user = User::find($id);
+        $user->firstName = $request->firstName;
+        $user->lastName = $request->lastName;
+        $user->email = $request->email;
+        $user->password = $request->password;
+        $user->save();
+        return response()->json(["message" => 'update successfully']);
     }
 
     /**
@@ -71,6 +71,7 @@ class UserController extends Controller
      */
     public function destroy($id)
     {
-        //
+        User::destroy($id);
+        return response()->json(["message" => 'delete successfully']);
     }
 }

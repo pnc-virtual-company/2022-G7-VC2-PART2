@@ -25,4 +25,4 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::apiResource('/batch',BatchController::class);
 Route::apiResource('/major',MajorController::class);
 Route::apiResource('/alumni',AlumniController::class);
-Route::apiResource('/user',UserController::class);
+Route::apiResource('/users',UserController::class);
