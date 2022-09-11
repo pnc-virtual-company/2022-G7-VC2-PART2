@@ -11,7 +11,7 @@ class WorkExperienceController extends Controller
     public function index()
     {
         // return WorkExperience::all();
-        return WorkExperience::with('Company')->get();
+        return WorkExperience::with('Company','Position')->get();
     }
     // ===========show specified data=============
     public function show($id)
