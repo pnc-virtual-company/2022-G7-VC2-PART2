@@ -22,7 +22,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::apiResource('/batch',BatchController::class);
-Route::apiResource('/major',MajorController::class);
-Route::apiResource('/alumni',AlumniController::class);
+Route::apiResource('/batches',BatchController::class);
+Route::apiResource('/majors',MajorController::class);
+Route::apiResource('/alumnis',AlumniController::class);
 Route::apiResource('/users',UserController::class);
