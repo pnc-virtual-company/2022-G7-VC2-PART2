@@ -2,6 +2,9 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\BatchController;
+use App\Http\Controllers\MajorController;
+use App\Http\Controllers\AlumniController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\WorkExperienceController;
 use App\Http\Controllers\PositionController;
@@ -22,6 +25,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
+<<<<<<< HEAD
 
 Route::apiResource('/users',UserController::class);
 
@@ -39,3 +43,9 @@ Route::post('/company/{id}',[CompanyController::class,'update']);
 Route::get('/position',[PositionController::class,'index']);
 Route::post('/position',[PositionController::class,'store']);
 Route::get('/position/{id}',[PositionController::class,'show']);
+=======
+Route::apiResource('/batch',BatchController::class);
+Route::apiResource('/major',MajorController::class);
+Route::apiResource('/alumni',AlumniController::class);
+Route::apiResource('/users',UserController::class);
+>>>>>>> 307d5244ef580d9122506c1b4f9d22e3af504a07
