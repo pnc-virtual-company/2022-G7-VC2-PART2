@@ -17,7 +17,7 @@ class BatchSeeder extends Seeder
     public function run()
     {
         DB::table('batches')->insert([
-            'generation' => Str::random(10),
+            'generation' => "2022-2023",
         ]);
     }
 }

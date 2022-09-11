@@ -30,6 +30,8 @@ class UserController extends Controller
         $user->lastName = $request->lastName;
         $user->email = $request->email;
         $user->password = $request->password;
+        $user->profile = $request->profile;
+        $user->cover = $request->cover;
         $user->save();
         return response()->json(["message" => 'create successfully']);
     }
@@ -59,6 +61,8 @@ class UserController extends Controller
         $user->lastName = $request->lastName;
         $user->email = $request->email;
         $user->password = $request->password;
+        $user->profile = $request->profile;
+        $user->cover = $request->cover;
         $user->save();
         return response()->json(["message" => 'update successfully']);
     }
