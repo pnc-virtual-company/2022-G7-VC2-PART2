@@ -2,10 +2,9 @@
 
 namespace Database\Seeders;
 
+use App\Models\Alumni;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Database\Seeder;
-use Ramsey\Uuid\Type\Integer;
 
 class AlumniSeeder extends Seeder
 {
@@ -16,11 +15,15 @@ class AlumniSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('alumnis')->insert([
+        $alumni = [
+            [
             'user_id' => 1,
             'batch_id' => 1,
             'major_id'=>1
-            
-        ]);
+            ]
+        ];
+        foreach ($alumni as $key => $value) {
+            Alumni::create($value);
+        }
     }
 }

@@ -26,6 +26,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 Route::apiResource('/users',UserController::class);
 
@@ -49,3 +50,9 @@ Route::apiResource('/major',MajorController::class);
 Route::apiResource('/alumni',AlumniController::class);
 Route::apiResource('/users',UserController::class);
 >>>>>>> 307d5244ef580d9122506c1b4f9d22e3af504a07
+=======
+Route::apiResource('/batches',BatchController::class);
+Route::apiResource('/majors',MajorController::class);
+Route::apiResource('/alumnis',AlumniController::class);
+Route::apiResource('/users',UserController::class);
+>>>>>>> 2c33000f962fb60249a71032d46a95c6e76e66f2

@@ -2,9 +2,7 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Str;
+use App\Models\Batch;
 use Illuminate\Database\Seeder;
 
 class BatchSeeder extends Seeder
@@ -16,8 +14,13 @@ class BatchSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('batches')->insert([
-            'generation' => "2022-2023",
-        ]);
+        $batch = [
+            [
+                'generation' => "2022",
+            ]
+        ];
+        foreach ($batch as $key => $value) {
+            Batch::create($value);
+        }
     }
 }
