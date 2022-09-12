@@ -32,7 +32,7 @@ class CompanyController extends Controller
             $company->image = $fileName;
             $file-> move($path,$fileName);
         $company->save();
-        return response()->json(['message' => 'Success for store data']);
+        return response()->json(['message' => 'Successfully for createData']);
     }
 
     public function update(Request $request, $id){
@@ -48,7 +48,7 @@ class CompanyController extends Controller
             $company->image = $fileName;
             $file-> move($path,$fileName);
         $company->save();
-        return response()->json(['message' => 'Success for Update your data']);
+        return response()->json(['message' => 'Successfully for updateData']);
     }
 
 

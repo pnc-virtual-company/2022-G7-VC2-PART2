@@ -18,7 +18,7 @@ class PositionController extends Controller
         $position = new Position();
         $position->name = $request->name;
         $position->save();
-        return response()->json(['message' => 'Successfull for create data']);
+        return response()->json(['message' => 'Successfull for Createdata']);
     }
 
     /**

@@ -4,7 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use App\Models\WorkExperience;
+use App\Models\workExperience;
 
 class Position extends Model
 {
@@ -17,6 +17,6 @@ class Position extends Model
         'updated_at'
     ];
     public function workExperience(){
-        return $this->hasMany(WorkExperience::class);
+        return $this->hasMany(workExperience::class);
     }
 }
