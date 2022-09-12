@@ -1,4 +1,5 @@
 <template>
+<<<<<<< HEAD
   <div>
     <a href="https://vitejs.dev" target="_blank">
       <img src="/vite.svg" class="logo" alt="Vite logo" />
@@ -23,19 +24,23 @@ export default {
     'cardview':Card,
 
   }
+=======
+  <nav-component></nav-component>
+  <router-view></router-view>
+</template>
+
+<script>
+import TheNavigationBar from './components/nav/TheNavigationBar.vue'
+export default {
+  components: {
+    'nav-component': TheNavigationBar,
+  },
+>>>>>>> 4d3e76feea69a80f769f6adc5f1c72e3f8679333
 }
 </script>
 
-<style scoped>
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.vue:hover {
-  filter: drop-shadow(0 0 2em #42b883aa);
+<style>
+body {
+  background: #F6F8F9;
 }
 </style>

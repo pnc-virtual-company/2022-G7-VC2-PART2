@@ -2,42 +2,41 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\WorkExperience;
+use App\Models\workExperience;
 use Illuminate\Http\Request;
 
-class WorkExperienceController extends Controller
+class workExperienceController extends Controller
 {
     
     public function index()
     {
-        // return WorkExperience::all();
-        return WorkExperience::with('Company','Position')->get();
+        // return workExperience::all();
+        return workExperience::with('Company','Position')->get();
     }
     // ===========show specified data=============
     public function show($id)
     {
-        return WorkExperience::with('Company')->FindOrFail($id);
+        return workExperience::with('Company')->FindOrFail($id);
     }
     // =========== store your data=============
     public function store(Request $request)
     {
-        $workExperience = new WorkExperience();
-        $workExperience->start_year = $request->start_year;
-        $workExperience->end_year = $request->end_year;
-        $workExperience->company_id = $request->company_id;
+        $workExperience = new workExperience();
+        $workExperience->start_year = $request->startYear;
+        $workExperience->end_year = $request->endYear;
+        $workExperience->company_id = $request->companyId;
         // $workExperience->alumni_id = $request->alumni_id;
-        $workExperience->position_id = $request->position_id;
+        $workExperience->position_id = $request->positionId;
         $workExperience->save();
-        return response()->json(['message'=>'Successfull for StoreData']);
+        return response()->json(['message'=>'Successfully for CreateData']);
     }
     // ===========update your data=============
     public function update(Request $request, $id)
     {
-        $workExperience = WorkExperience::FindOrFail($id);
-        $workExperience->start_year = $request->start_year;
-        $workExperience->end_year = $request->end_year;
+        $workExperience = workExperience::FindOrFail($id);
+        $workExperience->start_year = $request->startYear;
+        $workExperience->end_year = $request->endYear;
         $workExperience->save();
-        return response()->json(['message'=>'Successfull for UpdateData']);
+        return response()->json(['message'=>'Successfully for UpdateData']);
     }
-
 }
