@@ -28,7 +28,12 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::apiResource('/batches',BatchController::class);
 Route::apiResource('/majors',MajorController::class);
 Route::apiResource('/alumni',AlumniController::class);
-Route::apiResource('/users',UserController::class);
+//===========Api user routes ===============
+Route::get('/users',[UserController::class,'index']);
+Route::post('/users',[UserController::class,'store']);
+Route::get('/users/{id}',[UserController::class,'show']);
+Route::put('/users/{id}',[UserController::class,'update']);
+Route::delete('/users/{id}',[UserController::class,'destroy']);
 // ===========Api for Position ============
 Route::get('/position',[PositionController::class,'index']);
 Route::post('/position',[PositionController::class,'store']);
