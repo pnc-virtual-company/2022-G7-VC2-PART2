@@ -22,11 +22,11 @@ class workExperienceController extends Controller
     public function store(Request $request)
     {
         $workExperience = new workExperience();
-        $workExperience->start_year = $request->start_year;
-        $workExperience->end_year = $request->end_year;
-        $workExperience->company_id = $request->company_id;
-        // $workExperience->alumni_id = $request->alumni_id;
-        $workExperience->position_id = $request->position_id;
+        $workExperience->start_year = $request->startYear;
+        $workExperience->end_year = $request->endYear;
+        $workExperience->company_id = $request->companyId;
+        $workExperience->alumni_id = $request->alumni_id;
+        $workExperience->position_id = $request->positionId;
         $workExperience->save();
         return response()->json(['message'=>'Successfully for CreateData']);
     }
@@ -34,8 +34,8 @@ class workExperienceController extends Controller
     public function update(Request $request, $id)
     {
         $workExperience = workExperience::FindOrFail($id);
-        $workExperience->start_year = $request->start_year;
-        $workExperience->end_year = $request->end_year;
+        $workExperience->start_year = $request->startYear;
+        $workExperience->end_year = $request->endYear;
         $workExperience->save();
         return response()->json(['message'=>'Successfully for UpdateData']);
     }

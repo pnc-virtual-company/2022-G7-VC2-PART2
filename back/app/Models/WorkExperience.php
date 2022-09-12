@@ -12,7 +12,7 @@ class workExperience extends Model
         'start_year',
         'end_year',
         'company_id',
-        // 'alumni_id',
+        'alumni_id',
         'position_id'
     ];
     protected $hidden =[
@@ -24,5 +24,8 @@ class workExperience extends Model
     }
     public function position(){
         return $this->belongsTo(Position::class);
+    }
+    public function alumni(){
+        return $this->belongsTo(Alumni::class);
     }
 }

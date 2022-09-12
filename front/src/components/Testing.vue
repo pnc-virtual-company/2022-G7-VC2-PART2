@@ -4,7 +4,7 @@
             <h1>Work Experience</h1>
         </template>
         <template #card>
-            <base-card :bgColor="'bg-gray-600'" :wCard="'w-[100px]'">
+            <base-card :bgColor="'bg-gray-700'" :wCard="'w-[100px]'">
                 <template #header>
                     <h1>Hello</h1>
                 </template>

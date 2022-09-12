@@ -25,6 +25,12 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
+//===========Api user routes ===============
+Route::get('/users',[UserController::class,'index']);
+Route::post('/users',[UserController::class,'store']);
+Route::get('/users/{id}',[UserController::class,'show']);
+Route::put('/users/{id}',[UserController::class,'update']);
+Route::delete('/users/{id}',[UserController::class,'destroy']);
 // ===========Api for Position ============
 Route::get('/positions',[PositionController::class,'index']);
 Route::post('/positions',[PositionController::class,'store']);
@@ -51,6 +57,4 @@ Route::post('/majors/{id}',[MajorController::class,'update']);
 Route::get('/alumni',[AlumniController::class,'index']);
 Route::post('/alumni',[AlumniController::class,'store']);
 Route::post('/alumni/{id}',[AlumniController::class,'update']);
-Route::apiResource('/users',UserController::class);
-
 
