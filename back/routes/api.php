@@ -25,8 +25,17 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
+<<<<<<< HEAD
+=======
+Route::apiResource('/batches',BatchController::class);
+Route::apiResource('/majors',MajorController::class);
+Route::apiResource('/alumni',AlumniController::class);
+>>>>>>> dfae790515170fdc2cb5eb1ceb48f5afeefaf79b
 Route::apiResource('/users',UserController::class);
-
+// ===========Api for Position ============
+Route::get('/position',[PositionController::class,'index']);
+Route::post('/position',[PositionController::class,'store']);
+Route::get('/position/{id}',[PositionController::class,'show']);
 // ===============api for workExperience =============
 Route::get('/experience',[WorkExperienceController::class,'index']);
 Route::post('/experience',[WorkExperienceController::class,'store']);
@@ -36,6 +45,7 @@ Route::put('/experience/{id}',[WorkExperienceController::class,'update']);
 Route::get('/company',[CompanyController::class,'index']);
 Route::post('/company',[CompanyController::class,'store']);
 Route::get('/company/{id}',[CompanyController::class,'show']);
+<<<<<<< HEAD
 Route::post('/company/{id}',[CompanyController::class,'update']);
 // ===========Api for Position ============
 Route::get('/position',[PositionController::class,'index']);
@@ -53,3 +63,6 @@ Route::apiResource('/majors',MajorController::class);
 Route::apiResource('/alumnis',AlumniController::class);
 Route::apiResource('/users',UserController::class);
 
+=======
+Route::post('/company/{id}',[CompanyController::class,'update']);
+>>>>>>> dfae790515170fdc2cb5eb1ceb48f5afeefaf79b
