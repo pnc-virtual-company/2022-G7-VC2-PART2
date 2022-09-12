@@ -1,21 +1,17 @@
 <template>
-    <div class="mt-2 shadow-lg bg-white rounded-lg p-3 font-poppins">
-        <div class="flex justify-between">
-            <h1 class="text-primary font-bold text-xl">Work Experience</h1>
-            <add-icon />
-        </div>
-        <div class="flex flex-wrap gap-2 py-4">
-            <slot>
-                <small-card/>
-                <small-card/>
-            </slot>
-        </div>
+    <div :class="[shadowLg,bgWhite,pCard,roundedLg,mCard]">
+        <slot name="header">
+
+        </slot>
+        <slot name="card">
+
+        </slot>
     </div>
 </template>
 
 <script>
 export default {
-
+    props:['shadowLg','bgWhite','pCard','roundedLg','mCard']
 }
 </script>
 

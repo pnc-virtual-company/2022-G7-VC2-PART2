@@ -13,7 +13,9 @@ import PhoneIcon from './components/widgets/IconWidgets/PhoneIcon.vue'
 import PointIcon from './components/widgets/IconWidgets/PointIcon.vue'
 import CancelIcon from './components/widgets/IconWidgets/CancelIcon.vue'
 import CardWidget from './components/widgets/Card/cardWidget.vue'
-import CardSmall from './components/widgets/Card/CardSmall.vue'
+import BaseCard from './components/widgets/Card/BaseCard.vue'
+import NextIcon from './components/widgets/IconWidgets/NextIcon.vue'
+import BackIcon from './components/widgets/IconWidgets/BackIcon.vue'
 
 
 
@@ -31,5 +33,7 @@ app.component('phone-icon',PhoneIcon)
 app.component('point-icon',PointIcon)
 app.component('cancel-icon',CancelIcon)
 app.component('card-widget',CardWidget)
-app.component('small-card',CardSmall)
+app.component('base-card',BaseCard)
+app.component('next-icon',NextIcon)
+app.component('back-icon',BackIcon)
 .mount('#app')

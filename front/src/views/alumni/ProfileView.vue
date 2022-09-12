@@ -41,14 +41,18 @@
                 </span>
             </div>
         </div>
-        <!-- display work experience  -->
-        <card-widget/>
+        <!-- testing Card widget -->
+        <testing-card/>
 
     </section>
 </template>
 
 <script>
+    import TheTesting from '../../components/Testing.vue' 
     export default {
+        components:{
+            'testing-card':TheTesting
+        },
         data(){
             return {
                 isOpenOptionCard: false
