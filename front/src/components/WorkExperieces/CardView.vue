@@ -1,6 +1,6 @@
-<template>
-    <!-- // Card  work experience -->
-    <div class="flex items-center bg-slate-100 relative rounded-lg w-[49%]">
+<!-- <template>
+    // Card  work experience -->
+    <!-- <div class="flex items-center bg-slate-100 relative rounded-lg w-[49%]">
         <img src="../../assets/z1 flexible.svg" alt="">
         <div>
             <h1 class="font-bold">Senior Fronted Developer</h1>
@@ -27,8 +27,8 @@
                 </div>
             </div>
         </div>
-    </div>
-  </template>
+    </div> -->
+  <!-- </template>
   
   <script>
   import axios from '../../axios-http';
@@ -41,4 +41,4 @@
   
   <style>
   
-  </style>
+  </style> --> 
