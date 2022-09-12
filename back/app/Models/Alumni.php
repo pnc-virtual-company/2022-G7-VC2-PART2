@@ -25,4 +25,7 @@ class Alumni extends Model
     {
         return $this->belongsTo(Major::class,'major_id');
     }
+    public function workExperience(){
+        return $this->hasMany(WorkExperience::class,'workExperience_id');
+    }
 }

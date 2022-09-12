@@ -18,9 +18,8 @@ return new class extends Migration
             $table->date('start_year');
             $table->date('end_year');
             $table->foreignId('company_id')->constrained()->onDelete('CASCADE');
-            // $table->foreignId('alumni_id')->constrained()->onDelete('CASCADE');
+            $table->foreignId('alumni_id')->constrained()->onDelete('CASCADE');
             $table->foreignId('position_id')->constrained()->onDelete('CASCADE');
-            // $table->integer('alumni_id');
             $table->timestamps();
         });
     }

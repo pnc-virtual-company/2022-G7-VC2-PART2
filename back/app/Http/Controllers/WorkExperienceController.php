@@ -25,7 +25,7 @@ class workExperienceController extends Controller
         $workExperience->start_year = $request->startYear;
         $workExperience->end_year = $request->endYear;
         $workExperience->company_id = $request->companyId;
-        // $workExperience->alumni_id = $request->alumni_id;
+        $workExperience->alumni_id = $request->alumni_id;
         $workExperience->position_id = $request->positionId;
         $workExperience->save();
         return response()->json(['message'=>'Successfully for CreateData']);

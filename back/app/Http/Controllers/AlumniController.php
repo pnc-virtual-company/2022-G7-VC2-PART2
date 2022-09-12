@@ -40,9 +40,9 @@ class AlumniController extends Controller
      * @param  \App\Models\Alumni  $alumni
      * @return \Illuminate\Http\Response
      */
-    public function show(Alumni $alumni)
+    public function show($id)
     {
-        //
+        return Alumni::with('User','Batch','Major')->FindOrFail($id);
     }
 
     /**
@@ -63,14 +63,4 @@ class AlumniController extends Controller
         return response()->json(['message'=>'updated']);
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Alumni  $alumni
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Alumni $alumni)
-    {
-        //
-    }
 }
