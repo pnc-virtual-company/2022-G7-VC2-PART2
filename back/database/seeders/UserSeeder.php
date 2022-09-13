@@ -22,6 +22,8 @@ class UserSeeder extends Seeder
                 'email' => 'sophysaeuy@gmail.com',
                 'email_verified_at' => now(),
                 'password' => '12345678',
+                'phone' => 'string',
+                'gender' => 'gender',
                 'profile' => 'sophy.png',
                 'cover' => 'sp.png',
             ]
