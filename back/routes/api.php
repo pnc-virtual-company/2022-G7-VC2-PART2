@@ -29,7 +29,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::get('/users',[UserController::class,'index']);
 Route::post('/users',[UserController::class,'store']);
 Route::get('/users/{id}',[UserController::class,'show']);
-Route::post('/users/{id}',[UserController::class,'update']);
+Route::put('/users/{id}',[UserController::class,'update']);
 Route::delete('/users/{id}',[UserController::class,'destroy']);
 
 // ===============api for workExperience =============
@@ -37,6 +37,7 @@ Route::get('/experiences',[WorkExperienceController::class,'index']);
 Route::post('/experiences',[WorkExperienceController::class,'store']);
 Route::get('/experiences/{id}',[WorkExperienceController::class,'show']);
 Route::put('/experiences/{id}',[WorkExperienceController::class,'update']);
+Route::get('/experiences/alumni/{id}',[WorkExperienceController::class,'getWEbyAlumin']);
 // ===============api for company ============
 Route::get('/companies',[CompanyController::class,'index']);
 Route::post('/companies',[CompanyController::class,'store']);
@@ -45,16 +46,14 @@ Route::put('/companies/{id}',[CompanyController::class,'update']);
 // ============== api for batches ==============
 Route::get('/batches',[BatchController::class,'index']);
 Route::post('/batches',[BatchController::class,'store']);
-Route::post('/batches/{id}',[BatchController::class,'update']);
+Route::put('/batches/{id}',[BatchController::class,'update']);
 // ============== api for majors ==============
 Route::get('/majors',[MajorController::class,'index']);
 Route::post('/majors',[MajorController::class,'store']);
 Route::post('/majors/{id}',[MajorController::class,'update']);
 // ============== api for alumni ==============
 Route::get('/alumni',[AlumniController::class,'index']);
+Route::get('/alumni/{id}',[AlumniController::class,'show']);
 Route::post('/alumni',[AlumniController::class,'store']);
 Route::post('/alumni/{id}',[AlumniController::class,'update']);
 Route::get('/alumni/{id}',[AlumniController::class,'show']);
-
-
-

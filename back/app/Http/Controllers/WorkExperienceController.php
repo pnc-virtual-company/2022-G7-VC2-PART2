@@ -40,4 +40,9 @@ class workExperienceController extends Controller
         $workExperience->save();
         return response()->json(['message'=>'Successfully for UpdateData']);
     }
+
+    public function getWEbyAlumin($id)
+    {
+        return workExperience::where('alumni_id', '=', $id)->with('Company')->get();
+    }
 }

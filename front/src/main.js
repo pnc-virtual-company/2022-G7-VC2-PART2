@@ -16,6 +16,10 @@ import CardWidget from './components/widgets/Card/cardWidget.vue'
 import BaseCard from './components/widgets/Card/BaseCard.vue'
 import NextIcon from './components/widgets/IconWidgets/NextIcon.vue'
 import BackIcon from './components/widgets/IconWidgets/BackIcon.vue'
+import GeneralInfo from './components/profile/alumni/GeneralInfo.vue'
+import HeaderCard from './components/widgets/Card/HeaderCard.vue'
+import SkillsContent from './components/profile/alumni/SkillsContent.vue'
+import './axios-http';
 
 
 
@@ -36,4 +40,8 @@ app.component('card-widget',CardWidget)
 app.component('base-card',BaseCard)
 app.component('next-icon',NextIcon)
 app.component('back-icon',BackIcon)
+app.component('general-info-body',GeneralInfo)
+app.component('header-card',HeaderCard)
+app.component('skill-content',SkillsContent)
+
 .mount('#app')

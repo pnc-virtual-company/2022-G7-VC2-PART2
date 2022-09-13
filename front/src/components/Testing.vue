@@ -1,10 +1,10 @@
 <template>
-    <card-widget :shadowLg="'shadow-lg'" :bgWhite="'bg-white'" :roundedLg="'rounded-lg'" :pCard="'p-3'" :mCard="'mt-2'">
+    <card-widget>
         <template #header>
             <h1>Work Experience</h1>
         </template>
         <template #card>
-            <base-card :bgColor="'bg-gray-700'" :wCard="'w-[100px]'">
+            <base-card>
                 <template #header>
                     <h1>Hello</h1>
                 </template>

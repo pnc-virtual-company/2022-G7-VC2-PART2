@@ -45,6 +45,8 @@ class AlumniController extends Controller
         return Alumni::with('User','Batch','Major')->FindOrFail($id);
     }
 
+
+
     /**
      * Update the specified resource in storage.
      *

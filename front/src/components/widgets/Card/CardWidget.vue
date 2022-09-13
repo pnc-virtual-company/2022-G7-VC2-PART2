@@ -1,18 +1,18 @@
 <template>
-    <div :class="[shadowLg,bgWhite,pCard,roundedLg,mCard]">
-        <slot name="header">
+    <div class="shadow-lg bg-white rounded-[5px] p-3 font-poppins w-full">
+        <div class="flex justify-between">
+            <slot name="header">
 
-        </slot>
-        <slot name="card">
+            </slot>
+        </div>
+        <slot name="body">
 
         </slot>
     </div>
 </template>
 
 <script>
-export default {
-    props:['shadowLg','bgWhite','pCard','roundedLg','mCard']
-}
+
 </script>
 
 <style>
