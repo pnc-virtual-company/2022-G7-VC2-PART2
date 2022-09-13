@@ -1,11 +1,24 @@
-<!-- <template>
-    // Card  work experience -->
-    <!-- <div class="flex items-center bg-slate-100 relative rounded-lg w-[49%]">
-        <img src="../../assets/z1 flexible.svg" alt="">
-        <div>
-            <h1 class="font-bold">Senior Fronted Developer</h1>
-            <p class="text-sm text-slate-400">Z1 Flexible Solution</p>
-            <p class="text-xs text-slate-400">2018 - 2019</p>
+<template>
+    <div class="flex items-center bg-slate-100 relative rounded-lg w-[49%]">
+        <slot name="logo">
+
+        </slot>
+        <div class="w-full">
+            <h1 class="font-bold w-[85%] truncate" @mouseover="$event.target.classList.remove('truncate')" @mouseout="$event.target.classList.add('truncate')">
+                <slot name="main_title">
+
+                </slot>
+            </h1>
+            <p class="text-sm text-slate-400">
+                <slot name="sub_title">
+    
+                </slot>
+            </p>
+            <p class="text-xs text-slate-400">
+                <slot name="lower_title">
+    
+                </slot>
+            </p>
         </div>
         <div class="absolute right-0 top-0 mr-2 mt-1 cursor-pointer">
             <svg @click="openOpenCard" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6 hover:text-primary">
@@ -27,18 +40,23 @@
                 </div>
             </div>
         </div>
-    </div> -->
-  <!-- </template>
-  
-  <script>
-  import axios from '../../axios-http';
-  export default {
-    prop:{
-      
-    }
-  }
-  </script>
-  
-  <style>
-  
-  </style> --> 
+    </div>
+</template>
+<script>
+export default {
+    data(){
+            return {
+                isOpenOptionCard: false
+            }
+        },
+        methods:{
+            openOpenCard(){
+                this.isOpenOptionCard = !this.isOpenOptionCard;
+            }
+        }
+}
+</script>
+
+<style>
+
+</style>

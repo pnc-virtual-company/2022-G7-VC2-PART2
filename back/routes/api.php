@@ -25,9 +25,6 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::apiResource('/batches',BatchController::class);
-Route::apiResource('/majors',MajorController::class);
-Route::apiResource('/alumni',AlumniController::class);
 //===========Api user routes ===============
 Route::get('/users',[UserController::class,'index']);
 Route::post('/users',[UserController::class,'store']);
@@ -58,14 +55,7 @@ Route::post('/majors',[MajorController::class,'store']);
 Route::post('/majors/{id}',[MajorController::class,'update']);
 // ============== api for alumni ==============
 Route::get('/alumni',[AlumniController::class,'index']);
+Route::get('/alumni/{id}',[AlumniController::class,'show']);
 Route::post('/alumni',[AlumniController::class,'store']);
 Route::post('/alumni/{id}',[AlumniController::class,'update']);
-<<<<<<< HEAD
-Route::get('/alumni/{id}',[AlumniController::class,'show']);
-
-Route::apiResource('/users',UserController::class);
-Route::get('/users/{id}',[UserController::class,'show']);
-=======
-
->>>>>>> 8780a8bc13e82db7d45badf8f8c64ccc5dbb7943
 
