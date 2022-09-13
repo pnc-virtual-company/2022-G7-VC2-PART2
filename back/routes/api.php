@@ -41,7 +41,7 @@ Route::put('/experiences/{id}',[WorkExperienceController::class,'update']);
 Route::get('/companies',[CompanyController::class,'index']);
 Route::post('/companies',[CompanyController::class,'store']);
 Route::get('/companies/{id}',[CompanyController::class,'show']);
-Route::post('/companies/{id}',[CompanyController::class,'update']);
+Route::put('/companies/{id}',[CompanyController::class,'update']);
 // ============== api for batches ==============
 Route::get('/batches',[BatchController::class,'index']);
 Route::post('/batches',[BatchController::class,'store']);
@@ -54,14 +54,7 @@ Route::post('/majors/{id}',[MajorController::class,'update']);
 Route::get('/alumni',[AlumniController::class,'index']);
 Route::post('/alumni',[AlumniController::class,'store']);
 Route::post('/alumni/{id}',[AlumniController::class,'update']);
-<<<<<<< HEAD
-
 Route::get('/alumni/{id}',[AlumniController::class,'show']);
 
-Route::apiResource('/users',UserController::class);
-Route::get('/users/{id}',[UserController::class,'show']);
 
 
-=======
-Route::get('/alumni/{id}',[AlumniController::class,'show']);
->>>>>>> eb555d999c567f70060329cc15c58b50e5992cb3

@@ -36,7 +36,7 @@ class CompanyController extends Controller
     }
 
     public function update(Request $request, $id){
-        $company = Company::FindOrFail($id);
+        $company = Company::Find($id);
         $company->name = $request->name;
         $company->address = $request->address;
         $path = public_path('images');

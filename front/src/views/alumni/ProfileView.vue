@@ -12,13 +12,7 @@
                 </div>
                 <div class="flex w-full relative">
                     <img class="w-[17%] rounded-full border-4 border-white absolute ml-10 -mt-14" src="../../assets/cover-img.png" alt="cover-img">
-<<<<<<< HEAD
-                    <span class="z-20 bg-secondary p-1 rounded-full mt-[6%] ml-[20%]">
-                        <img class="w-4" src="../../assets/male-symbol-svgrepo-com.min.svg" alt="">
-                    </span>
-=======
                     <man-icon/> 
->>>>>>> eb555d999c567f70060329cc15c58b50e5992cb3
                     <div class="absolute ml-[26%] block mt-1">
                         <h1 class="text-2xl font-extrabold">Mengyi Yoeng</h1>
                         <span class="text-base font-bold">Senior Frontend Developer at Amazon</span>
@@ -42,7 +36,7 @@
                 </div>
             </div>
             <div class="relative w-full h-[16%]">
-<<<<<<< HEAD
+
                 <!-- // edit icons  -->
                 <span class="bg-white rounded-full w-8 h-8 absolute items-center flex justify-center right-0 bottom-0 m-3 cursor-pointer shadow-lg" @click="showFormEdit">                     
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6 text-primary">
@@ -270,7 +264,6 @@
                     </div>
                     </div>
                 </div>
-                
             </form>
             </div>
         </div> 
@@ -278,8 +271,8 @@
 
         <!-- edit workexperience -->
 
-        <div class="modal-mask" v-if="showedit==true">
-      <div class="modal-wrapper">
+    <div class="modal-mask" v-if="showedit==true">
+        <div class="modal-wrapper">
           <div class="modal-container rounded">
               <form @submit.prevent="editworkexperience">  
                     <div class="card_form text-start w-[50%] m-auto p-5">
@@ -335,7 +328,7 @@
                             <div class="w-[100%] mt-1">
                             <label for="file" class="text-slate-500 text-sm">Image</label> <sup class="star text-blue-500">*</sup> 
                             <br>
-                            <input type="file" class="text-sm w-[97%] p-1 mt-1 outline-blue-500 border-solid border-[1px] border-gray-400" placeholder="e.g. file" @onchange="onchangeimg" >
+                            <input type="file" class="text-sm w-[97%] p-1 mt-1 outline-blue-500 border-solid border-[1px] border-gray-400" placeholder="e.g. file" @change="onchangeimg" >
                             </div>
                             
                         </div>
@@ -346,28 +339,20 @@
                     </div>
                 </div>
               </form>
-          </div>
-      </div>
-  </div>
-=======
-                <span class="bg-white rounded-full w-8 h-8 absolute items-center flex justify-center right-0 bottom-0 m-3 cursor-pointer shadow-lg">
-                    <edit-icon class="text-primary"/>
-                </span>
             </div>
         </div>
+    </div>
         <!-- testing Card widget -->
         <testing-card/>
 
->>>>>>> eb555d999c567f70060329cc15c58b50e5992cb3
+
     </section>
     
 </template>
-
-<<<<<<< HEAD
 <script setup>
     import {ref,onMounted} from 'vue'
     import axios from '../../axios-http';
-    const updateInfoURL = ""
+    // const updateInfoURL = ""
 
     const isOpenOptionCard= ref(false);
     const showModal = ref(false);  
@@ -384,9 +369,6 @@
 
     // edit work experience -->
    
-     const name=ref("");
-     const address=ref("");
-     const image=ref("");
 
     function openOpenCard(){
         isOpenOptionCard.value = !isOpenOptionCard.value;
@@ -416,43 +398,44 @@
     // onMounted(()=>{
     //     getInformations();
     // })
-
-    const  allowExtension = ["jpg", "png", "jpeg", "gif", "webp"];
+    const name=ref("");
+    const address=ref("");
+    const image=ref("");
     // const 
+    
+    const startdate = ref("");
+    const enddate = ref("");
+    const position = ref("");
+    
+    const  allowExtension = ["jpg", "png", "jpeg", "gif", "webp"];
     function onchangeimg(event) {
         let fileExtension = event.target.files[0].name.split(".").pop();
         if (allowExtension.includes(fileExtension.toLowerCase())) {
             image.value = event.target.files[0];
-=======
-<script>
-    import TheTesting from '../../components/Testing.vue' 
-    export default {
-        components:{
-            'testing-card':TheTesting
-        },
-        data(){
-            return {
-                isOpenOptionCard: false
-            }
-        },
-        methods:{
-            openOpenCard(){
-                this.isOpenOptionCard = !this.isOpenOptionCard;
-            }
->>>>>>> eb555d999c567f70060329cc15c58b50e5992cb3
+            console.log(image.value);
         }
     }
-    
-    const startdate = ref("");
-    const enddate = ref("");
-    const position=ref("");
     function editworkexperience(){
-        axios.put('experiences/'+'1',{
-            startYear:startdate.value,
+        let Fd = new FormData();
+        Fd.append('_method','PUT');
+        Fd.append('name',name.value);
+        Fd.append('address',address.value);
+        Fd.append('image',image.value);
+        console.log(Fd.value);
+        axios.post("http://127.0.0.1:8000/api/companies/2",Fd).then((response)=>{
+            console.log(response.data)
         })
+
+        axios.put('http://127.0.0.1:8000/api/experiences/5',{
+            startYear:startdate.value,
+            endYear:enddate.value,
+            position:position.value
+        }).then((result) => {
+            console.log(result.data);
+        })
+        showedit.value = !showedit.value;
     }
 </script>
-
 <style scoped>
     .modal-mask {
         position: fixed;
