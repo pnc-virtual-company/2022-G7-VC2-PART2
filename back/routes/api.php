@@ -57,4 +57,4 @@ Route::post('/majors/{id}',[MajorController::class,'update']);
 Route::get('/alumni',[AlumniController::class,'index']);
 Route::post('/alumni',[AlumniController::class,'store']);
 Route::post('/alumni/{id}',[AlumniController::class,'update']);
-
+Route::get('/alumni/{id}',[AlumniController::class,'show']);
