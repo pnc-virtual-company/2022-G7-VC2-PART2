@@ -311,42 +311,6 @@
 
     
 </template>
-<!-- <script >
-    
-    // onMounted(()=>{
-    //     getInformations();
-    // })
-
-    
-    const  allowExtension = ["jpg", "png", "jpeg", "gif", "webp"];
-    function onchangeimg(event) {
-        let fileExtension = event.target.files[0].name.split(".").pop();
-        if (allowExtension.includes(fileExtension.toLowerCase())) {
-            image.value = event.target.files[0];
-            console.log(image.value);
-        }
-    }
-    function editworkexperience(){
-        let Fd = new FormData();
-        Fd.append('_method','PUT');
-        Fd.append('name',name.value);
-        Fd.append('address',address.value);
-        Fd.append('image',image.value);
-        console.log(Fd.value);
-        axios.post("http://127.0.0.1:8000/api/companies/2",Fd).then((response)=>{
-            console.log(response.data)
-        })
-
-        axios.put('http://127.0.0.1:8000/api/experiences/5',{
-            startYear:startdate.value,
-            endYear:enddate.value,
-            position:position.value
-        }).then((result) => {
-            console.log(result.data);
-        })
-        showedit.value = !showedit.value;
-    }
-</script> -->
 
 <script>
     import axios from '../../axios-http';
