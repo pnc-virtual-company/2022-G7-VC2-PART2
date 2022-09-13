@@ -18,9 +18,9 @@
                         </label>
                         <input id="cover-img" hidden type="file" accept="image/*" />
                     </div>
-                    <div class="mt-[8%] block text-center absolute">
+                    <div class="mt-[8%] block text-center absolute ml-[6%]">
                         <h1 class="text-2xl font-extrabold">{{alumniData.firstName}} {{alumniData.lastName}}</h1>
-                        <span class="text-base ">Senior Frontend Developer at Amazon</span>
+                        <span class="text-base">{{workExperiences[0].position}}</span>
                     </div>
                 </div>
             </div>
@@ -70,32 +70,19 @@
                 </template>
                 <template #body>
                     <div class="flex flex-wrap gap-2 py-4">
-                        <base-card>
+                        <base-card v-for="(work, index) in workExperiences" :key="index">
                             <template #logo>
-                                <img src="../../assets/z1 flexible.svg" alt="">
+                                <img :src="work.company.image" alt="">
+                                <img src="../../assets/workplacelogos/work_experience_defaul_logo.svg" alt="">
                             </template>
                             <template #main_title>
-                                Senior Fronted Developer
+                                {{work.position}}
                             </template>
                             <template #sub_title>
-                                Z1 Flexible Solution
+                                {{work.company.name}}
                             </template>
                             <template #lower_title>
-                                2018 - 2019
-                            </template>
-                        </base-card>
-                        <base-card>
-                            <template #logo>
-                                <img src="../../assets/z1 flexible.svg" alt="">
-                            </template>
-                            <template #main_title>
-                                Senior Fronted Developer
-                            </template>
-                            <template #sub_title>
-                                Z1 Flexible Solution
-                            </template>
-                            <template #lower_title>
-                                2018 - 2019
+                                {{work.start_year}} {{work.end_year}}
                             </template>
                         </base-card>
                     </div>
@@ -135,20 +122,6 @@
                                 2016 - 2018
                             </template>
                         </base-card>
-                        <base-card>
-                            <template #logo>
-                                <img src="../../assets/schoollogos/pnc.svg" alt="" class="w-[15%] m-4">
-                            </template>
-                            <template #main_title>
-                                Passerellesnumeriques Cambodia
-                            </template>
-                            <template #sub_title>
-                                Association’s in Web Development
-                            </template>
-                            <template #lower_title>
-                                2016 - 2018
-                            </template>
-                        </base-card>
                     </div>
                 </template>
             </card-widget>
@@ -164,6 +137,7 @@
             return {
                 isOpenOptionCard: false,
                 data: [],
+                workExp: [],
                 isFetch: false
             }
         },
@@ -172,13 +146,21 @@
                 this.isOpenOptionCard = !this.isOpenOptionCard;
             },
             async getAlumin(){
-                await axios.get('alumni/1')
+                await axios.get('alumni/2')
                 .then(resp => {
                     this.data = resp.data;
                     this.isFetch = true;
+                    // console.log(resp.data)
+                })
+            },
+            async getAluminWorkExp(){
+                await axios.get('experiences/alumni/2')
+                .then(resp => {
+                    this.workExp = resp.data;
+                    this.isFetch = true;
                     console.log(resp.data)
                 })
-            }
+            },
         },
         computed: {
             alumniData(){
@@ -190,9 +172,13 @@
             major(){
                 return this.data.major
             },
+            workExperiences(){
+                return this.workExp;
+            }
         },
         mounted() {
             this.getAlumin();
+            this.getAluminWorkExp();
         }
     }
 </script>

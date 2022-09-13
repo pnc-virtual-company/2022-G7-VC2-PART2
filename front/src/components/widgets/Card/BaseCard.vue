@@ -1,5 +1,5 @@
 <template>
-    <div class="flex items-center bg-slate-100 relative rounded-lg w-[49%]">
+    <div class="flex items-center bg-slate-100 relative rounded-lg w-[49%] p-1">
         <slot name="logo">
 
         </slot>

@@ -51,11 +51,11 @@ class BatchController extends Controller
      */
     public function update(Request $request,$id)
     {
-        $batch = Batch::findOrFail($id);
+        $batch = Batch::find($id);
         $batch->generation = $request->generation;
 
         $batch->save();
-        return response()->json(['message'=>'updated']);
+        return response()->json(['message'=>'batch is updated']);
     }
 
     /**

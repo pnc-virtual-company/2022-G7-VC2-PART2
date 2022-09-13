@@ -14,4 +14,8 @@ class Batch extends Model
     public function alumni(){
         return $this->hasMany(Alumni::class);
     }
+    protected $hidden =[
+        'created_at',
+        'updated_at'
+    ];
 }
