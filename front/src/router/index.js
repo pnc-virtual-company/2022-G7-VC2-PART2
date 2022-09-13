@@ -3,7 +3,7 @@ import ProfileView from '../views/alumni/ProfileView.vue'
 const routes = [
   {
     path: "/",
-    name: "Home",
+    name: "profile",
     component: ProfileView,
   },
 ];
