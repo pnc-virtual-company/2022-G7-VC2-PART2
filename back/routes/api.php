@@ -29,12 +29,9 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::get('/users',[UserController::class,'index']);
 Route::post('/users',[UserController::class,'store']);
 Route::get('/users/{id}',[UserController::class,'show']);
-Route::put('/users/{id}',[UserController::class,'update']);
+Route::post('/users/{id}',[UserController::class,'update']);
 Route::delete('/users/{id}',[UserController::class,'destroy']);
-// ===========Api for Position ============
-Route::get('/positions',[PositionController::class,'index']);
-Route::post('/positions',[PositionController::class,'store']);
-Route::get('/positions/{id}',[PositionController::class,'show']);
+
 // ===============api for workExperience =============
 Route::get('/experiences',[WorkExperienceController::class,'index']);
 Route::post('/experiences',[WorkExperienceController::class,'store']);
@@ -57,4 +54,14 @@ Route::post('/majors/{id}',[MajorController::class,'update']);
 Route::get('/alumni',[AlumniController::class,'index']);
 Route::post('/alumni',[AlumniController::class,'store']);
 Route::post('/alumni/{id}',[AlumniController::class,'update']);
+<<<<<<< HEAD
 
+Route::get('/alumni/{id}',[AlumniController::class,'show']);
+
+Route::apiResource('/users',UserController::class);
+Route::get('/users/{id}',[UserController::class,'show']);
+
+
+=======
+Route::get('/alumni/{id}',[AlumniController::class,'show']);
+>>>>>>> eb555d999c567f70060329cc15c58b50e5992cb3
