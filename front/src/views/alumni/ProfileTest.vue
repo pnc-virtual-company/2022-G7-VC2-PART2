@@ -20,7 +20,7 @@
                     </div>
                     <div class="mt-[8%] block text-center absolute ml-[6%]">
                         <h1 class="text-2xl font-extrabold">{{alumniData.firstName}} {{alumniData.lastName}}</h1>
-                        <span class="text-base">{{workExperiences[0].position}}</span>
+                        <span class="text-base" v-if="workExperiences.length>0">{{workExperiences[0].position}}</span>
                     </div>
                 </div>
             </div>
@@ -69,7 +69,7 @@
                     </header-card>
                 </template>
                 <template #body>
-                    <div class="flex flex-wrap gap-2 py-4">
+                    <div class="flex flex-wrap gap-2 py-4" v-if="workExperiences.length>0">
                         <base-card v-for="(work, index) in workExperiences" :key="index">
                             <template #logo>
                                 <img :src="work.company.image" alt="" class="w-[100px]">
