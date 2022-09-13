@@ -1,5 +1,5 @@
 import { createWebHistory, createRouter } from "vue-router";
-import ProfileView from '../views/alumni/ProfileTest.vue'
+import ProfileView from '../views/alumni/ProfileView.vue'
 const routes = [
   {
     path: "/",
