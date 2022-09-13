@@ -11,7 +11,7 @@ class workExperienceController extends Controller
     public function index()
     {
         // return workExperience::all();
-        return workExperience::with('Company','Position')->get();
+        return workExperience::with('Company')->get();
     }
     // ===========show specified data=============
     public function show($id)
@@ -25,8 +25,8 @@ class workExperienceController extends Controller
         $workExperience->start_year = $request->startYear;
         $workExperience->end_year = $request->endYear;
         $workExperience->company_id = $request->companyId;
-        $workExperience->alumni_id = $request->alumni_id;
-        $workExperience->position_id = $request->positionId;
+        $workExperience->alumni_id = $request->alumniId;
+        $workExperience->position = $request->position;
         $workExperience->save();
         return response()->json(['message'=>'Successfully for CreateData']);
     }
@@ -36,6 +36,7 @@ class workExperienceController extends Controller
         $workExperience = workExperience::FindOrFail($id);
         $workExperience->start_year = $request->startYear;
         $workExperience->end_year = $request->endYear;
+        $workExperience->position = $request->position;
         $workExperience->save();
         return response()->json(['message'=>'Successfully for UpdateData']);
     }

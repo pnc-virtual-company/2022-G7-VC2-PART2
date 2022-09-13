@@ -30,10 +30,12 @@ class UserController extends Controller
         $user->lastName = $request->lastName;
         $user->email = $request->email;
         $user->password = $request->password;
+        $user->gender = $request->gender;
+        $user->phone = $request->phone;
         $user->profile = $request->profile;
         $user->cover = $request->cover;
         $user->save();
-        return response()->json(["message" => 'create successfully']);
+        return response()->json(["message" => 'User create successfully']);
     }
 
     /**
@@ -61,10 +63,10 @@ class UserController extends Controller
         $user->lastName = $request->lastName;
         $user->email = $request->email;
         $user->password = $request->password;
-        $user->profile = $request->profile;
-        $user->cover = $request->cover;
+        $user->gender = $request->gender;
+        $user->phone = $request->phone;
         $user->save();
-        return response()->json(["message" => 'update successfully']);
+        return response()->json(["message" => 'User generalinfo update successfully']);
     }
 
     /**
