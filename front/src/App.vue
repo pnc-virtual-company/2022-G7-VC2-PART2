@@ -4,7 +4,7 @@
 </template>
 
 <script>
-import TheNavigationBar from './components/nav/TheNavigationBar.vue'
+import TheNavigationBar from './components/nav/TheNavigationBar.vue';
 export default {
   components: {
     'nav-component': TheNavigationBar,
