@@ -28,7 +28,7 @@
 </template>
 <script setup>
     const props = defineProps({
-        user: Array,
+        user: Object,
         batch: String,
         major: String
     })
