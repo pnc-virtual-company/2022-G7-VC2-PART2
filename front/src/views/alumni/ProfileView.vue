@@ -18,10 +18,6 @@
                         </label>
                         <input id="cover-img" hidden type="file" accept="image/*" />
                     </div>
-                    <!-- <div class="mt-[8%] block text-center absolute ml-[6%]">
-                        <h1 class="text-2xl font-extrabold">{{alumniData.firstName}} {{alumniData.lastName}}</h1>
-                        <span class="text-base" v-if="workExperiences.length>0">{{workExperiences[0].position}}</span>
-                    </div> -->
                 </div>
             </div>
         </div>
@@ -31,22 +27,17 @@
             </skill-content>
         </div>
         <div class="w-7/12 mr-[8.4%] absolute right-0 -mt-14">
-
-            <div class=" block -mt-4 text-neutral-700" >
+            <div class=" block -mt-2 text-neutral-700 font-poppins" >
                 <div class="flex justify-between">
-                    <div>
-                        <h1 class="text-2xl font-extrabold">{{alumniData.firstName}} {{alumniData.lastName}}</h1>
-                    </div>
-                    <div>
-                        <span class="bg-white w-8 h-8 rounded-full flex justify-center cursor-pointer shadow-lg text-primary">
-                            <edit-icon ></edit-icon>
-                        </span>
-                    </div>
+                    <h1 class="text-2xl font-extrabold">{{alumniData.firstName}} {{alumniData.lastName}}</h1>
+                    <span class="bg-white w-8 h-8 rounded-full flex justify-center cursor-pointer shadow-lg text-primary">
+                        <edit-icon ></edit-icon>
+                    </span>
                 </div>
                 <div class="flex mt-4">
                     <phone-icon ></phone-icon>
-                    <span class="-mt-1 ml-2">{{alumniData.phone}}</span>
-                    <copy-icon class="ml-2 w-5 -mt-1 cursor-pointer"></copy-icon>
+                    <h1 class="-mt-1 ml-2 text-xl font-semibold">{{alumniData.phone}}</h1>
+                    <copy-icon class="ml-3 w-5 -mt-1 cursor-pointer"></copy-icon>
                 </div>
                 <div class="flex items-center">
                     <div class="flex items-center mt-4">
@@ -72,7 +63,7 @@
                     </div>
                 </div>
             </div>
-            <card-widget class="mt-4">
+            <card-widget class="mt-6">
                 <template #header>
                     <header-card>
                         <template #icon>
