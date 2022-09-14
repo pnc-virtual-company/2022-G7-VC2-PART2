@@ -169,31 +169,34 @@
                     <span style='font-size:10px;' class="text-blue-500">&#9733;</span>
                     <p class="ml-1 text-slate-500 text-sm">Indicates required</p>
                     </div>
-                    <div class="overflow-y-auto h-[400px]">
-                        <div class="w-[100%] mt-4">
+                    <div class="flex w-[100%]">
+
+                        <div class="w-[50%] mt-2">
                             <label for="First name" class="text-slate-500 text-sm">First name</label> <sup class="star text-blue-500">*</sup> 
                             <br>
                             <input type="text" class="w-[97%] p-1 mt-1 outline-blue-500 border-solid border-[1px] border-gray-400" placeholder="e.g. Sophiem" v-model="firstname" >
                         </div>
-                        <div class="w-[100%] mt-2">
+                        <div class="w-[50%] mt-2">
                             <label for="Last name" class="text-slate-500 text-sm">Last name</label> <sup class="star text-blue-500">*</sup> 
                             <br> 
                             <input type="text" class="w-[97%] p-1 mt-1 outline-blue-500 border-solid border-[1px] border-gray-400" placeholder="e.g. Loem" v-model="lastname">
                         </div>
-                        <div class="w-[100%] mt-2">
+                    </div>
+                        <div class="w-[100%] mt-1">
                             <label for="Gender" class="text-slate-500 text-sm">Gender</label><sup class="star text-blue-500">*</sup> 
                             <br>
-                            <select id="gender" class="w-[97%] p-1.5 mt-1 text-slate-500 outline-blue-500 border-solid border-[1px] border-gray-400 text-sm" v-model="gender">
+                            <select id="gender" class="w-[98.7%] p-1.5 mt-1 text-slate-500 outline-blue-500 border-solid border-[1px] border-gray-400 text-sm" v-model="gender">
                             <option value="Male">Male</option>
                             <option value="Female">Female</option>
+                            <option value="Other">Other</option>
                             </select>
                         </div>
                 
-                        <h3 class="mt-7 text-slate-500 text-sm">Alumni info</h3>
-                        <div class="w-[100%] mt-1">
+                        <h3 class="mt-5 text-slate-500 font-bold text-sm">Alumni info</h3>
+                        <div class="w-[100%] ">
                         <label for="Batch" class="text-slate-500 text-sm">Batch</label> <sup class="star text-blue-500">*</sup> 
                         <br>
-                        <select id="batch" class="w-[97%] p-1.5 mt-1 text-slate-500 outline-blue-500 border-solid border-[1px] border-gray-400 text-sm" v-model="generation">
+                        <select id="batch" class="w-[98.7%] p-1.5 mt-1 text-slate-500 outline-blue-500 border-solid border-[1px] border-gray-400 text-sm" v-model="generation">
                             <option value="PNC2007">PNC2007</option>
                             <option value="PNC2008">PNC2008</option>
                             <option value="PNC2009">PNC2009</option>
@@ -212,19 +215,22 @@
                         </select>
                         </div>
 
-                        <h3 class="mt-7 text-slate-500 text-sm">Contact info</h3>
-                        <div class="w-[100%] mt-1">
-                        <label for="Email" class="text-slate-500 text-sm">Email</label> <sup class="star text-blue-500">*</sup> 
-                        <br>
-                        <input type="email" class="text-sm w-[97%] p-1 mt-1 outline-blue-500 border-solid border-[1px] border-gray-400" placeholder="e.g. example@email.com" v-model="email">
+                        <h3 class="mt-5 text-slate-500 text-sm font-bold">Contact info</h3>
+                        <div class="flex w-[100%]">
+                            <div class="w-[50%] ">
+                                <label for="Email" class="text-slate-500 text-sm">Email</label> <sup class="star text-blue-500">*</sup> 
+                                <br>
+                                <input type="email" class="text-sm w-[97%] p-1 mt-1 outline-blue-500 border-solid border-[1px] border-gray-400" placeholder="e.g. example@email.com" v-model="email">
+                            </div>
+                            <div class="w-[50%] ">
+                                <label for="company" class='text-slate-500 text-sm' >Phone</label> <sup class="star text-blue-500">*</sup> 
+                                <br>
+                                <input type="number" class="text-sm w-[97%] p-1 mt-1 outline-blue-500 border-solid border-[1px] border-gray-400" placeholder="e.g. 087 276 083" v-model="phone">
+                            </div>
+                        
                         </div>
-                        <div class="w-[100%] mt-2">
-                        <label for="company" class='text-slate-500 text-sm' >Phone</label> <sup class="star text-blue-500">*</sup> 
-                        <br>
-                        <input type="number" class="text-sm w-[97%] p-1 mt-1 outline-blue-500 border-solid border-[1px] border-gray-400" placeholder="e.g. 087 276 083" v-model="phone">
-                        </div>
-                    
-                    </div>
+                
+               
                     <div class="text-end pt-5">
                         <hr >
                         <button type="submit" class="bg-sky-500/80 p-1 rounded-full w-[13%] text-white mt-2 mb-0">Save</button>
