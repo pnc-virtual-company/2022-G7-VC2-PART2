@@ -243,6 +243,7 @@
     </div>
 
     <!-- form edit work experience -->
+<section>
     <div class="modal-mask" v-if="showedit==true">
       <div class="modal-wrapper">
           <div class="modal-container rounded">
@@ -268,42 +269,44 @@
                         <span style='font-size:10px;' class="text-blue-500">&#9733;</span>
                         <p class="ml-1 text-slate-500 text-sm">Indicates required</p>
                         </div>
-                        <div class="overflow-y-auto h-[400px]">
-                            <div class="w-[100%] mt-4">
+                        <div class="flex w-[100%]">
+                            <div class="w-[50%] mt-2">
                                 <label for="startdate" class="text-slate-500 text-sm">Start_date</label> <sup class="star text-blue-500">*</sup> 
                                 <br>
                                 <input type="date" class="w-[97%] p-1 mt-1 outline-blue-500 border-solid border-[1px] border-gray-400" placeholder="e.g. Sophiem" v-model="startdate">
                             </div>
-                            <div class="w-[100%] mt-2">
+                            <div class="w-[50%] mt-2">
                                 <label for="enddate" class="text-slate-500 text-sm">End_date</label> <sup class="star text-blue-500">*</sup> 
                                 <br> 
                                 <input type="date" class="w-[97%] p-1 mt-1 outline-blue-500 border-solid border-[1px] border-gray-400" placeholder="e.g. Loem" v-model="enddate">
                             </div>
+                        </div>
                             
                             <div class="w-[100%] mt-2">
                             <label for="position" class="text-slate-500 text-sm">Position</label> <sup class="star text-blue-500">*</sup> 
                             <br>
-                            <input type="text" class="text-sm w-[97%] p-1 mt-1 outline-blue-500 border-solid border-[1px] border-gray-400" placeholder="e.g. web developer" v-model="position">
+                            <input type="text" class="text-sm w-[98.7%] p-1 mt-1 outline-blue-500 border-solid border-[1px] border-gray-400" placeholder="e.g. web developer" v-model="position">
                             </div>
-                            <h3 class="mt-7 text-slate-500 text-sm">company info</h3>
-                            <div class="w-[100%] mt-1">
-                            <label for="name" class="text-slate-500 text-sm">Name</label> <sup class="star text-blue-500">*</sup> 
-                            <br>
-                            <input type="text" class="text-sm w-[97%] p-1 mt-1 outline-blue-500 border-solid border-[1px] border-gray-400" placeholder="e.g. ZINation" v-model="name">
-                            </div>
-                            <div class="w-[100%] mt-1">
-                            <label for="address" class="text-slate-500 text-sm">Address</label> <sup class="star text-blue-500">*</sup> 
-                            <br>
-                            <input type="text" class="text-sm w-[97%] p-1 mt-1 outline-blue-500 border-solid border-[1px] border-gray-400" placeholder="e.g. PNC" v-model="address">
+                            <h3 class="mt-7 text-slate-500 text-sm font-bold">company info</h3>
+                            <div class="flex w-[100%]">
+                                <div class="w-[100%] mt-1">
+                                    <label for="name" class="text-slate-500 text-sm">Name</label> <sup class="star text-blue-500">*</sup> 
+                                    <br>
+                                    <input type="text" class="text-sm w-[97%] p-1 mt-1 outline-blue-500 border-solid border-[1px] border-gray-400" placeholder="e.g. ZINation" v-model="name">
+                                </div>
+                                <div class="w-[100%] mt-1">
+                                    <label for="address" class="text-slate-500 text-sm">Address</label> <sup class="star text-blue-500">*</sup> 
+                                    <br>
+                                    <input type="text" class="text-sm w-[97%] p-1 mt-1 outline-blue-500 border-solid border-[1px] border-gray-400" placeholder="e.g. PNC" v-model="address">
+                                </div>
                             </div>
 
                             <div class="w-[100%] mt-1">
                             <label for="file" class="text-slate-500 text-sm">Image</label> <sup class="star text-blue-500">*</sup> 
                             <br>
-                            <input type="file" class="text-sm w-[97%] p-1 mt-1 outline-blue-500 border-solid border-[1px] border-gray-400" placeholder="e.g. file" accept="images/*"  @change="onchangeimg">
+                            <input type="file" class="text-sm w-[98.7%] p-1 mt-1 outline-blue-500 border-solid border-[1px] border-gray-400" placeholder="e.g. file" accept="images/*"  @change="onchangeimg">
                             </div>
                             
-                        </div>
                         <div class="text-end pt-5">
                             <hr >
                             <button type="submit" class="bg-sky-500/80 p-1 rounded-full w-[13%] text-white mt-2 mb-0">Save</button>
@@ -314,6 +317,10 @@
           </div>
       </div>
   </div>
+
+
+</section>
+
 
     
 </template>
