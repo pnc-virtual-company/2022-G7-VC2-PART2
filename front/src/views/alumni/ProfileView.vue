@@ -33,10 +33,20 @@
         <div class="w-7/12 mr-[8.4%] absolute right-0 -mt-14">
 
             <div class=" block -mt-4 text-neutral-700" >
-                <h1 class="text-2xl font-extrabold">{{alumniData.firstName}} {{alumniData.lastName}}</h1>
+                <div class="flex justify-between">
+                    <div>
+                        <h1 class="text-2xl font-extrabold">{{alumniData.firstName}} {{alumniData.lastName}}</h1>
+                    </div>
+                    <div>
+                        <span class="bg-white w-8 h-8 rounded-full flex justify-center cursor-pointer shadow-lg text-primary">
+                            <edit-icon ></edit-icon>
+                        </span>
+                    </div>
+                </div>
                 <div class="flex mt-4">
                     <phone-icon ></phone-icon>
                     <span class="-mt-1 ml-2">{{alumniData.phone}}</span>
+                    <copy-icon class="ml-2 w-5 -mt-1 cursor-pointer"></copy-icon>
                 </div>
                 <div class="flex items-center">
                     <div class="flex items-center mt-4">
@@ -56,6 +66,9 @@
                                 <span>{{alumniData.gender}}</span>
                             </template>
                         </background-widget>
+                        <div class="ml-10 text-sky-500 font-semibold underline cursor-pointer">
+                            <span>Details</span>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -343,8 +356,9 @@
 <script>
     import axios from '../../axios-http';
 import AcademicIcon from '../../components/widgets/IconWidgets/AcademicIcon.vue';
+import EditIcon from '../../components/widgets/IconWidgets/EditIcon.vue';
     export default {
-  components: { AcademicIcon },
+  components: { AcademicIcon, EditIcon },
         data(){
             return {
                 allowExtension : ["jpg", "png", "jpeg", "gif", "webp"],

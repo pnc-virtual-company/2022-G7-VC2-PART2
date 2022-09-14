@@ -19,6 +19,7 @@ import BackIcon from './components/widgets/IconWidgets/BackIcon.vue'
 import GeneralInfo from './components/profile/alumni/GeneralInfo.vue'
 import HeaderCard from './components/widgets/Card/HeaderCard.vue'
 import SkillsContent from './components/profile/alumni/SkillsContent.vue'
+import CopyIcon from "./components/widgets/IconWidgets/CopyIcon.vue"
 import './axios-http';
 
 
@@ -43,5 +44,6 @@ app.component('back-icon',BackIcon)
 app.component('general-info-body',GeneralInfo)
 app.component('header-card',HeaderCard)
 app.component('skill-content',SkillsContent)
+app.component('copy-icon',CopyIcon)
 
 .mount('#app')
