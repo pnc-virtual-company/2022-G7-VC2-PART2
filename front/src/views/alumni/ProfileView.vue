@@ -26,6 +26,7 @@
 
             </skill-content>
         </div>
+        <!-- General Information  -->
         <div class="w-7/12 mr-[8.4%] absolute right-0 -mt-14">
             <div class=" block -mt-2 text-neutral-700 font-poppins" >
                 <div class="flex justify-between">
@@ -59,8 +60,8 @@
                                 <span>{{alumniData.gender}}</span>
                             </template>
                         </background-widget>
-                        <div class="ml-10 text-sky-500 font-semibold underline cursor-pointer">
-                            <span >Details</span>
+                        <div @click="showDetailAlumniInfo" class="ml-10 text-sky-500 font-semibold underline cursor-pointer">
+                            <span class="text-primary">Details</span>
                         </div>
                     </div>
                 </div>
@@ -253,6 +254,26 @@
             </div>
         </div> 
     </div>
+
+    <!--    Detail Information Alumni profile -->
+    <section  v-if="isFetch" v-cloak class="mr-40 mt-14">
+        <div v-if="!alumniDetailInfo" class="font-poppins flex justify-end">
+        <card-widget class="w-1/4 absolute" >
+            <template #header>
+                <div class="font-bold">
+                    <h1 class="text-primary">General Information</h1>
+                </div>
+            </template>
+            <template #body>
+                <div class="flex mt-4">
+                    <mail-icon class="w-6 h-6"></mail-icon>
+                    <span class=" ml-3">{{alumniData.email}}</span>
+                </div>
+            </template>
+                
+            </card-widget>
+        </div>
+    </section>
     <!-- form edit work experience -->
     <section>
         <div class="modal-mask" v-if="showedit==true">
@@ -338,8 +359,9 @@
     import axios from '../../axios-http';
 import AcademicIcon from '../../components/widgets/IconWidgets/AcademicIcon.vue';
 import EditIcon from '../../components/widgets/IconWidgets/EditIcon.vue';
+import MailIcon from '../../components/widgets/IconWidgets/MailIcon.vue';
     export default {
-  components: { AcademicIcon, EditIcon },
+  components: { AcademicIcon, EditIcon, MailIcon },
         data(){
             return {
                 allowExtension : ["jpg", "png", "jpeg", "gif", "webp"],
@@ -365,6 +387,7 @@ import EditIcon from '../../components/widgets/IconWidgets/EditIcon.vue';
                 startdate : "",
                 enddate : "",
                 position : "",
+                alumniDetailInfo:false,
             }
         },
         methods:{
@@ -397,6 +420,9 @@ import EditIcon from '../../components/widgets/IconWidgets/EditIcon.vue';
                         this.currentIndex =null
                         this.isOpen=false
                     }
+            },
+            showDetailAlumniInfo(){
+                this.alumniDetailInfo =! this.alumniDetailInfo
             },
             showFormEdit(){
                 this.showModal = !this.showModal
