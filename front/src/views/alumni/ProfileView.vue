@@ -260,8 +260,9 @@
         <div v-if="!alumniDetailInfo" class="font-poppins flex justify-end">
         <card-widget class="w-1/4 absolute" >
             <template #header>
-                <div class="font-bold">
-                    <h1 class="text-primary">General Information</h1>
+                <div class="flex font-bold text-primary">
+                    <info-icon></info-icon>
+                    <h1 class="ml-3">General Information</h1>
                 </div>
             </template>
             <template #body>
