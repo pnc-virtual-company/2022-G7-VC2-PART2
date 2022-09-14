@@ -5,11 +5,11 @@
             <!-- // top  -->
             <div class="mt-4 relative font-poppins">
                 <div class="bg-profile relative">
-                    <img src="../assets/bg-profile.png" alt="bg-profile">
+                    <img :src="coverurl" alt="bg-profile">
                     <label for="bg-profile" class="rounded-full w-8 h-8 absolute items-center flex justify-center top-0 right-0 m-3 cursor-pointer shadow-lg bg-white">                     
                         <camara-icon class="w-6 h-6 text-primary"/>
                     </label>
-                    <input id="bg-profile" hidden type="file" accept="image/*" />
+                    <input id="bg-profile" hidden type="file" accept="image/*" @change="onchangeCover" />
                 </div>
                 <div class="flex w-full relative">
                     <div class="w-[14%] relative ml-16 -mt-20">
@@ -342,11 +342,31 @@
                 enddate : "",
                 position : "",
                 profileimg:"",
+                coverfileimg:"",
                 profileurl:null,
+                coverurl:null,
             }
         },
         methods:{
- 
+            onchangeCover(event){
+                this.coverfileimg = "";
+                let fileExtension = event.target.files[0].name.split(".").pop();
+                if (this.allowExtension.includes(fileExtension.toLowerCase())) {
+                    this.coverfileimg = event.target.files[0];
+                }
+                this.updateCover();
+            },
+            updateCover(){
+                let formdata = new FormData();
+                formdata.append('_method','PUT');
+                formdata.append('cover',this.coverfileimg)
+                axios.post('/users/updateimage/1',formdata).then((response)=>{
+                    if (response.status==200){
+                        this.updateImagealert('cover');
+                        this.getAlumniimage();
+                    }
+                })
+            },
             onchangeProfile(event){
                 this.profileimg = "";
                 let fileExtension = event.target.files[0].name.split(".").pop();
