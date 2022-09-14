@@ -6,6 +6,7 @@ const routes = [
     name: "profile",
     component: ProfileView,
   },
+  
 ];
 
 const router = createRouter({
