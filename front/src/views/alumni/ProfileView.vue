@@ -30,9 +30,11 @@
             <div class=" block -mt-2 text-neutral-700 font-poppins" >
                 <div class="flex justify-between">
                     <h1 class="text-2xl font-extrabold">{{alumniData.firstName}} {{alumniData.lastName}}</h1>
-                    <span class="bg-white w-8 h-8 rounded-full flex justify-center cursor-pointer shadow-lg text-primary">
-                        <edit-icon ></edit-icon>
-                    </span>
+                    <div @click="showFormEdit">
+                        <span  class="bg-white w-8 h-8 rounded-full flex justify-center cursor-pointer shadow-lg text-primary ">
+                            <edit-icon ></edit-icon>
+                        </span>
+                    </div>
                 </div>
                 <div class="flex mt-4">
                     <phone-icon ></phone-icon>
@@ -58,7 +60,7 @@
                             </template>
                         </background-widget>
                         <div class="ml-10 text-sky-500 font-semibold underline cursor-pointer">
-                            <span>Details</span>
+                            <span >Details</span>
                         </div>
                     </div>
                 </div>
@@ -154,6 +156,7 @@
             </card-widget>
         </div>
     </section>
+
 
     <!-- form edit general information -->
     <div class="modal-mask" v-if="showModal==true">

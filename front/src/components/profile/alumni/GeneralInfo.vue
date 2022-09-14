@@ -4,7 +4,7 @@
             <ul class="text-softGray text-sm leading-7">
                 <li>FIRST NAME</li>
                 <li>GENDER</li>
-                <li>Email</li>
+                <mail-icon></mail-icon>
             </ul>
             <ul class="text-sm ml-8 font-bold leading-7">
                 <li>{{user.firstName}}</li>
@@ -16,7 +16,7 @@
             <ul class="text-softGray text-sm leading-7">
                 <li>LAST NAME</li>
                 <li>BATCH</li>
-                <li>PHONE</li>
+                <phone-icon></phone-icon>
             </ul>
             <ul class="text-sm ml-8 font-bold leading-7">
                 <li>{{user.lastName}}</li>
