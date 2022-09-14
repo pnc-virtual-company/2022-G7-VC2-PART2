@@ -18,10 +18,10 @@
                         </label>
                         <input id="cover-img" hidden type="file" accept="image/*" />
                     </div>
-                    <div class="mt-[8%] block text-center absolute ml-[6%]">
+                    <!-- <div class="mt-[8%] block text-center absolute ml-[6%]">
                         <h1 class="text-2xl font-extrabold">{{alumniData.firstName}} {{alumniData.lastName}}</h1>
                         <span class="text-base" v-if="workExperiences.length>0">{{workExperiences[0].position}}</span>
-                    </div>
+                    </div> -->
                 </div>
             </div>
         </div>
@@ -31,7 +31,35 @@
             </skill-content>
         </div>
         <div class="w-7/12 mr-[8.4%] absolute right-0 -mt-14">
-            <card-widget>
+
+            <div class=" block -mt-4 text-neutral-700" >
+                <h1 class="text-2xl font-extrabold">{{alumniData.firstName}} {{alumniData.lastName}}</h1>
+                <div class="flex mt-4">
+                    <phone-icon ></phone-icon>
+                    <span class="-mt-1 ml-2">{{alumniData.phone}}</span>
+                </div>
+                <div class="flex items-center">
+                    <div class="flex items-center mt-4">
+                        <academic-icon></academic-icon>
+                        <span class=" ml-2">{{batch.generation}}</span>
+                        <background-widget>
+                            <template #value>
+                                <span class="text-center">{{major.name}}</span>
+                            </template>
+                        </background-widget>
+                    </div>
+                    <div class="flex items-center mt-4">
+                        <img src="../../assets/gender.svg" alt="" class="w-4 ml-10">
+                        <span class="ml-3">Gender</span>
+                        <background-widget >
+                            <template #value>
+                                <span>{{alumniData.gender}}</span>
+                            </template>
+                        </background-widget>
+                    </div>
+                </div>
+            </div>
+            <!-- <card-widget>
                 <template #header>
                     <header-card>
                         <template #icon>
@@ -50,7 +78,7 @@
                 <template #body>
                     <general-info-body :user="alumniData" :batch="batch.generation" :major="major.name"></general-info-body>
                 </template>
-            </card-widget>
+            </card-widget> -->
             <card-widget class="mt-4">
                 <template #header>
                     <header-card>
@@ -235,7 +263,7 @@
             </div>
         </div> 
     </div>
-
+    
     <!-- form edit work experience -->
     <div class="modal-mask" v-if="showedit==true">
       <div class="modal-wrapper">
@@ -306,15 +334,17 @@
                 </div>
               </form>
           </div>
-      </div>
-  </div>
-
+        </div>
+    </div>
+    
     
 </template>
 
 <script>
     import axios from '../../axios-http';
+import AcademicIcon from '../../components/widgets/IconWidgets/AcademicIcon.vue';
     export default {
+  components: { AcademicIcon },
         data(){
             return {
                 allowExtension : ["jpg", "png", "jpeg", "gif", "webp"],
@@ -351,7 +381,7 @@
                 .then(resp => {
                     this.data = resp.data;
                     this.isFetch = true;
-                    // console.log(resp.data)
+                    console.log(resp.data)
                 })
             },
             async getAluminWorkExp(){
@@ -359,7 +389,7 @@
                 .then(resp => {
                     this.workExp = resp.data;
                     this.isFetch = true;
-                    console.log(resp.data)
+                    // console.log(resp.data)
                 })
             },
             openOpenCard(index){
