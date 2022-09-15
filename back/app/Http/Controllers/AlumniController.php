@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Models\Alumni;
 use Illuminate\Http\Request;
-
 class AlumniController extends Controller
 {
     /**
@@ -64,5 +63,4 @@ class AlumniController extends Controller
         $alumni->save();
         return response()->json(['message'=>'updated']);
     }
-
 }

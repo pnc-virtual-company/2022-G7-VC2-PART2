@@ -28,7 +28,7 @@ class workExperienceController extends Controller
         $workExperience->alumni_id = $request->alumniId;
         $workExperience->position = $request->position;
         $workExperience->save();
-        return response()->json(['message'=>'Successfully for CreateData']);
+        return response()->json(['message'=>'Work expereience create successfully']);
     }
     // ===========update your data=============
     public function update(Request $request, $id)
