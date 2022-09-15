@@ -1,29 +1,28 @@
 <template>
      <!-- form edit general information -->
-     <div class="modal-mask" v-if="showModal==true">
+     <div class="modal-mask">
         <div class="modal-wrapper">
             <div class="modal-container rounded">
             <form @submit.prevent="editinfo">  
                 <div class="card_form text-start w-[50%] m-auto p-5">
-                    <div class="bg-white p-5 rounded-md">
-                    <div class="flex justify-between items-start text-sky-500/80 font-bold">
-                    <div class="flex ">
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L10.582 16.07a4.5 4.5 0 01-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 011.13-1.897l8.932-8.931zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0115.75 21H5.25A2.25 2.25 0 013 18.75V8.25A2.25 2.25 0 015.25 6H10" />
-                        </svg>
-                        <h2 class="ml-2 text-lg">General Information</h2> 
-                    </div>
-                    <!-- cencel icon -->
-                    <div class="w-[4%]">
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-Width={1.5} stroke="currentColor" className="w-6 h-6" @click="showFormEdit" >
-                        <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" class="text-end font-bold"/>
-                        </svg>
-                    </div>
+                        <div class="bg-white p-5 rounded-md">
+                        <div class="flex justify-between items-start text-sky-500/80 font-bold">
+                        <div class="flex ">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L10.582 16.07a4.5 4.5 0 01-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 011.13-1.897l8.932-8.931zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0115.75 21H5.25A2.25 2.25 0 013 18.75V8.25A2.25 2.25 0 015.25 6H10" />
+                            </svg>
+                            <h2 class="ml-2 text-lg">General Information</h2> 
+                        </div>
+                        <!-- cencel icon -->
+                        <div class="w-[4%]">
+                            <slot name="hidenCard">
+                            </slot>
+                        </div>
                     </div>
                     <hr>
                     <div class="flex mt-4 ">
-                    <span style='font-size:10px;' class="text-blue-500">&#9733;</span>
-                    <p class="ml-1 text-slate-500 text-sm">Indicates required</p>
+                        <span style='font-size:10px;' class="text-blue-500">&#9733;</span>
+                        <p class="ml-1 text-slate-500 text-sm">Indicates required</p>
                     </div>
                     <div class="flex w-[100%]">
 
@@ -84,8 +83,6 @@
                             </div>
                         
                         </div>
-                
-               
                     <div class="text-end pt-5">
                         <hr >
                         <button type="submit" class="bg-sky-500/80 p-1 rounded-full w-[13%] text-white mt-2 mb-0">Save</button>
@@ -99,7 +96,61 @@
 </template>
 
 <script>
+    import axios from '../../axios-http';
+    export default {
+        props:{
+            userData:Object,
+            batch:Object,
+        },
+        // emit:['closeDiloag'],
+        data(){
+            return{
+                userId :1,
+                batchid :1,
+                gender :"",
+                firstname:"",
+                lastname: "",
+                generation : "",
+                email:"",
+                phone :"",
+            }
+        },
+        methods:{
+            getData(){
+                this.firstname = this.userData.firstName;
+                this.lastname = this.userData.lastName;
+                this.email= this.userData.email;
+                this.phone= this.userData.phone;
+                this.gender=this.userData.gender;
+                this.generation=this.batch.generation
+            },
+            editinfo(){
+                let userdata = {
+                    firstName:this.firstname,
+                    lastName:this.lastname,
+                    email:this.email,
+                    password:"pupd",
+                    gender:this.gender,
+                    phone:this.phone,
+                }
+                axios.put('http://127.0.0.1:8000/api/users/'+this.userId,userdata).then((response) =>{
+                    return (response.data);
+                })
+               
+                axios.put('http://127.0.0.1:8000/api/batches/'+this.batchid,{ generation:this.generation}).then((response) =>{
+                    return (response.data);
+                })
+                this.showModal = !this.showModal;
+                this.$emit('closeDiloag',false)
+                // console.log('All Data from batch and userdata:',userdata);
+            },
+            
 
+        },
+        mounted(){
+            this.getData();
+        }
+    }
 </script>
 
 <style>

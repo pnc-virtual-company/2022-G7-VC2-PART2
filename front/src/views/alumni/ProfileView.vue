@@ -10,7 +10,7 @@
                     </label>
                     <input id="bg-profile" hidden type="file" accept="image/*" />
                 </div>
-                <div class="flex w-full relative">
+                <div class="flex w-full relative" >
                     <div class="w-[14%] relative ml-16 -mt-20">
                         <img class="rounded-full border-4 border-white ml-1" src="../../assets/cover-img.png" alt="cover-img">
                         <label for="cover-img" class="rounded-full w-8 h-8 absolute items-center flex justify-center bottom-0 cursor-pointer shadow-lg bg-white right-0">                     
@@ -43,7 +43,7 @@
                             General Information
                         </template>
                         <template #action_icon >
-                            <edit-icon class="text-primary" @click="showFormEdit"/>
+                            <edit-icon class="text-primary" @click="showEditExperience = !showEditExperience"/>
                         </template>
                     </header-card>
                 </template>
@@ -142,190 +142,22 @@
             </card-widget>
         </div>
     </section>
-
-    <!-- form edit general information -->
-    <div class="modal-mask" v-if="showModal==true">
-        <div class="modal-wrapper">
-            <div class="modal-container rounded">
-            <form @submit.prevent="editinfo">  
-                <div class="card_form text-start w-[50%] m-auto p-5">
-                    <div class="bg-white p-5 rounded-md">
-                    <div class="flex justify-between items-start text-sky-500/80 font-bold">
-                    <div class="flex ">
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L10.582 16.07a4.5 4.5 0 01-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 011.13-1.897l8.932-8.931zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0115.75 21H5.25A2.25 2.25 0 013 18.75V8.25A2.25 2.25 0 015.25 6H10" />
-                        </svg>
-                        <h2 class="ml-2 text-lg">General Information</h2> 
-                    </div>
-                    <!-- cencel icon -->
-                    <div class="w-[4%]">
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-Width={1.5} stroke="currentColor" className="w-6 h-6" @click="showFormEdit" >
-                        <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" class="text-end font-bold"/>
-                        </svg>
-                    </div>
-                    </div>
-                    <hr>
-                    <div class="flex mt-4 ">
-                    <span style='font-size:10px;' class="text-blue-500">&#9733;</span>
-                    <p class="ml-1 text-slate-500 text-sm">Indicates required</p>
-                    </div>
-                    <div class="flex w-[100%]">
-
-                        <div class="w-[50%] mt-2">
-                            <label for="First name" class="text-slate-500 text-sm">First name</label> <sup class="star text-blue-500">*</sup> 
-                            <br>
-                            <input type="text" class="w-[97%] p-1 mt-1 outline-blue-500 border-solid border-[1px] border-gray-400" placeholder="e.g. Sophiem" v-model="firstname" >
-                        </div>
-                        <div class="w-[50%] mt-2">
-                            <label for="Last name" class="text-slate-500 text-sm">Last name</label> <sup class="star text-blue-500">*</sup> 
-                            <br> 
-                            <input type="text" class="w-[97%] p-1 mt-1 outline-blue-500 border-solid border-[1px] border-gray-400" placeholder="e.g. Loem" v-model="lastname">
-                        </div>
-                    </div>
-                    <div class="flex w-[100%] mt-2">
-                        <div class="w-[50%]">
-                            <label for="Gender" class="text-slate-500 text-sm">Gender</label><sup class="star text-blue-500">*</sup><br>
-                            <select id="gender" class="w-[97%] p-1.5 mt-1 text-slate-500 outline-blue-500 border-solid border-[1px] border-gray-400 text-sm" v-model="gender">
-                                <option value="Male">Male</option>
-                                <option value="Female">Female</option>
-                                <option value="Other">Other</option>
-                            </select>
-                        </div>
-                        <div class="w-[50%]">
-                            <label for="Batch" class="text-slate-500 text-sm">Batch</label> <sup class="star text-blue-500">*</sup> 
-                            <br>
-                            <select id="batch" class="w-[97%] p-1.5 mt-1 text-slate-500 outline-blue-500 border-solid border-[1px] border-gray-400 text-sm" v-model="generation">
-                                <option value="PNC2007">PNC2007</option>
-                                <option value="PNC2008">PNC2008</option>
-                                <option value="PNC2009">PNC2009</option>
-                                <option value="PNC2010">PNC2010</option>
-                                <option value="PNC2011">PNC2011</option>
-                                <option value="PNC2012">PNC2012</option>
-                                <option value="PNC2013">PNC2013</option>
-                                <option value="PNC2014">PNC2014</option>
-                                <option value="PNC2015">PNC2015</option>
-                                <option value="PNC2016">PNC2016</option>
-                                <option value="PNC2017">PNC2017</option>
-                                <option value="PNC2018">PNC2018</option>
-                                <option value="PNC2019">PNC2019</option>
-                                <option value="PNC2020">PNC2020</option>
-                                <option value="PNC2021">PNC2021</option>
-                            </select>
-                        </div>
-                    </div>
-
-                        <h3 class="mt-5 text-slate-500 text-sm font-bold">Contact info</h3>
-                        <div class="flex w-[100%]">
-                            <div class="w-[50%] ">
-                                <label for="Email" class="text-slate-500 text-sm">Email</label> <sup class="star text-blue-500">*</sup> 
-                                <br>
-                                <input type="email" class="text-sm w-[97%] p-1 mt-1 outline-blue-500 border-solid border-[1px] border-gray-400" placeholder="e.g. example@email.com" v-model="email">
-                            </div>
-                            <div class="w-[50%] ">
-                                <label for="company" class='text-slate-500 text-sm' >Phone</label> <sup class="star text-blue-500">*</sup> 
-                                <br>
-                                <input type="number" class="text-sm w-[97%] p-1 mt-1 outline-blue-500 border-solid border-[1px] border-gray-400" placeholder="e.g. 087 276 083" v-model="phone">
-                            </div>
-                        
-                        </div>
-                
-               
-                    <div class="text-end pt-5">
-                        <hr >
-                        <button type="submit" class="bg-sky-500/80 p-1 rounded-full w-[13%] text-white mt-2 mb-0">Save</button>
-                    </div>
-                    </div>
-                </div>
-            </form>
-            </div>
-        </div> 
-    </div>
-    <!-- form edit work experience -->
-    <section>
-        <div class="modal-mask" v-if="showedit==true">
-        <div class="modal-wrapper">
-            <div class="modal-container rounded">
-                <form @submit.prevent="editworkexperience">  
-                        <div class="card_form text-start w-[50%] m-auto p-5">
-                            <div class="bg-white p-5 rounded-md">
-                            <div class="flex justify-between items-start text-sky-500/80 font-bold">
-                            <div class="flex ">
-                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                                <path stroke-linecap="round" stroke-linejoin="round" d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L10.582 16.07a4.5 4.5 0 01-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 011.13-1.897l8.932-8.931zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0115.75 21H5.25A2.25 2.25 0 013 18.75V8.25A2.25 2.25 0 015.25 6H10" />
-                                </svg>
-                                <h2 class="ml-2 text-lg">WorkExperience Information</h2> 
-                            </div>
-                            <!-- cencel icon -->
-                            <div class="w-[4%]">
-                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-Width={1.5} stroke="currentColor" className="w-6 h-6" @click="showEdit" >
-                                <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" class="text-end font-bold"/>
-                                </svg>
-                            </div>
-                            </div>
-                            <hr>
-                            <div class="flex mt-4 ">
-                            <span style='font-size:10px;' class="text-blue-500">&#9733;</span>
-                            <p class="ml-1 text-slate-500 text-sm">Indicates required</p>
-                            </div>
-                            <div class="flex w-[100%]">
-                                <div class="w-[50%] mt-2">
-                                    <label for="startdate" class="text-slate-500 text-sm">Start_date</label> <sup class="star text-blue-500">*</sup> 
-                                    <br>
-                                    <input type="date" class="w-[97%] p-1 mt-1 outline-blue-500 border-solid border-[1px] border-gray-400" placeholder="e.g. Sophiem" v-model="startdate">
-                                </div>
-                                <div class="w-[50%] mt-2">
-                                    <label for="enddate" class="text-slate-500 text-sm">End_date</label> <sup class="star text-blue-500">*</sup> 
-                                    <br> 
-                                    <input type="date" class="w-[97%] p-1 mt-1 outline-blue-500 border-solid border-[1px] border-gray-400" placeholder="e.g. Loem" v-model="enddate">
-                                </div>
-                            </div>
-                                
-                                <div class="w-[100%] mt-2">
-                                <label for="position" class="text-slate-500 text-sm">Position</label> <sup class="star text-blue-500">*</sup> 
-                                <br>
-                                <input type="text" class="text-sm w-[98.7%] p-1 mt-1 outline-blue-500 border-solid border-[1px] border-gray-400" placeholder="e.g. web developer" v-model="position">
-                                </div>
-                                <h3 class="mt-7 text-slate-500 text-sm font-bold">company info</h3>
-                                <div class="flex w-[100%]">
-                                    <div class="w-[100%] mt-1">
-                                        <label for="name" class="text-slate-500 text-sm">Name</label> <sup class="star text-blue-500">*</sup> 
-                                        <br>
-                                        <input type="text" class="text-sm w-[97%] p-1 mt-1 outline-blue-500 border-solid border-[1px] border-gray-400" placeholder="e.g. ZINation" v-model="name">
-                                    </div>
-                                    <div class="w-[100%] mt-1">
-                                        <label for="address" class="text-slate-500 text-sm">Address</label> <sup class="star text-blue-500">*</sup> 
-                                        <br>
-                                        <input type="text" class="text-sm w-[97%] p-1 mt-1 outline-blue-500 border-solid border-[1px] border-gray-400" placeholder="e.g. PNC" v-model="address">
-                                    </div>
-                                </div>
-
-                                <div class="w-[100%] mt-1">
-                                <label for="file" class="text-slate-500 text-sm">Image</label> <sup class="star text-blue-500">*</sup> 
-                                <br>
-                                <input type="file" class="text-sm w-[98.7%] p-1 mt-1 outline-blue-500 border-solid border-[1px] border-gray-400" placeholder="e.g. file" accept="images/*"  @change="onchangeimg">
-                                </div>
-                                
-                            <div class="text-end pt-5">
-                                <hr >
-                                <button type="submit" class="bg-sky-500/80 p-1 rounded-full w-[13%] text-white mt-2 mb-0">Save</button>
-                            </div>
-                        </div>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
-
-
-    </section>
-
-
-    
+    <editExperience v-if="showEditExperience" :userData="data.user" @closeDiloag="closeDiloag" :batch="data.batch">
+        <template #hidenCard>
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-Width={1.5} stroke="currentColor" className="w-6 h-6" @click="showEditExperience = !showEditExperience" >
+                <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" class="text-end font-bold"/>
+            </svg>
+        </template>
+    </editExperience>
 </template>
 
 <script>
     import axios from '../../axios-http';
+    import editExperience from './formEditExperience.vue'
     export default {
+        components: {
+            editExperience
+        },
         data(){
             return {
                 allowExtension : ["jpg", "png", "jpeg", "gif", "webp"],
@@ -335,16 +167,10 @@
                 isFetch: false,           
                 currentIndex: null,
                 isOpen : false,
-                showModal : false,
-                showedit : false,
+                showModal : true,
+                showEditExperience : false,
                 userId :1,
                 batchid :1,
-                gender : "",
-                firstname:"",
-                lastname: "",
-                generation : "",
-                email:"",
-                phone :"",
                 name:"",
                 address:"",
                 image:"",
@@ -362,7 +188,7 @@
                 .then(resp => {
                     this.data = resp.data;
                     this.isFetch = true;
-                    // console.log(resp.data)
+                    console.log('return data',this.data.user);   
                 })
             },
             async getAluminWorkExp(){
@@ -370,7 +196,7 @@
                 .then(resp => {
                     this.workExp = resp.data;
                     this.isFetch = true;
-                    console.log(resp.data)
+                    // console.log(resp.data)
                 })
             },
             openOpenCard(index){
@@ -384,30 +210,10 @@
                         this.isOpen=false
                     }
             },
-            showFormEdit(){
-                this.showModal = !this.showModal
+            closeDiloag(value){
+                this.showEditExperience = value
             },
-            showEdit(){
-                this.showedit = !this.showedit
-            },
-            editinfo(){
-                axios.put('http://127.0.0.1:8000/api/users/'+this.userId,{
-                    firstName:this.firstname,
-                    lastName:this.lastname,
-                    email:this.email,
-                    password:"pupd",
-                    gender:this.gender,
-                    phone:this.phone
-                })
-                axios.put('http://127.0.0.1:8000/api/batches/'+this.batchid,{
-                    generation:this.generation
-                }).then((response) =>{
 
-                    this.getAlumin();
-                })
-                this.showModal = !this.showModal;
-            },
-            
     
     onchangeimg(event) {
         let fileExtension = event.target.files[0].name.split(".").pop();
@@ -435,7 +241,7 @@
             console.log(result.data);
             this.getAluminWorkExp();
         })
-        this.showedit = !this.showedit;
+        this.showEditExperience = !this.showEditExperience ;
     }
 
 
