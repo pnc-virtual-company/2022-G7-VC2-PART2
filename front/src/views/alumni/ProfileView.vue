@@ -1,7 +1,6 @@
 <template>
     <section class="w-10/12 m-auto" v-if="isFetch" v-cloak>
         <div class="m-auto rounded-[5px]">
-            <!-- // top  -->
             <div class="mt-4 relative font-poppins">
                 <div class="bg-profile relative">
                     <img src="../../assets/bg-profile.png" alt="bg-profile">
@@ -91,13 +90,12 @@
                         <base-card v-for="(work, index) in workExperiences" :key="index">
                             <template #logo>
                                 <img :src="work.company.image" alt="" class="w-[100px]">
-                                <!-- <img src="../../assets/workplacelogos/work_experience_defaul_logo.svg" alt=""> -->
                             </template>
                             <template #main_title>
-                                {{work.position}}
+                                {{work.company.name}}
                             </template>
                             <template #sub_title>
-                                {{work.company.name}}
+                                {{work.position}}
                             </template>
                             <template #lower_title>
                                 {{work.start_year}} {{work.end_year}}
@@ -106,7 +104,7 @@
                                 <div class="absolute right-0 top-0 mr-2 mt-1 cursor-pointer">
                                     <point-icon @click="openOpenCard(index)" ></point-icon>
                                     <div v-if="index==currentIndex" class="absolute bg-bgColorWhite space-y-1 p-1 rounded-md z-10"> 
-                                        <div @click="showEdit" class="flex items-center hover:text-primary text-slate-400 text-sm">
+                                        <div @click="showEditForm(work.id)" class="flex items-center hover:text-primary text-slate-400 text-sm">
                                             <edit-icon ></edit-icon>
                                             <span class="ml-1">Edit</span>
                                         </div>
@@ -152,7 +150,7 @@
                                 Association’s in Web Development
                             </template>
                             <template #lower_title>
-                                2016 - 2018
+                                2016 - 2018 
                             </template>
                         </base-card>
                     </div>
@@ -181,6 +179,8 @@
             </card-widget>
         </div>
     </section>
+
+    
     <!-- form edit work experience -->
     <editExperience v-if="showEditExperience" :userData="data.user" @closeDiloag="closeDiloag" :batch="data.batch">
         <template #hidenCard>
@@ -190,20 +190,28 @@
         </template>
     </editExperience>
 
+    <edit-work-form :work="workToEdit" v-if="showedit" @closeForm = closeForm>
+        <template #hidden-form>
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-Width={1.5} stroke="currentColor" class="w-6 h-6 hover:bg-gray-200 rounded-full cursor-pointer" @click="showedit = !showedit" >
+                <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" class="text-end font-bold"/>
+            </svg>
+        </template>
+    </edit-work-form>
+    
+    <!-- form edit general information -->
 </template>
 
 <script>
+    import FormEditWorkExperViewVue from '../../components/profile/alumni/FormEditWorkExper.vue';
     import axios from '../../axios-http';
-    import editExperience from './formEditExperience.vue'
+    import editExperience from '../../components/profile/alumni/formEditExperience.vue'
     import AcademicIcon from '../../components/widgets/IconWidgets/AcademicIcon.vue';
     import EditIcon from '../../components/widgets/IconWidgets/EditIcon.vue';
     import MailIcon from '../../components/widgets/IconWidgets/MailIcon.vue';
     export default {
-  components: { AcademicIcon, EditIcon, MailIcon,editExperience },
-      
+    components: { AcademicIcon, EditIcon, MailIcon,editExperience , 'edit-work-form': FormEditWorkExperViewVue},  
         data(){
             return {
-                allowExtension : ["jpg", "png", "jpeg", "gif", "webp"],
                 isOpenOptionCard: false,
                 data: [],
                 workExp: [],
@@ -211,16 +219,11 @@
                 currentIndex: null,
                 isOpen : false,
                 showModal : true,
-                showEditExperience :true,
-                userId :1,
-                batchid :1,
-                name:"",
-                address:"",
-                image:"",
-                startdate : "",
-                enddate : "",
-                position : "",
+                showEditExperience :false,
                 alumniDetailInfo:false,
+                showModal : false,
+                showedit: false,
+                currentWorkIndex: null
             }
         },
         methods:{
@@ -228,7 +231,7 @@
                 this.isOpenOptionCard = !this.isOpenOptionCard;
             },
             async getAlumin(){
-                await axios.get('alumni/2')
+                await axios.get('alumni/3')
                 .then(resp => {
                     this.data = resp.data;
                     this.isFetch = true;
@@ -236,23 +239,22 @@
                 })
             },
             async getAluminWorkExp(){
-                await axios.get('experiences/alumni/2')
+                await axios.get('experiences/alumni/3')
                 .then(resp => {
                     this.workExp = resp.data;
                     this.isFetch = true;
-                    // console.log(resp.data)
+
                 })
             },
             openOpenCard(index){
                 if(!this.isOpen){
-                        console.log(index);
                         this.currentIndex = index;
                         this.isOpen =true
-
                     }else{
                         this.currentIndex =null
                         this.isOpen=false
                     }
+                console.log(index);
             },
             closeDiloag(value){
                 this.showEditExperience = value
@@ -261,38 +263,28 @@
             showDetailAlumniInfo(){
                 this.alumniDetailInfo =! this.alumniDetailInfo
             },
-
-    
-    onchangeimg(event) {
-        let fileExtension = event.target.files[0].name.split(".").pop();
-        if (this.allowExtension.includes(fileExtension.toLowerCase())) {
-            this.image = event.target.files[0];
-            console.log(this.image);
-        }
-    },
-    editworkexperience(){
-        let Fd = new FormData();
-        Fd.append('_method','PUT');
-        Fd.append('name',this.name);
-        Fd.append('address',this.address);
-        Fd.append('image',this.image);
-        console.log(this.Fd);
-        axios.post("http://127.0.0.1:8000/api/companies/2",Fd).then((response)=>{
-            console.log(response.data)
-        })
-
-        axios.put('http://127.0.0.1:8000/api/experiences/5',{
-            startYear:this.startdate,
-            endYear:this.enddate,
-            position:this.position
-        }).then((result) => {
-            console.log(result.data);
-            this.getAluminWorkExp();
-        })
-        this.showEditExperience = !this.showEditExperience ;
-    }
-
-
+            onchangeimg(event) {
+                let fileExtension = event.target.files[0].name.split(".").pop();
+                if (this.allowExtension.includes(fileExtension.toLowerCase())) {
+                    this.image = event.target.files[0];
+                    console.log(this.image);
+                }
+            },
+            showDetailAlumniInfo(){
+                this.alumniDetailInfo =! this.alumniDetailInfo
+            },
+            showFormEdit(){
+                this.showModal = !this.showModal
+            },
+            showEditForm(index){
+                this.currentWorkIndex = index;
+                this.showedit = !this.showedit;
+                // console.log(index);
+            },
+            closeForm(value){
+                this.showedit = value;
+            }
+           
         },
         computed: {
             alumniData(){
@@ -305,7 +297,10 @@
                 return this.data.major
             },
             workExperiences(){
-                return this.workExp;
+                return this.workExp
+            },
+            workToEdit(){
+                return this.workExp.filter((work) => work.id == this.currentWorkIndex)[0]
             }
         },
         mounted() {
@@ -315,47 +310,4 @@
     }
 </script>
 
-<style scoped>
-    .modal-mask {
-        position: fixed;
-        z-index: 10;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background-color: rgba(0, 0, 0, 0.5);
-        display: table;
-        transition: opacity 0.3s ease;
-    }
-    .modal-wrapper {
-        display: table-cell;
-        vertical-align: middle;
-    }
-    .modal-container {
-        padding: 15px 28px;
-        border-radius: 2px;
-        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.33);
-        transition: all 0.3s ease;
-        font-family: Helvetica, Arial, sans-serif;
-        z-index: 10;
-    }
-    .modal-body {
-        margin: 20px 0;
-    }
-    .modal-default-button {
-        float: right;
-    }
-    .modal-enter-from, .modal-leave-to {
-        opacity: 0;
-    }
-    .modal-enter-active .modal-container,
-    .modal-leave-active .modal-container {
-        -webkit-transform: scale(1.1);
-        transform: scale(1.1);
-    };
-    form {
-        width: 95%;
-    }
-</style>
-    
-    
+

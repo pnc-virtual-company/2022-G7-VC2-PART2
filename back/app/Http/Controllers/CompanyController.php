@@ -28,6 +28,7 @@ class CompanyController extends Controller
                 mkdir($path, 0777,true);
             }
             $file = $request->file('image');
+          
             $fileName = uniqid().'_'.trim($file->getClientOriginalName());
             $company->image = asset('/images/'.$fileName);
             $file-> move($path,$fileName);
