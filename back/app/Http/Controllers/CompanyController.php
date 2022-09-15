@@ -30,7 +30,7 @@ class CompanyController extends Controller
             $file = $request->file('image');
           
             $fileName = uniqid().'_'.trim($file->getClientOriginalName());
-            $company->image = $fileName;
+            $company->image = asset('/images/'.$fileName);
             $file-> move($path,$fileName);
         $company->save();
         return response()->json(['message' => 'Successfully for createData']);
@@ -45,9 +45,6 @@ class CompanyController extends Controller
                 mkdir($path, 0777,true);
             }
             $file = $request->file('image');
-            if($file == null){
-                return 'cannot find the image';
-            }
             $fileName = uniqid().'_'.trim($file->getClientOriginalName());
             $company->image = asset('/images/'.$fileName);
             $file-> move($path,$fileName);

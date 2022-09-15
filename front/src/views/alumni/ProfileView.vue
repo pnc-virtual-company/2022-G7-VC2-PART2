@@ -1,7 +1,6 @@
 <template>
     <section class="w-10/12 m-auto" v-if="isFetch" v-cloak>
         <div class="m-auto rounded-[5px]">
-            <!-- // top  -->
             <div class="mt-4 relative font-poppins">
                 <div class="bg-profile relative">
                     <img src="../../assets/bg-profile.png" alt="bg-profile">
@@ -18,10 +17,6 @@
                         </label>
                         <input id="cover-img" hidden type="file" accept="image/*" />
                     </div>
-                    <div class="mt-[8%] block text-center absolute ml-[6%]">
-                        <h1 class="text-2xl font-extrabold">{{alumniData.firstName}} {{alumniData.lastName}}</h1>
-                        <span class="text-base" v-if="workExperiences.length>0">{{workExperiences[0].position}}</span>
-                    </div>
                 </div>
             </div>
         </div>
@@ -30,28 +25,47 @@
 
             </skill-content>
         </div>
+        <!-- General Information  -->
         <div class="w-7/12 mr-[8.4%] absolute right-0 -mt-14">
-            <card-widget>
-                <template #header>
-                    <header-card>
-                        <template #icon>
-                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-5 h-5">
-                                <path fill-rule="evenodd" d="M7.5 6a4.5 4.5 0 119 0 4.5 4.5 0 01-9 0zM3.751 20.105a8.25 8.25 0 0116.498 0 .75.75 0 01-.437.695A18.683 18.683 0 0112 22.5c-2.786 0-5.433-.608-7.812-1.7a.75.75 0 01-.437-.695z" clip-rule="evenodd" />
-                            </svg>
-                        </template>
-                        <template #title>
-                            General Information
-                        </template>
-                        <template #action_icon >
-                            <edit-icon class="text-primary" @click="showFormEdit"/>
-                        </template>
-                    </header-card>
-                </template>
-                <template #body>
-                    <general-info-body :user="alumniData" :batch="batch.generation" :major="major.name"></general-info-body>
-                </template>
-            </card-widget>
-            <card-widget class="mt-4">
+            <div class=" block -mt-2 text-neutral-700 font-poppins" >
+                <div class="flex justify-between">
+                    <h1 class="text-2xl font-extrabold">{{alumniData.firstName}} {{alumniData.lastName}}</h1>
+                    <div @click="showFormEdit">
+                        <span  class="bg-white w-8 h-8 rounded-full flex justify-center cursor-pointer shadow-lg text-primary ">
+                            <edit-icon ></edit-icon>
+                        </span>
+                    </div>
+                </div>
+                <div class="flex mt-4">
+                    <phone-icon ></phone-icon>
+                    <h1 class="-mt-1 ml-2 text-xl font-semibold">{{alumniData.phone}}</h1>
+                    <copy-icon class="ml-3 w-5 -mt-1 cursor-pointer"></copy-icon>
+                </div>
+                <div class="flex items-center">
+                    <div class="flex items-center mt-4">
+                        <academic-icon></academic-icon>
+                        <span class=" ml-2">{{batch.generation}}</span>
+                        <background-widget>
+                            <template #value>
+                                <span class="text-center">{{major.name}}</span>
+                            </template>
+                        </background-widget>
+                    </div>
+                    <div class="flex items-center mt-4">
+                        <img src="../../assets/gender.svg" alt="" class="w-4 ml-10">
+                        <span class="ml-3">Gender</span>
+                        <background-widget >
+                            <template #value>
+                                <span>{{alumniData.gender}}</span>
+                            </template>
+                        </background-widget>
+                        <div @click="showDetailAlumniInfo" class="ml-10 text-sky-500 font-semibold underline cursor-pointer">
+                            <span class="text-primary">Details</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <card-widget class="mt-6">
                 <template #header>
                     <header-card>
                         <template #icon>
@@ -75,10 +89,10 @@
                                 <img :src="work.company.image" alt="" class="w-[100px]">
                             </template>
                             <template #main_title>
-                                {{work.position}}
+                                {{work.company.name}}
                             </template>
                             <template #sub_title>
-                                {{work.company.name}}
+                                {{work.position}}
                             </template>
                             <template #lower_title>
                                 {{work.start_year}} {{work.end_year}}
@@ -87,8 +101,8 @@
                                 <div class="absolute right-0 top-0 mr-2 mt-1 cursor-pointer">
                                     <point-icon @click="openOpenCard(index)" ></point-icon>
                                     <div v-if="index==currentIndex" class="absolute bg-bgColorWhite space-y-1 p-1 rounded-md z-10"> 
-                                        <div class="flex items-center hover:text-primary text-slate-400 text-sm">
-                                            <edit-icon @click="showEditForm(work.id)"></edit-icon>
+                                        <div @click="showEditForm(work.id)" class="flex items-center hover:text-primary text-slate-400 text-sm">
+                                            <edit-icon ></edit-icon>
                                             <span class="ml-1">Edit</span>
                                         </div>
                                         <div class="flex items-center hover:text-secondary text-slate-400 text-sm">
@@ -133,7 +147,7 @@
                                 Association’s in Web Development
                             </template>
                             <template #lower_title>
-                                2016 - 2018 {{workExperiences}}
+                                2016 - 2018 
                             </template>
                         </base-card>
                     </div>
@@ -141,7 +155,8 @@
             </card-widget>
         </div>
     </section>
-    <edit-work-form :work="workToEdit" v-if="showedit">
+
+    <edit-work-form :work="workToEdit" v-if="showedit" @closeForm = closeForm>
         <template #hidden-form>
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-Width={1.5} stroke="currentColor" class="w-6 h-6 hover:bg-gray-200 rounded-full cursor-pointer" @click="showedit = !showedit" >
                 <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" class="text-end font-bold"/>
@@ -205,6 +220,9 @@
                     }
                 console.log(index);
             },
+            showDetailAlumniInfo(){
+                this.alumniDetailInfo =! this.alumniDetailInfo
+            },
             showFormEdit(){
                 this.showModal = !this.showModal
             },
@@ -213,23 +231,10 @@
                 this.showedit = !this.showedit;
                 // console.log(index);
             },
-            editinfo(){
-                axios.put('http://127.0.0.1:8000/api/users/'+this.userId,{
-                    firstName:this.firstname,
-                    lastName:this.lastname,
-                    email:this.email,
-                    password:"pupd",
-                    gender:this.gender,
-                    phone:this.phone
-                })
-                axios.put('http://127.0.0.1:8000/api/batches/'+this.batchid,{
-                    generation:this.generation
-                }).then((response) =>{
-
-                    this.getAlumin();
-                })
-                this.showModal = !this.showModal;
-            }, 
+            closeForm(value){
+                this.showedit = value;
+            }
+           
         },
         computed: {
             alumniData(){
@@ -255,47 +260,4 @@
     }
 </script>
 
-<style scoped>
-    .modal-mask {
-        position: fixed;
-        z-index: 10;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background-color: rgba(0, 0, 0, 0.5);
-        display: table;
-        transition: opacity 0.3s ease;
-    }
-    .modal-wrapper {
-        display: table-cell;
-        vertical-align: middle;
-    }
-    .modal-container {
-        padding: 15px 28px;
-        border-radius: 2px;
-        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.33);
-        transition: all 0.3s ease;
-        font-family: Helvetica, Arial, sans-serif;
-        z-index: 10;
-    }
-    .modal-body {
-        margin: 20px 0;
-    }
-    .modal-default-button {
-        float: right;
-    }
-    .modal-enter-from, .modal-leave-to {
-        opacity: 0;
-    }
-    .modal-enter-active .modal-container,
-    .modal-leave-active .modal-container {
-        -webkit-transform: scale(1.1);
-        transform: scale(1.1);
-    };
-    form {
-        width: 95%;
-    }
-</style>
-    
-    
+
