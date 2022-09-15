@@ -28,6 +28,7 @@ class CompanyController extends Controller
                 mkdir($path, 0777,true);
             }
             $file = $request->file('image');
+          
             $fileName = uniqid().'_'.trim($file->getClientOriginalName());
             $company->image = $fileName;
             $file-> move($path,$fileName);
@@ -44,6 +45,9 @@ class CompanyController extends Controller
                 mkdir($path, 0777,true);
             }
             $file = $request->file('image');
+            if($file == null){
+                return 'cannot find the image';
+            }
             $fileName = uniqid().'_'.trim($file->getClientOriginalName());
             $company->image = asset('/images/'.$fileName);
             $file-> move($path,$fileName);
