@@ -31,31 +31,49 @@
             </skill-content>
         </div>
         <div class="w-7/12 mr-[8.4%] absolute right-0 -mt-14">
-            <card-widget>
+            <div class=" block -mt-2 text-neutral-700 font-poppins" >
+                <div class="flex justify-between">
+                    <h1 class="text-2xl font-extrabold">{{alumniData.firstName}} {{alumniData.lastName}}</h1>
+                    <div >
+                        <span  class="bg-white w-8 h-8 rounded-full flex justify-center cursor-pointer shadow-lg text-primary ">
+                            <edit-icon @click="showEditExperience = !showEditExperience"></edit-icon>
+                        </span>
+                    </div>
+                </div>
+                <div class="flex mt-4">
+                    <phone-icon ></phone-icon>
+                    <h1 class="-mt-1 ml-2 text-xl font-semibold">{{alumniData.phone}}</h1>
+                    <copy-icon class="ml-3 w-5 -mt-1 cursor-pointer"></copy-icon>
+                </div>
+                <div class="flex items-center">
+                    <div class="flex items-center mt-4">
+                        <academic-icon></academic-icon>
+                        <span class=" ml-2">{{batch.generation}}</span>
+                        <background-widget>
+                            <template #value>
+                                <span class="text-center">{{major.name}}</span>
+                            </template>
+                        </background-widget>
+                    </div>
+                    <div class="flex items-center mt-4">
+                        <img src="../../assets/gender.svg" alt="" class="w-4 ml-10">
+                        <span class="ml-3">Gender</span>
+                        <background-widget >
+                            <template #value>
+                                <span>{{alumniData.gender}}</span>
+                            </template>
+                        </background-widget>
+                        <div @click="alumniDetailInfo = !alumniDetailInfo" class="ml-10 text-sky-500 font-semibold underline cursor-pointer">
+                            <span class="text-primary">Details</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <card-widget class="mt-6">
                 <template #header>
                     <header-card>
                         <template #icon>
-                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-5 h-5">
-                                <path fill-rule="evenodd" d="M7.5 6a4.5 4.5 0 119 0 4.5 4.5 0 01-9 0zM3.751 20.105a8.25 8.25 0 0116.498 0 .75.75 0 01-.437.695A18.683 18.683 0 0112 22.5c-2.786 0-5.433-.608-7.812-1.7a.75.75 0 01-.437-.695z" clip-rule="evenodd" />
-                            </svg>
-                        </template>
-                        <template #title>
-                            General Information
-                        </template>
-                        <template #action_icon >
-                            <edit-icon class="text-primary" @click="showEditExperience = !showEditExperience"/>
-                        </template>
-                    </header-card>
-                </template>
-                <template #body>
-                    <general-info-body :user="alumniData" :batch="batch.generation" :major="major.name"></general-info-body>
-                </template>
-            </card-widget>
-            <card-widget class="mt-4">
-                <template #header>
-                    <header-card>
-                        <template #icon>
-                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6 text-primary">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6 text-primary" >
                                 <path fill-rule="evenodd" d="M7.5 5.25a3 3 0 013-3h3a3 3 0 013 3v.205c.933.085 1.857.197 2.774.334 1.454.218 2.476 1.483 2.476 2.917v3.033c0 1.211-.734 2.352-1.936 2.752A24.726 24.726 0 0112 15.75c-2.73 0-5.357-.442-7.814-1.259-1.202-.4-1.936-1.541-1.936-2.752V8.706c0-1.434 1.022-2.7 2.476-2.917A48.814 48.814 0 017.5 5.455V5.25zm7.5 0v.09a49.488 49.488 0 00-6 0v-.09a1.5 1.5 0 011.5-1.5h3a1.5 1.5 0 011.5 1.5zm-3 8.25a.75.75 0 100-1.5.75.75 0 000 1.5z" clip-rule="evenodd" />
                                 <path d="M3 18.4v-2.796a4.3 4.3 0 00.713.31A26.226 26.226 0 0012 17.25c2.892 0 5.68-.468 8.287-1.335.252-.084.49-.189.713-.311V18.4c0 1.452-1.047 2.728-2.523 2.923-2.12.282-4.282.427-6.477.427a49.19 49.19 0 01-6.477-.427C4.047 21.128 3 19.852 3 18.4z" />
                             </svg>
@@ -142,6 +160,28 @@
             </card-widget>
         </div>
     </section>
+
+    <!--    Detail Information Alumni profile -->
+    <section  v-if="isFetch" v-cloak class="mr-40 mt-14">
+        <div v-if="!alumniDetailInfo" class="font-poppins flex justify-end">
+        <card-widget class="w-1/4 absolute" >
+            <template #header>
+                <div class="flex font-bold text-primary">
+                    <info-icon></info-icon>
+                    <h1 class="ml-3">General Information</h1>
+                </div>
+            </template>
+            <template #body>
+                <div class="flex mt-4">
+                    <mail-icon class="w-6 h-6"></mail-icon>
+                    <span class=" ml-3">{{alumniData.email}}</span>
+                </div>
+            </template>
+                
+            </card-widget>
+        </div>
+    </section>
+    <!-- form edit work experience -->
     <editExperience v-if="showEditExperience" :userData="data.user" @closeDiloag="closeDiloag" :batch="data.batch">
         <template #hidenCard>
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-Width={1.5} stroke="currentColor" className="w-6 h-6" @click="showEditExperience = !showEditExperience" >
@@ -149,15 +189,18 @@
             </svg>
         </template>
     </editExperience>
+
 </template>
 
 <script>
     import axios from '../../axios-http';
     import editExperience from './formEditExperience.vue'
+    import AcademicIcon from '../../components/widgets/IconWidgets/AcademicIcon.vue';
+    import EditIcon from '../../components/widgets/IconWidgets/EditIcon.vue';
+    import MailIcon from '../../components/widgets/IconWidgets/MailIcon.vue';
     export default {
-        components: {
-            editExperience
-        },
+  components: { AcademicIcon, EditIcon, MailIcon,editExperience },
+      
         data(){
             return {
                 allowExtension : ["jpg", "png", "jpeg", "gif", "webp"],
@@ -168,7 +211,7 @@
                 currentIndex: null,
                 isOpen : false,
                 showModal : true,
-                showEditExperience : false,
+                showEditExperience :true,
                 userId :1,
                 batchid :1,
                 name:"",
@@ -177,6 +220,7 @@
                 startdate : "",
                 enddate : "",
                 position : "",
+                alumniDetailInfo:false,
             }
         },
         methods:{
@@ -212,6 +256,10 @@
             },
             closeDiloag(value){
                 this.showEditExperience = value
+
+            },
+            showDetailAlumniInfo(){
+                this.alumniDetailInfo =! this.alumniDetailInfo
             },
 
     
