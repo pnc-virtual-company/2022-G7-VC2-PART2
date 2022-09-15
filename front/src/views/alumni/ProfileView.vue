@@ -399,7 +399,7 @@
                         icon: "success",
                         title: updatetitle,
                         showConfirmButton: false,
-                        timer: 1500,
+                        timer: 1200,
                     });
                 }
             },
