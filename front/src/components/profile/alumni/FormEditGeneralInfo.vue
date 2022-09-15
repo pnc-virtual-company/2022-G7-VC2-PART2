@@ -102,7 +102,6 @@
             userData:Object,
             batch:Object,
         },
-        // emit:['closeDiloag'],
         data(){
             return{
                 userId :1,
@@ -141,15 +140,14 @@
                     return (response.data);
                 })
                 this.showModal = !this.showModal;
-                this.$emit('closeDiloag',false)
-                // console.log('All Data from batch and userdata:',userdata);
+                this.$forceUpdate()
+                this.$emit('closeDiloag')
+                this.$emit('refreshData')
             },
-            
-
         },
         mounted(){
             this.getData();
-        }
+        },
     }
 </script>
 

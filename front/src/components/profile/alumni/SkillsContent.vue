@@ -12,9 +12,6 @@
                 <div class="flex flex-wrap py-1 gap-2 text-white font-bold">
                     <span class="bg-secondary p-1 rounded-full text-xs shadow-xl">HTML</span>
                 </div>
-                <span class="bg-white w-8 h-8 rounded-full flex items-center justify-center cursor-pointer shadow-lg mt-2">
-                    <add-icon class="text-primary" />
-                </span>
             </div>
 
             <div class="w-full mt-2">
@@ -22,9 +19,6 @@
                 <div class="flex flex-wrap py-1 gap-2 text-white font-bold">
                     <span class="bg-secondary p-1 rounded-full text-xs shadow-xl">Public Speaking</span>
                 </div>
-                <span class="bg-white w-8 h-8 rounded-full flex items-center justify-center cursor-pointer shadow-lg mt-2">
-                    <add-icon class="text-primary" />
-                </span>
             </div>
         </div>
     </div>

@@ -94,7 +94,7 @@ export default {
             formid:this.work.id,
             companyid:this.work.company.id,
             image: this.work.company.image,
-            allowExtension : ["jpg", "png", "jpeg", "gif", "webp","jfif"],
+            allowExtension : ["jpg", "png", "jpeg", "gif", "webp","jfif", "svg"],
         }
     },
     methods: {
@@ -123,8 +123,7 @@ export default {
             axios.put('http://127.0.0.1:8000/api/experiences/'+this.formid,experiences).then((result) => {
                 return result.data;
             })
-            this.showedit = !this.showedit;
-            this.$emit('closeForm',false)
+            this.$emit('closeForm',true)
         }
     }
 }

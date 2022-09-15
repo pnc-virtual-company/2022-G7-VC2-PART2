@@ -2,6 +2,8 @@ import { createApp } from 'vue'
 import './style.css'
 import App from './App.vue'
 import router from './router'
+import './axios-http';
+
 import EditIcon from './components/widgets/IconWidgets/EditIcon.vue'
 import AddIcon from './components/widgets/IconWidgets/AddIcon.vue'
 import CamaraIcon from './components/widgets/IconWidgets/CamaraIcon.vue'
@@ -12,7 +14,7 @@ import MailIcon from './components/widgets/IconWidgets/MailIcon.vue'
 import PhoneIcon from './components/widgets/IconWidgets/PhoneIcon.vue'
 import PointIcon from './components/widgets/IconWidgets/PointIcon.vue'
 import CancelIcon from './components/widgets/IconWidgets/CancelIcon.vue'
-import CardWidget from './components/widgets/Card/cardWidget.vue'
+import CardWidget from './components/widgets/Card/CardWidget.vue'
 import BaseCard from './components/widgets/Card/BaseCard.vue'
 import NextIcon from './components/widgets/IconWidgets/NextIcon.vue'
 import BackIcon from './components/widgets/IconWidgets/BackIcon.vue'
@@ -21,7 +23,6 @@ import HeaderCard from './components/widgets/Card/HeaderCard.vue'
 import SkillsContent from './components/profile/alumni/SkillsContent.vue'
 import CopyIcon from "./components/widgets/IconWidgets/CopyIcon.vue"
 import InformationIcon from './components/widgets/IconWidgets/InformationIcon.vue'
-import './axios-http';
 
 
 
