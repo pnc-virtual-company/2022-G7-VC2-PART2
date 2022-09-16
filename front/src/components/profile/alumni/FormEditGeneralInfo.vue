@@ -15,7 +15,7 @@
                         </div>
                         <!-- cencel icon -->
                         <div class="w-[4%]">
-                            <slot name="hidenCard">
+                            <slot name="hidden-form">
                             </slot>
                         </div>
                     </div>

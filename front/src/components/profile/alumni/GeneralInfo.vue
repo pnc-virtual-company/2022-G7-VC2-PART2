@@ -37,16 +37,22 @@
                 <detail-info :alumniData="alumniData" v-if="alumniDetailInfo"/>
             </div>
         </div>
-        <generalInfo-edit-form v-if="showForm" :userData="alumniData" @closeDiloag="showForm=false" :batch="batch" />
+        <generalInfo-edit-form v-if="showForm" :userData="alumniData" @closeDiloag="showForm=false" :batch="batch">
+            <template #hidden-form>
+                <cancel-icon @click="showForm = !showForm"/>
+            </template>
+        </generalInfo-edit-form>
     </div>
 </template>
 <script>
+import CancelIcon from '../../widgets/IconWidgets/CancelIcon.vue';
     import DetailAlumniInfo from './DetailAlumniInfo.vue';
     import FormEditGeneralInfoVue from './FormEditGeneralInfo.vue';
     export default {
        components: {
         'detail-info': DetailAlumniInfo,
-        'generalInfo-edit-form': FormEditGeneralInfoVue
+        'generalInfo-edit-form': FormEditGeneralInfoVue,
+              CancelIcon
        },
        data(){
           return {
