@@ -154,15 +154,17 @@
                 </template>
             </card-widget>
         </div>
+
+        <edit-work-form :work="workToEdit" v-if="showedit" @closeForm = closeForm>
+            <template #hidden-form>
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-Width={1.5} stroke="currentColor" class="w-6 h-6 hover:bg-gray-200 rounded-full cursor-pointer" @click="showedit = !showedit" >
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" class="text-end font-bold"/>
+                </svg>
+            </template>
+        </edit-work-form>
     </section>
 
-    <edit-work-form :work="workToEdit" v-if="showedit" @closeForm = closeForm>
-        <template #hidden-form>
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-Width={1.5} stroke="currentColor" class="w-6 h-6 hover:bg-gray-200 rounded-full cursor-pointer" @click="showedit = !showedit" >
-                <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" class="text-end font-bold"/>
-            </svg>
-        </template>
-    </edit-work-form>
+
     
     <!-- form edit general information -->
 </template>
