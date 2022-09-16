@@ -9,6 +9,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\WorkExperienceController;
 use App\Http\Controllers\PositionController;
 use App\Http\Controllers\CompanyController;
+use App\Http\Controllers\SchoolController;
 
 /*
 |--------------------------------------------------------------------------
@@ -57,3 +58,10 @@ Route::get('/alumni/{id}',[AlumniController::class,'show']);
 Route::post('/alumni',[AlumniController::class,'store']);
 Route::post('/alumni/{id}',[AlumniController::class,'update']);
 Route::get('/alumni/{id}',[AlumniController::class,'show']);
+// ============ api alumni school ==================
+Route::post('/school',[SchoolController::class,'store']);
+Route::get('/school',[SchoolController::class,'index']);
+Route::get('/school/{id}',[SchoolController::class,'show']);
+Route::put('/school/{id}',[SchoolController::class,'update']);
+Route::delete('/school/{id}',[SchoolController::class,'destroy']);
+
