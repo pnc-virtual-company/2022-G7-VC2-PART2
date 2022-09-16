@@ -49,23 +49,11 @@
                         <div class="w-[50%]">
                             <label for="Batch" class="text-slate-500 text-sm">Batch</label> <sup class="star text-blue-500">*</sup> 
                             <br>
-                            <select id="batch" class="w-[97%] p-1.5 mt-1 text-slate-500 outline-blue-500 border-solid border-[1px] border-gray-400 text-sm" v-model="generation">
-                                <option value="PNC2007">PNC2007</option>
-                                <option value="PNC2008">PNC2008</option>
-                                <option value="PNC2009">PNC2009</option>
-                                <option value="PNC2010">PNC2010</option>
-                                <option value="PNC2011">PNC2011</option>
-                                <option value="PNC2012">PNC2012</option>
-                                <option value="PNC2013">PNC2013</option>
-                                <option value="PNC2014">PNC2014</option>
-                                <option value="PNC2015">PNC2015</option>
-                                <option value="PNC2016">PNC2016</option>
-                                <option value="PNC2017">PNC2017</option>
-                                <option value="PNC2018">PNC2018</option>
-                                <option value="PNC2019">PNC2019</option>
-                                <option value="PNC2020">PNC2020</option>
-                                <option value="PNC2021">PNC2021</option>
-                            </select>
+                            <div>
+                                <select  id="batch" class="w-[97%] p-1.5 mt-1 text-slate-500 outline-blue-500 border-solid border-[1px] border-gray-400 text-sm" v-model="generation">
+                                    <option  v-for = "years in batchdata" :key="years" :value="years.generation">{{years.generation}}</option>
+                                </select>    
+                            </div>
                         </div>
                     </div>
 
@@ -105,13 +93,14 @@
         data(){
             return{
                 userId :1,
-                batchid :1,
+                batchid :16,
                 gender :"",
                 firstname:"",
                 lastname: "",
                 generation : "",
                 email:"",
                 phone :"",
+                batchdata:[]
             }
         },
         methods:{
@@ -122,6 +111,12 @@
                 this.phone= this.userData.phone;
                 this.gender=this.userData.gender;
                 this.generation=this.batch.generation
+            },
+            getBatch(){
+                axios.get('http://127.0.0.1:8000/api/batches').then(result=>{
+                    this.batchdata=result.data
+                    console.log('data batch', this.batchdata)
+                })
             },
             editinfo(){
                 let userdata = {
@@ -147,6 +142,7 @@
         },
         mounted(){
             this.getData();
+            this.getBatch();
         },
     }
 </script>
