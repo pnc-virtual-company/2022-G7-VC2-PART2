@@ -42,6 +42,7 @@
                 <cancel-icon @click="showForm = !showForm"/>
             </template>
         </generalInfo-edit-form>
+        
     </div>
 </template>
 <script>

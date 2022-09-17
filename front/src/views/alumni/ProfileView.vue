@@ -47,11 +47,10 @@
         },
         methods:{
             async getAlumin(){
-                await axios.get('alumni/3')
+                await axios.get('alumni/2')
                 .then(resp => {
                     this.data = resp.data;
                     this.isFetch = true;
-                    console.log('return data',this.data.user);   
                 })
             },
             async getAluminWorkExp(){
