@@ -2,7 +2,7 @@
     <section class="w-10/12 m-auto" v-if="isFetch" v-cloak>
         <profile-cover-img />
         <div class="w-3/12 h-[100vh] absolute mt-20 px-5">
-            <skill-content :listSkill="skills"/>
+            <skill-content :listSkill="skills" @getSkill="getSkillInfor"/>
         </div>
         <div class="w-7/12 mr-[8.4%] absolute right-0 -mt-10">
             <general-info :alumniData="alumniData" :batch="batch" :major="major" />
@@ -57,7 +57,7 @@
                 })
             },
             async getAluminWorkExp(){
-                await axios.get('experiences/alumni/2')
+                await axios.get('experiences/alumni/3')
                 .then(resp => {
                     this.workExp = resp.data;
                     this.isFetch = true;
