@@ -3,6 +3,7 @@ import './style.css'
 import App from './App.vue'
 import router from './router'
 import './axios-http';
+import VueCookies from 'vue-cookies'
 
 import EditIcon from './components/widgets/IconWidgets/EditIcon.vue'
 import AddIcon from './components/widgets/IconWidgets/AddIcon.vue'
@@ -23,12 +24,16 @@ import HeaderCard from './components/widgets/Card/HeaderCard.vue'
 import SkillsContent from './components/profile/alumni/SkillsContent.vue'
 import CopyIcon from "./components/widgets/IconWidgets/CopyIcon.vue"
 import InformationIcon from './components/widgets/IconWidgets/InformationIcon.vue'
+import InputField from './components/widgets/InputField/InputField.vue'
+import BaseButton from './components/widgets/Button/BaseButton.vue'
 
 
 
 
 const app = createApp(App)
 app.use(router)
+app.use(VueCookies, { expire: '1d'})
+
 app.component('edit-icon', EditIcon)
 app.component('add-icon',AddIcon)
 app.component('camara-icon',CamaraIcon)
@@ -48,5 +53,7 @@ app.component('header-card',HeaderCard)
 app.component('skill-content',SkillsContent)
 app.component('copy-icon',CopyIcon)
 app.component('info-icon',InformationIcon)
+app.component('input-field',InputField)
+app.component('base-button',BaseButton)
 
-.mount('#app')
+app.mount('#app')
