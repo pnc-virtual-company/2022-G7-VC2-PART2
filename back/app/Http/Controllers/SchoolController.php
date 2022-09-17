@@ -30,10 +30,12 @@ class SchoolController extends Controller
         if ( ! file_exists($path) ) {
             mkdir($path, 0777, true);
         }
-        $file = $request->file('school_profile');
-        $fileName = uniqid() . '_' . trim($file->getClientOriginalName());     
-        $file->move($path, $fileName);
-        $school->school_profile = asset('/images/'.$fileName);
+        $file = $request->file('school_logo');
+        if ($file != null){
+            $fileName = uniqid() . '_' . trim($file->getClientOriginalName());  
+            $file->move($path, $fileName);
+            $school->school_profile = asset('/images/'.$fileName);
+        }   
         $school->school_name = $request->school_name;
         $school->start_date = $request->start_date;
         $school->end_date = $request->end_date;
@@ -69,15 +71,20 @@ class SchoolController extends Controller
         if ( ! file_exists($path) ) {
             mkdir($path, 0777, true);
         }
-        $file = $request->file('school_profile');
-        $fileName = uniqid() . '_' . trim($file->getClientOriginalName());     
-        $file->move($path, $fileName);
-        $school->school_profile = asset('/images/'.$fileName);
+        $file = $request->file('school_logo');
+        if ($file != null){
+            $fileName = uniqid() . '_' . trim($file->getClientOriginalName());  
+            $file->move($path, $fileName);
+            $school->school_profile = asset('/images/'.$fileName);
+        }  
+        if ($request->current==0){
+            $school->end_date = $request->end_date;
+        }else {
+            $school->current = $request->current;
+        }
         $school->school_name = $request->school_name;
         $school->start_date = $request->start_date;
-        $school->end_date = $request->end_date;
         $school->degree = $request->degree;
-        $school->current = $request->current;
         $school->alumni_id = $request->alumni_id;
         $school->save();
         return response()->json(['message'=>"Alumni School have been updated!"]);

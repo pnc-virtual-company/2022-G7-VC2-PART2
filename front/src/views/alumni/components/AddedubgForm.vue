@@ -45,15 +45,22 @@
                             </div>
 
                         <div class="flex w-[100%]">
-                            <div class="w-[50%] mt-2">
+                            <div class="w-[50%] mt-2" v-if="!current" >
                                 <label for="startdate" class="text-slate-500 text-sm">Start_date</label> <sup class="star text-blue-500">*</sup> 
                                 <br>
                                 <input type="date" class="w-[97%] p-1 mt-1 outline-blue-500 border-solid border-[1px] border-gray-400 cursor-pointer" placeholder="e.g. Sophiem" v-model="start_date">
                             </div>
-                            <div class="w-[50%] mt-2">
-                                <label for="enddate" class="text-slate-500 text-sm">End_date</label> <sup class="star text-blue-500">*</sup> 
+                            
+                            <div class="w-[100%] mt-2" v-else >
+                                <label for="startdate" class="text-slate-500 text-sm">Start_date</label> <sup class="star text-blue-500">*</sup> 
+                                <br>
+                                <input type="date" class="w-[97%] p-1 mt-1 outline-blue-500 border-solid border-[1px] border-gray-400 cursor-pointer" placeholder="e.g. Sophiem" v-model="start_date">
+                            </div>
+
+                            <div class="w-[50%] mt-2" v-if="!current">
+                                <label for="enddate"  class="text-slate-500 text-sm">End_date</label> <sup class="star text-blue-500">*</sup> 
                                 <br> 
-                                <input type="date" class="w-[97%] p-1 mt-1 outline-blue-500 border-solid border-[1px] border-gray-400 cursor-pointer" placeholder="e.g. Loem" v-model="end_date">
+                                <input type="date"  class="w-[97%] p-1 mt-1 outline-blue-500 border-solid border-[1px] border-gray-400 cursor-pointer" placeholder="e.g. Loem" v-model="end_date">
                             </div>
                         </div>
                             
@@ -75,7 +82,8 @@
 </template>
 
 <script>
-// import axios from '../../axios-http';
+import axios from '../../../axios-http';
+import Swal from "sweetalert2";
 export default {
     emits:['add-school'],
     data(){
@@ -84,27 +92,56 @@ export default {
             end_date:"",
             school_name:"",
             degree:"",
-            current:"",
+            current:'',
             school_profile:"",
+            allowExtension:['jpg','png'],
+            disable:false,
         }
     },
     methods:{
         addSchool(){
-            let schoolinfo = {
-                name:this.school_name,
-                start_date:this.start_date,
-                end_date:this.end_date,
-                degree:this.degree,
-                current:this.current,
-                profile:this.school_profile,
+            if (this.start_date != "" && this.degree != "" && this.school_name != "" &&(this.current !='' || this.end_date != "")){
+                let formdata = new FormData();
+                formdata.append('school_name',this.school_name);
+                formdata.append('start_date',this.start_date);
+                formdata.append('end_date',this.end_date);
+                formdata.append('school_logo',this.school_profile);
+                formdata.append('degree',this.degree);
+                formdata.append('alumni_id',1);
+                if (this.current==true){
+                    formdata.append('current',1);
+                }else {
+                    formdata.append('current',0);
+                }
+                axios.post('http://127.0.0.1:8000/api/school',formdata).then((response)=>{
+                    if (response.status==200){
+                        Swal.fire({
+                            position: 'center',
+                            icon: 'success',
+                            title: 'Alumni School have been add',
+                            showConfirmButton: false,
+                            timer: 1500,
+                        });
+                    }
+                })
+            }else {
+                Swal.fire({
+                        position: 'center',
+                        icon: 'error',
+                        title: 'Fail to add alumni school',
+                        showConfirmButton: false,
+                        timer: 1500,
+                })
             }
-            // axios.post('/school',schoolinfo).then((response)=>{
-            //     console.log(response)
-            // })
             this.$emit('add-school')
-            console.log(schoolinfo);
-        }
-    }
+        },
+        onchangeScprofile(event){
+            let fileExtension = event.target.files[0].name.split(".").pop();
+            if (this.allowExtension.includes(fileExtension.toLowerCase())) {
+                this.school_profile = event.target.files[0];
+            }
+        },
+    },
 }
 </script>
 
@@ -156,5 +193,8 @@ export default {
         width: 150px;
         direction: rtl;
         text-align: left;
+    }
+    .whendisable {
+        width: 100%;
     }
 </style>

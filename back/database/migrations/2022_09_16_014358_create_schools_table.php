@@ -16,10 +16,10 @@ return new class extends Migration
         Schema::create('schools', function (Blueprint $table) {
             $table->id();
             $table->date('start_date');
-            $table->date('end_date');
+            $table->date('end_date')->nullable();
             $table->string('degree');
             $table->string('school_name');
-            $table->string('school_profile');
+            $table->string('school_profile')->nullable();
             $table->boolean('current');
             $table->foreignId('alumni_id')->constrained()->onDelete('CASCADE');
             $table->timestamps();
