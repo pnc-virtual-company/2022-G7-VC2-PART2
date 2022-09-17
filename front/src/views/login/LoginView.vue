@@ -19,8 +19,10 @@
     </form>
 </template>
 <script>
+    import axios from '../../axios-http'
     import encryptData from '../../helper/encrypt'
     const TOKEN_SCRET_KEY = import.meta.env.VITE_APP_TOKEN_KEY;
+    const USER_SCRET_KEY = import.meta.env.VITE_APP_USER_KEY;
 
     export default {
         data(){
@@ -28,30 +30,31 @@
                 email: {
                     label: 'Email',
                     placeholder: 'e.g. user@gmail.com',
+                    type: "email"
                 },
                 password: {
                     label: 'Password',
                     placeholder: 'e.g. @!@#$Me34',
+                    type: "password"
                 },
                 emailValue: '',
-                passwordValue: ''
+                passwordValue: '',
             }
         },
         methods: {
             login(){
-                // console.log('email ' + this.emailValue + ' password: ' + this.passwordValue)
                 let email = localStorage.getItem('email')
                 let password = localStorage.getItem('password')
-                if(this.emailValue == email && this.passwordValue == password){
-                    window.localStorage.setItem('isLogin', true);
-                    console.log('isValid information')
-                    const token = encryptData('werrgfgfgfgg', TOKEN_SCRET_KEY)
-                    this.$cookies.set('isLogin', token, "1d") 
-    
-                    this.$router.push('/')
-                }
+                axios.post('account/login', {email: this.emailValue, password: this.passwordValue})
+                    .then(response => {
+                        console.log(response.data.user.id);
+                        const token = encryptData(response.data.token, TOKEN_SCRET_KEY)
+                        const user_id = encryptData(response.data.user.id.toString(), USER_SCRET_KEY)
+                        this.$cookies.set('token', token, "1d") 
+                        this.$cookies.set('user_id', user_id, "1d") 
+                        this.$router.go()
+                    })
             },
-
         }
     }
 </script>

@@ -104,7 +104,7 @@
         },
         data(){
             return{
-                userId :1,
+                userId : this.$store.state.user_id,
                 batchid :1,
                 gender :"",
                 firstname:"",

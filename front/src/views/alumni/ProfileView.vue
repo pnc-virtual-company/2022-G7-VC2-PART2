@@ -17,6 +17,14 @@
                 </template>
             </work-experiences>
         </div>
+
+        <edit-work-form :work="workToEdit" v-if="showedit" @closeForm = closeForm>
+            <template #hidden-form>
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-Width={1.5} stroke="currentColor" class="w-6 h-6 hover:bg-gray-200 rounded-full cursor-pointer" @click="showedit = !showedit" >
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" class="text-end font-bold"/>
+                </svg>
+            </template>
+        </edit-work-form>
     </section>
 </template>
 
@@ -42,24 +50,27 @@
             return {
                 data: [],
                 workExp: [],
-                isFetch: false,           
+                isFetch: false,   
+                user_id: this.$store.state.user_id,
+                alumni_id: null        
             }
         },
         methods:{
             async getAlumin(){
-                await axios.get('alumni/3')
-                .then(resp => {
-                    this.data = resp.data;
+                await axios.get('/alumni/user/'+this.user_id)
+                .then(resp=>{
+                    console.log(resp.data[0].id);
+                    this.data = resp.data[0]
+                    this.alumni_id = resp.data[0].id
                     this.isFetch = true;
-                    console.log('return data',this.data.user);   
+                    this.getAluminWorkExp();
                 })
             },
             async getAluminWorkExp(){
-                await axios.get('experiences/alumni/3')
+                await axios.get('/experiences/alumni/'+this.alumni_id)
                 .then(resp => {
                     this.workExp = resp.data;
                     this.isFetch = true;
-
                 })
             },
         },
@@ -80,7 +91,6 @@
         },
         mounted() {
             this.getAlumin();
-            this.getAluminWorkExp();
         },
     }
 </script>

@@ -4,6 +4,7 @@ import App from './App.vue'
 import router from './router'
 import './axios-http';
 import VueCookies from 'vue-cookies'
+import { store } from './stores/userInfo';
 
 import EditIcon from './components/widgets/IconWidgets/EditIcon.vue'
 import AddIcon from './components/widgets/IconWidgets/AddIcon.vue'
@@ -26,12 +27,15 @@ import CopyIcon from "./components/widgets/IconWidgets/CopyIcon.vue"
 import InformationIcon from './components/widgets/IconWidgets/InformationIcon.vue'
 import InputField from './components/widgets/InputField/InputField.vue'
 import BaseButton from './components/widgets/Button/BaseButton.vue'
+import EyeOpen from './components/widgets/IconWidgets/EyeOpen.vue'
+import EyeClose from './components/widgets/IconWidgets/EyeClose.vue'
 
 
 
 
 const app = createApp(App)
 app.use(router)
+app.use(store)
 app.use(VueCookies, { expire: '1d'})
 
 app.component('edit-icon', EditIcon)
@@ -55,5 +59,7 @@ app.component('copy-icon',CopyIcon)
 app.component('info-icon',InformationIcon)
 app.component('input-field',InputField)
 app.component('base-button',BaseButton)
+app.component('eye-open',EyeOpen)
+app.component('eye-close',EyeClose)
 
 app.mount('#app')

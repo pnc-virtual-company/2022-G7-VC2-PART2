@@ -25,13 +25,19 @@ const router = createRouter({
   routes,
 });
 
-router.beforeEach(async (to) => {
+router.beforeEach((to) => {
   const publicPages = ['/account/login'];
   const authRequired = !publicPages.includes(to.path);
-  const cookies = VueCookies.get('isLogin')
-  const decryptCookies = decryptData(cookies, TOKEN_SCRET_KEY)
+  const token = VueCookies.get('token')
+  const decryptCookies = decryptData(token, TOKEN_SCRET_KEY)
+  console.log(decryptCookies);
+
+  if(decryptCookies && !authRequired){
+    console.log('already authenticated');
+    return '/'
+  } 
   
-  if (decryptCookies == undefined && authRequired) {
+  if (decryptCookies === undefined && authRequired) {
     return '/account/login';
   }
 });

@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Models\Alumni;
 use Illuminate\Http\Request;
-
 class AlumniController extends Controller
 {
     /**
@@ -47,6 +46,8 @@ class AlumniController extends Controller
 
 
 
+
+
     /**
      * Update the specified resource in storage.
      *
@@ -63,6 +64,17 @@ class AlumniController extends Controller
         
         $alumni->save();
         return response()->json(['message'=>'updated']);
+    }
+
+    public function getAlumniByUser($id)
+    {
+        // GET alumni_id only by user id
+        $alumni_id = Alumni::where('user_id', $id)->select('id')->first();
+        return Alumni::with('User','Batch','Major')->FindOrFail($alumni_id);
+        // return Alumni::where('user_id', $id)->first()->with('Batch');
+        // return Alumni::where('user_id', $id)->with('user_id','Batch','Major')->first();
+        // return Alumni::with('user_id','Batch','Major')->whereIn('user_id', $id)->first();
+        // return response()->json(['message'=>'updated']);
     }
 
 }
