@@ -22,7 +22,7 @@ use App\Http\Controllers\CompanyController;
 */
 
 Route::post('/alumni/login',[UserController::class,'alumniLogin']);
-// Route::group(['middleware'=>['auth:sanctum']], function(){
+Route::group(['middleware'=>['auth:sanctum']], function(){
     //===========Api user routes ===============
     Route::get('/users',[UserController::class,'index']);
     Route::post('/users',[UserController::class,'store']);
@@ -54,4 +54,4 @@ Route::post('/alumni/login',[UserController::class,'alumniLogin']);
     Route::post('/alumni',[AlumniController::class,'store']);
     Route::post('/alumni/{id}',[AlumniController::class,'update']);
     Route::get('/alumni/{id}',[AlumniController::class,'show']);
-// });
+});
