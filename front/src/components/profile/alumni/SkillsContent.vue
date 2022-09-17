@@ -58,7 +58,7 @@
                             <div v-if="skill.type=='hard'">
                                 <background-widget class="relative">
                                     <template #value>
-                                        <minus-icon class="text-white font-bold absolute -mt-3 right-0"></minus-icon>
+                                        <minus-icon @click="deleteSkill(skill.id)" class="text-white font-bold absolute -mt-3 right-0"></minus-icon>
                                         <span class="text-white">{{skill.name}}</span>
                                     </template>
                                 </background-widget>
@@ -73,7 +73,7 @@
                             <div v-if="skill.type=='soft'">
                                 <background-widget class="relative">
                                     <template #value>
-                                        <minus-icon  class="text-white font-bold absolute -mt-3 right-0"></minus-icon>
+                                        <minus-icon @click="deleteSkill(skill.id)" class="text-white font-bold absolute -mt-3 right-0"></minus-icon>
                                         <span class="text-white">{{skill.name}}</span>
                                     </template>
                                 </background-widget>
@@ -109,6 +109,13 @@
                     this.$emit('getSkill')
                     console.log(res.data);
                     this.skill=""
+                })
+            },
+            deleteSkill(index){
+                axios.delete('/skills/'+ index).then(res=>{
+                    this.$emit('getSkill')
+                    console.log(res.data);
+                    
                 })
             },
             isEdited(){
