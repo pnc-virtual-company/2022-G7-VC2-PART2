@@ -38,6 +38,7 @@ class SchoolController extends Controller
         $school->start_date = $request->start_date;
         $school->end_date = $request->end_date;
         $school->degree = $request->degree;
+        $school->current = $request->current;
         $school->alumni_id = $request->alumni_id;
         $school->save();
         return response()->json(['message'=>"Alumni School have been created!"]);
@@ -76,6 +77,7 @@ class SchoolController extends Controller
         $school->start_date = $request->start_date;
         $school->end_date = $request->end_date;
         $school->degree = $request->degree;
+        $school->current = $request->current;
         $school->alumni_id = $request->alumni_id;
         $school->save();
         return response()->json(['message'=>"Alumni School have been updated!"]);

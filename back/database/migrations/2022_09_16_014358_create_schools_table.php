@@ -20,6 +20,7 @@ return new class extends Migration
             $table->string('degree');
             $table->string('school_name');
             $table->string('school_profile');
+            $table->boolean('current');
             $table->foreignId('alumni_id')->constrained()->onDelete('CASCADE');
             $table->timestamps();
         });
