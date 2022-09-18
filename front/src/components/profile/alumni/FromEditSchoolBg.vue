@@ -1,8 +1,9 @@
 <template>
+    <h1>Form eiddd</h1>
     <div class="modal-mask">
        <div class="modal-wrapper">
            <div class="modal-container rounded">
-           <form @submit.prevent="editinfo">  
+           <form @submit.prevent="editworkexperience">  
                <div class="card_form text-start w-[50%] m-auto p-5">
                        <div class="bg-white p-5 rounded-md">
                        <div class="flex justify-between items-start text-sky-500/80 font-bold">
@@ -12,7 +13,6 @@
                            </svg>
                            <h2 class="ml-2 text-lg">Education Backgound</h2> 
                        </div>
-                       <!-- cencel icon -->
                        <div class="w-[4%]">
                            <slot name="hidden-form">
                            </slot>
@@ -28,7 +28,7 @@
                        <div class="w-[50%] mt-2">
                            <label for="school" class="text-slate-500 text-sm">School</label> <sup class="star text-blue-500">*</sup> 
                            <br>
-                           <input type="text" class="w-[97%] p-1 mt-1 outline-blue-500 border-solid border-[1px] border-gray-400" placeholder="e.g. RUPP" v-model="school">
+                           <input type="text" class="w-[97%] p-1 mt-1 outline-blue-500 border-solid border-[1px] border-gray-400" placeholder="e.g. RUPP" v-model="schoolName">
                        </div>
                        <div class="w-[50%] mt-2">
                            <label for="degree" class="text-slate-500 text-sm">Degree of</label> <sup class="star text-blue-500">*</sup> 
@@ -37,25 +37,33 @@
                        </div>
                    </div>
                    <div class="mt-3 mb-2">
-                       <input type="checkbox" id="current" name="curent" value="current">
-                       <label for="current" class="ml-3">I am currently studying in this school</label><br>
+                       <input type="checkbox"  id="current" name="curent" value="1"  v-model="current" >
+                       <label for="current" class="ml-3" value="1">I am currently studying in this school</label><br>
+                       {{current}}
                    </div>
-                   <div class="flex w-[100%]">
+                   <div class="flex w-[100%]" v-if="current == 0">
                        <div class="w-[50%] ">
                            <label for="startdate" class="text-slate-500 text-sm">Start date</label> <sup class="star text-blue-500">*</sup> 
                            <br>
                            <input type="date" class="text-sm w-[97%] p-1 mt-1 outline-blue-500 border-solid border-[1px] border-gray-400" v-model="startdate">
                        </div>
-                       <div class="w-[50%] ">
-                           <label for="company" class='text-slate-500 text-sm'>End date</label> <sup class="star text-blue-500">*</sup> 
+                       <div class="w-[50%]" v-if="current == 0" > 
+                           <label for="enddate" class='text-slate-500 text-sm'>End date</label> <sup class="star text-blue-500">*</sup> 
                            <br>
                            <input type="date" class="text-sm w-[97%] p-1 mt-1 outline-blue-500 border-solid border-[1px] border-gray-400" v-model="enddate">
+                       </div>
+                   </div>
+                   <div class="flex w-[100%]" v-else>
+                       <div class="w-[100%] ">
+                           <label for="startdate" class="text-slate-500 text-sm">Start date</label> <sup class="star text-blue-500">*</sup> 
+                           <br>
+                           <input type="date" class="text-sm w-[97%] p-1 mt-1 outline-blue-500 border-solid border-[1px] border-gray-400" v-model="startdate">
                        </div>
                    </div>
                    <div class="w-[100%] mt-1 relative">
                        <label for="file" class="text-slate-500 text-sm">Logo</label> <sup class="star text-blue-500">*</sup> 
                        <br><input type="file" class="text-sm w-[98.7%] p-1 mt-1 outline-blue-500 border-solid border-[1px] border-gray-400" placeholder="Upload image" accept="images/*"  @change="onChangeimg">
-                       <!-- <div class="text-xs absolute -mt-6 bg-white ellipsis-start ml-[100px]">{{image}}</div> -->
+                       <div class="text-xs absolute -mt-6 bg-white ellipsis-start ml-[100px]">{{image}}</div>
                     </div>
                     <div class="text-end pt-5">
                         <hr >
@@ -70,8 +78,54 @@
 </template>
 
 <script>
+import axios from '../../../axios-http';
 export default {
-
+    props:{
+        school:Object,
+    },
+    data(){
+        return{
+            schoolName:this.school.school_name,
+            degree:this.school.degree,
+            current:this.school.current,
+            startdate:this.school.start_date,
+            enddate:this.school.end_date,
+            image:this.school.school_profile,
+            schoolId:this.school.id,
+            allowExtension : ["jpg", "png", "jpeg", "gif", "webp","jfif", "svg"],
+        }
+    },
+    methods:{
+        onChangeimg(event) {
+            let fileExtension = event.target.files[0].name.split(".").pop();
+            if (this.allowExtension.includes(fileExtension.toLowerCase())) {
+                this.image = event.target.files[0];
+                console.log(this.image);
+            }
+        },
+        editworkexperience(){
+            if(this.current == true) {
+                this.current =1
+            }
+            else{
+                this.current=0
+            }
+            let formdata = new FormData();
+            formdata.append('_method','PUT');
+            formdata.append('start_date',this.startdate);
+            formdata.append('end_date',this.enddate);
+            formdata.append('degree',this.degree);
+            formdata.append('school_name',this.schoolName);
+            formdata.append('school_profile',this.image);
+            formdata.append('current',this.current);
+            console.log('date time', this.current);
+            axios.post("http://127.0.0.1:8000/api/school/"+this.schoolId,formdata).then((response)=>{
+                console.log('School data:',formdata)
+            })
+            this.$emit('closeFormschoolBg',true)
+        }
+    },
+   
 }
 </script>
 
