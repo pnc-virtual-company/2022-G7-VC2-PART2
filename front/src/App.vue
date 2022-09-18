@@ -1,37 +1,37 @@
 <template>
-  <div>
-    <a href="https://vitejs.dev" target="_blank">
-      <img src="/vite.svg" class="logo" alt="Vite logo" />
-    </a>
-    <a href="https://vuejs.org/" target="_blank">
-      <img src="./assets/aba.svg" class="logo vue" alt="Vue logo" />
-    </a>
-  </div>
-  <HelloWorld msg="Vite + Vue" />
-  <h1 class="text-3xl font-bold underline text-pink-700">
-    Hello world!
-  </h1>
+  <section v-if="role=='alumni'">
+    <alumni-nav></alumni-nav>
+    <router-view></router-view>
+  </section>
+  <section v-if="role=='admin'">
+    <admin-nav>
+        <template #main>
+          <router-view></router-view>
+        </template>
+    </admin-nav>
+  </section>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import TheNavigationBar from './components/nav/TheNavigationBar.vue'
+import AdminNavigationBar from './components/nav/AdminNavigationBar.vue';
 export default {
   components: {
-    HelloWorld
+    'alumni-nav': TheNavigationBar,
+    'admin-nav': AdminNavigationBar,
+  },
+  data(){
+    return {
+      role: 'admin'
+    }
   }
 }
 </script>
 
-<style scoped>
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.vue:hover {
-  filter: drop-shadow(0 0 2em #42b883aa);
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap');
+body {
+  background: #F6F8F9;
+  font-family: 'Poppins', sans-serif;
 }
 </style>
