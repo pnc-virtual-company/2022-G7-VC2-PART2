@@ -85,7 +85,6 @@ class SchoolController extends Controller
         $school->school_name = $request->school_name;
         $school->start_date = $request->start_date;
         $school->degree = $request->degree;
-        $school->alumni_id = $request->alumni_id;
         $school->save();
         return response()->json(['message'=>"Alumni School have been updated!"]);
     }
