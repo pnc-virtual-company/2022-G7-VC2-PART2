@@ -81,6 +81,7 @@
 
 <script>
 import axios from '../../../axios-http';
+import Swal from "sweetalert2";
 export default {
     props:{
         school:Object,
@@ -106,24 +107,27 @@ export default {
             }
         },
         editworkexperience(){
-            if(this.current == true) {
-                this.current =1
-            }
-            else{
-                this.current=0
-            }
-            let formdata = new FormData();
-            formdata.append('_method','PUT');
-            formdata.append('start_date',this.startdate);
-            formdata.append('end_date',this.enddate);
-            formdata.append('degree',this.degree);
-            formdata.append('school_name',this.schoolName);
-            formdata.append('school_logo',this.school_profile);
-            formdata.append('current',this.current);
-            console.log('date time', this.current);
-            axios.post("http://127.0.0.1:8000/api/school/"+this.schoolId,formdata).then((response)=>{
-                console.log(response)
-            })
+           if (this.current != null || this.enddate != null){
+                console.log(this.enddate)
+                if(this.current == true) {
+                    this.current =1
+                }
+                else{
+                    this.current=0
+                }
+                let formdata = new FormData();
+                formdata.append('_method','PUT');
+                formdata.append('start_date',this.startdate);
+                formdata.append('end_date',this.enddate);
+                formdata.append('degree',this.degree);
+                formdata.append('school_name',this.schoolName);
+                formdata.append('school_logo',this.school_profile);
+                formdata.append('current',this.current);
+                console.log('date time', this.current);
+                axios.post("http://127.0.0.1:8000/api/school/"+this.schoolId,formdata).then((response)=>{
+                    console.log(response)
+                })
+           }
             this.$emit('closeFormschoolBg');
         }
     },

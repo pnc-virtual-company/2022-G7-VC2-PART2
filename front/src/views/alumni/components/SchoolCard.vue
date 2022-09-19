@@ -39,6 +39,7 @@
 <script>   
     import FormEditSchoolBg from '../../../components/profile/alumni/FromEditSchoolBg.vue'
     export default {
+        emits:['edit-school'],
         props: {
             school:Object
         },
@@ -57,7 +58,7 @@
             },
             closeFormschoolBg(){
                 this.showedit = !this.showedit;
-                
+                this.$emit('edit-school');
             },
             getdata(){
                 return this.school

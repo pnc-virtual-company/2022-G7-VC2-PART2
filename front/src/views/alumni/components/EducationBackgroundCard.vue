@@ -20,7 +20,7 @@
             </template>
             <template #body>
                 <div class="flex flex-wrap gap-2 py-4">
-                    <slot name="card">
+                    <slot name="card" @edit-school="editSchool">
 
                     </slot>
                 </div>
@@ -52,7 +52,9 @@ export default {
         openAddedu(){
             this.hiddeaddedu = !this.hiddeaddedu;
         },
-       
+        editSchool(){
+            this.$emit('add-school')
+        },
     },
 }
 </script>

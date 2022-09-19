@@ -6,7 +6,7 @@
         </div>
         <div class="w-7/12 mr-[8.4%] absolute right-0 -mt-10">
             <general-info :alumniData="alumniData" :batch="batch" :major="major" />
-            <education-background @add-school="addSchool" >
+            <education-background @add-school="addSchool" @edit-school="editSchool">
                 <template #card>
                     <school-card v-for="(school, index) in schoolBgData" :key="index" :school="school"/>
                 </template>
@@ -69,6 +69,9 @@ export default {
             this.showSchoolEdit = !this.showSchoolEdit;
             this.getSchoolBg();
             console.log('hh')
+        },
+        editSchool(){
+            console.log('\\-------')
         },
         addSchool(){
             this.getSchoolBg();
