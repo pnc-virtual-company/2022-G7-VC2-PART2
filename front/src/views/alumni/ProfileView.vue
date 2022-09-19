@@ -58,7 +58,7 @@
         },
         methods:{
             async getAlumin(){
-                await axios.get('http://127.0.0.1:8000/api/alumni/2')
+                await axios.get('alumni/2')
                 .then(resp => {
                     this.data = resp.data;
                     this.isFetch = true;
@@ -73,7 +73,7 @@
                 })
             },
             async getSchoolBg(){
-                await axios.get('http://127.0.0.1:8000/api/school').then(resp => {
+                await axios.get('school').then(resp => {
                     this.schoolBgData = resp.data;
                     console.log('School data: ' ,this.schoolBgData);
                 })
