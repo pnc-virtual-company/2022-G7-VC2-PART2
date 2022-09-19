@@ -41,27 +41,25 @@
             <template #hidden-form>
                 <cancel-icon @click="showForm = !showForm"/>
             </template>
-        </generalInfo-edit-form>
-        
+        </generalInfo-edit-form>  
     </div>
 </template>
 <script>
 import CancelIcon from '../../widgets/IconWidgets/CancelIcon.vue';
-    import DetailAlumniInfo from './DetailAlumniInfo.vue';
-    import FormEditGeneralInfoVue from './FormEditGeneralInfo.vue';
-    export default {
-       components: {
+import DetailAlumniInfo from './DetailAlumniInfo.vue';
+import FormEditGeneralInfoVue from './FormEditGeneralInfo.vue';
+export default {
+    components: {
         'detail-info': DetailAlumniInfo,
         'generalInfo-edit-form': FormEditGeneralInfoVue,
-              CancelIcon
-       },
-       data(){
-          return {
-            alumniDetailInfo: false,
-            showForm: false
-          }
-       },
-       props: ['alumniData', 'batch', 'major'],
-       
-    }
+        CancelIcon,
+    },
+    data(){
+        return {
+        alumniDetailInfo: false,
+        showForm: false
+        }
+    },
+    props: ['alumniData', 'batch', 'major'],
+}
 </script>

@@ -92,7 +92,7 @@ export default {
             degree:"",
             current:'',
             school_profile:"",
-            allowExtension:['jpg','png'],
+            allowExtension:["jpg", "png", "jpeg", "gif", "webp","jfif", "svg"],
             disable:false,
         }
     },

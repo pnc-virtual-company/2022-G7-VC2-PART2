@@ -59,10 +59,10 @@
                             </div>
 
                             <div class="w-[100%] mt-1 relative">
-                            <label for="file" class="text-slate-500 text-sm">Image</label> <sup class="star text-blue-500">*</sup> 
-                            <br>
-                            <input type="file" class="text-sm w-[98.7%] p-1 mt-1 outline-blue-500 border-solid border-[1px] border-gray-400" placeholder="e.g. file" accept="images/*"  @change="onChangeimg">
-                            <div class="text-xs absolute -mt-6 bg-white ellipsis-start ml-[100px]">{{image}}</div>
+                                <label for="file" class="text-slate-500 text-sm">Image</label> <sup class="star text-blue-500">*</sup> 
+                                <br>
+                                <input type="file" class="text-sm w-[98.7%] p-1 mt-1 outline-blue-500 border-solid border-[1px] border-gray-400" placeholder="e.g. file" accept="images/*"  @change="onChangeimg">
+                                <div class="text-xs absolute -mt-6 bg-white ellipsis-start ml-[100px]">{{image}}</div>
                             </div>
                             
                         <div class="text-end pt-5">
@@ -77,10 +77,10 @@
     </div>
 </section>
 </template>
-
 <script>
 import axios from '../../../axios-http';
 export default {
+    emits:['edit-scbg'],
     props:{
         work:Object,
     },
@@ -123,7 +123,7 @@ export default {
             axios.put('http://127.0.0.1:8000/api/experiences/'+this.formid,experiences).then((result) => {
                 return result.data;
             })
-            this.$emit('closeForm',true)
+            this.$emit('closeForm')
         }
     }
 }
