@@ -25,7 +25,7 @@ import CopyIcon from "./components/widgets/IconWidgets/CopyIcon.vue"
 import InformationIcon from './components/widgets/IconWidgets/InformationIcon.vue'
 import CheckIcon from './components/widgets/IconWidgets/CheckIcon.vue'
 import MinusIcon from './components/widgets/IconWidgets/MinusIcon.vue'
-
+import BasePanel from './components/widgets/accodion/BasePanel.vue';
 
 
 
@@ -53,5 +53,6 @@ app.component('copy-icon',CopyIcon)
 app.component('info-icon',InformationIcon)
 app.component('check-icon',CheckIcon)
 app.component('minus-icon',MinusIcon)
+app.component('base-panel',BasePanel)
 
 .mount('#app')

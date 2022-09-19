@@ -30,9 +30,9 @@
             </div>
         </template>
     </base-card>
-    <edit-school-form :school="school" v-if="showedit" @closeFormschoolBg=closeFormschoolBg>
+    <edit-school-form :school="school" v-if="showEdit" @closeFormschoolBg="closeFormschoolForm">
         <template #hidden-form>
-            <cancel-icon @click="showedit = !showedit"/>
+            <cancel-icon @click="showEdit =!showEdit"/>
         </template>
     </edit-school-form>
 </template>
@@ -45,18 +45,23 @@
         components: {
             'edit-school-form': FormEditSchoolBg
         },
+        emmits:['action','close-form'],
         data(){
             return {
                 showOption: false,
-                showedit: false
+                showEdit: false
             }
         },
         methods: {
             showEditForm(){
-                this.showedit = !this.showedit;
+                this.showEdit = !this.showEdit;
+                this.$emit('action',this.school.id);
             },
-            closeFormschoolBg(){
-                this.showedit = !this.showedit;
+            closeFormschoolForm(){
+                this.showEdit = !this.showEdit;
+                console.log('close')
+    
+                
                 
             },
             getdata(){
