@@ -77,10 +77,10 @@
     </div>
 </section>
 </template>
-
 <script>
 import axios from '../../../axios-http';
 export default {
+    emits:['edit-scbg'],
     props:{
         work:Object,
     },
@@ -123,7 +123,7 @@ export default {
             axios.put('http://127.0.0.1:8000/api/experiences/'+this.formid,experiences).then((result) => {
                 return result.data;
             })
-            this.$emit('closeForm',true)
+            this.$emit('closeForm')
         }
     }
 }

@@ -1,5 +1,6 @@
 <template>
-    <base-card>
+    <div class="w-[100%] flex flex-wrap">
+        <base-card>
         <template #logo>
             <img :src="work.company.image" alt="" class="w-[100px]">
         </template>
@@ -16,7 +17,7 @@
             <div class="absolute right-0 top-0 mr-2 mt-1 cursor-pointer" @mouseleave="showOption=false">
                 <point-icon @mouseover="showOption=true" ></point-icon>
                 <div v-if="showOption" @mouseleave="showOption=false" class="absolute bg-bgColorWhite space-y-1 p-1 rounded-md z-10"> 
-                    <div @click="showEditForm(work.id)" class="flex items-center hover:text-primary text-slate-400 text-sm">
+                    <div @click="showEditForm()" class="flex items-center hover:text-primary text-slate-400 text-sm">
                         <edit-icon ></edit-icon>
                         <span class="ml-1">Edit</span>
                     </div>
@@ -35,6 +36,7 @@
             </svg>
         </template>
     </edit-work-form>
+    </div>
 </template>
 <script>   
     import FormEditWorkExperViewVue from '../../../components/profile/alumni/FormEditWorkExper.vue'
@@ -55,9 +57,8 @@
             showEditForm(){
                 this.showedit = !this.showedit;
             },
-            closeForm(value){
+            closeForm(){
                 this.showedit = !this.showedit;
-                console.log(value)
             }
         },
     }

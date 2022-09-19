@@ -28,6 +28,9 @@ class Alumni extends Model
     public function workExperience(){
         return $this->hasMany(WorkExperience::class,'workExperience_id');
     }
+    public function schools(){
+        return $this->hasMany(school::class);
+    }
     public function skill(){
         return $this->hasMany(Skill::class);
     }
