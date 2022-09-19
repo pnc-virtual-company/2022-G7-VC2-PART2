@@ -23,6 +23,9 @@ import HeaderCard from './components/widgets/Card/HeaderCard.vue'
 import SkillsContent from './components/profile/alumni/SkillsContent.vue'
 import CopyIcon from "./components/widgets/IconWidgets/CopyIcon.vue"
 import InformationIcon from './components/widgets/IconWidgets/InformationIcon.vue'
+import CheckIcon from './components/widgets/IconWidgets/CheckIcon.vue'
+import MinusIcon from './components/widgets/IconWidgets/MinusIcon.vue'
+
 
 
 
@@ -48,5 +51,7 @@ app.component('header-card',HeaderCard)
 app.component('skill-content',SkillsContent)
 app.component('copy-icon',CopyIcon)
 app.component('info-icon',InformationIcon)
+app.component('check-icon',CheckIcon)
+app.component('minus-icon',MinusIcon)
 
 .mount('#app')

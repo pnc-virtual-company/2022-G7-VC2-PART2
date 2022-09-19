@@ -9,6 +9,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\WorkExperienceController;
 use App\Http\Controllers\PositionController;
 use App\Http\Controllers\CompanyController;
+use App\Http\Controllers\SkillController;
 
 /*
 |--------------------------------------------------------------------------
@@ -57,3 +58,8 @@ Route::get('/alumni/{id}',[AlumniController::class,'show']);
 Route::post('/alumni',[AlumniController::class,'store']);
 Route::post('/alumni/{id}',[AlumniController::class,'update']);
 Route::get('/alumni/{id}',[AlumniController::class,'show']);
+// ================= api for skill =============
+Route::get('/skills',[SkillController::class,'index']);
+Route::post('/skills',[SkillController::class,'store']);
+Route::delete('/skills/{id}',[SkillController::class,'destroy']);
+Route::get('/skills/alumni/{id}',[SkillController::class,'getSkillbyAlumin']);
