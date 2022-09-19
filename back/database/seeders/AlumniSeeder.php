@@ -19,7 +19,7 @@ class AlumniSeeder extends Seeder
             [
             'user_id' => 1,
             'batch_id' => 1,
-            'major_id'=>1
+            'major_id'=>1,
             ]
         ];
         foreach ($alumni as $key => $value) {
