@@ -81,6 +81,8 @@ class SchoolController extends Controller
         }  
         if ($request->current==0){
             $school->end_date = $request->end_date;
+        }else  {
+            $school->end_date = null;
         }
         $school->school_name = $request->school_name;
         $school->start_date = $request->start_date;
