@@ -11,4 +11,7 @@ class school extends Model
     public function alumni(){
         return $this->belongsTo(Alumni::class);
     }
+    protected $casts = [
+        'current' => 'boolean',
+     ];
 }
