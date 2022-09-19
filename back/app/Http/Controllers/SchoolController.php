@@ -35,10 +35,12 @@ class SchoolController extends Controller
             $fileName = uniqid() . '_' . trim($file->getClientOriginalName());  
             $file->move($path, $fileName);
             $school->school_profile = asset('/images/'.$fileName);
-        }   
+        }
+        if ($request->current==0){
+            $school->end_date = $request->end_date;
+        }
         $school->school_name = $request->school_name;
         $school->start_date = $request->start_date;
-        $school->end_date = $request->end_date;
         $school->degree = $request->degree;
         $school->current = $request->current;
         $school->alumni_id = $request->alumni_id;

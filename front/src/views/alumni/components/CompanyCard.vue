@@ -1,5 +1,6 @@
 <template>
-    <base-card>
+    <div class="w-[100%] flex flex-wrap">
+        <base-card>
         <template #logo>
             <img :src="work.company.image" alt="" class="w-[100px]">
         </template>
@@ -35,6 +36,7 @@
             </svg>
         </template>
     </edit-work-form>
+    </div>
 </template>
 <script>   
     import FormEditWorkExperViewVue from '../../../components/profile/alumni/FormEditWorkExper.vue'

@@ -34,9 +34,14 @@
 <script>
 import AddeducationbackgroundForm from "./AddedubgForm.vue";
 export default {
+    
+    components:{
+        "add-educ":AddeducationbackgroundForm,
+    },
     data(){
         return {
             hiddeaddedu:false,
+            schools:[],
         }
     },
     methods:{
@@ -45,10 +50,8 @@ export default {
         },
         openAddedu(){
             this.hiddeaddedu = !this.hiddeaddedu;
-        }
+        },
+       
     },
-    components:{
-        "add-educ":AddeducationbackgroundForm,
-    }
 }
 </script>

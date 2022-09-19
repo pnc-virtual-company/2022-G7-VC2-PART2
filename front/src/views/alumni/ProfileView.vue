@@ -8,7 +8,7 @@
             <general-info :alumniData="alumniData" :batch="batch" :major="major" />
             <education-background>
                 <template #card>
-                    <school-card/>
+                    <school-card v-for="school in schools" :key="school" :school="school"/>
                 </template>
             </education-background>
             <work-experiences>
@@ -42,6 +42,7 @@
             return {
                 data: [],
                 workExp: [],
+                schools:[],
                 isFetch: false,           
             }
         },
@@ -61,6 +62,13 @@
 
                 })
             },
+            getEducbg(){
+            axios.get('/school').then((response)=>{
+                this.schools = response.data;
+                // console.log(this.schools)
+                console.log(this.schools)
+            })
+        },
         },
         computed: {
             alumniData(){
@@ -80,6 +88,7 @@
         mounted() {
             this.getAlumin();
             this.getAluminWorkExp();
+            this.getEducbg()
         },
     }
 </script>
