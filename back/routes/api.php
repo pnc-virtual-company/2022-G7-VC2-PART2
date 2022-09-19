@@ -39,6 +39,7 @@ Route::get('/experiences',[WorkExperienceController::class,'index']);
 Route::post('/experiences',[WorkExperienceController::class,'store']);
 Route::get('/experiences/{id}',[WorkExperienceController::class,'show']);
 Route::put('/experiences/{id}',[WorkExperienceController::class,'update']);
+Route::put('/experiences/{id}',[WorkExperienceController::class,'delete']);
 Route::get('/experiences/alumni/{id}',[WorkExperienceController::class,'getWEbyAlumin']);
 // ===============api for company ============
 Route::get('/companies',[CompanyController::class,'index']);
