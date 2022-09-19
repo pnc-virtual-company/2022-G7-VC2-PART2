@@ -48,6 +48,7 @@ export default {
         addSc(){
             this.hiddeaddedu = !this.hiddeaddedu;
             this.$emit('add-school');
+            console.log('muy')
         },
         openAddedu(){
             this.hiddeaddedu = !this.hiddeaddedu;

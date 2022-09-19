@@ -75,6 +75,7 @@ export default {
         },
         addSchool(){
             this.getSchoolBg();
+            console.log('pi')
         },
     },
     computed: {
