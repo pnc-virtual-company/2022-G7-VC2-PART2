@@ -6,7 +6,7 @@
         </div>
         <div class="w-7/12 mr-[8.4%] absolute right-0 -mt-10">
             <general-info :alumniData="alumniData" :batch="batch" :major="major" />
-            <education-background>
+            <education-background @add-school="addSchool" >
                 <template #card>
                     <school-card v-for="(school, index) in schoolBgData" :key="index" :school="school"/>
                 </template>
@@ -16,94 +16,84 @@
                     <company-card v-for="(work, index) in workExperiences" :key="index" :work="work" />
                 </template>
             </work-experiences>
-            <!-- <education-background_school v-if="showSchoolEdit" :schoolBgData="schoolBgData" @closeFormschoolBg = closeFormschoolBg >
-                <template #card>
-                    <education-background v-for="(work, index) in workExperiences" :key="index" :work="work" />
-                </template>
-            </education-background_school> -->
-            
         </div>
     </section>
 </template>
-
 <script>
-    import axios from '../../axios-http'
-    import FormEditWorkExperViewVue from '../../components/profile/alumni/FormEditWorkExper.vue';
-    import WorkExperienceCard from '../alumni/components/WorkExperienceCard.vue'
-    import CompanyCard from '../alumni/components/CompanyCard.vue'
-    import EducationBackgroundCard from '../alumni/components/EducationBackgroundCard.vue'
-    import SchoolCard from '../alumni/components/SchoolCard.vue'
-    import GeneralInfoVue from '../../components/profile/alumni/GeneralInfo.vue';
-    import CoverAndProfileImgVue from '../../components/profile/alumni/CoverAndProfileImg.vue';
-
-    export default {
-        components: { 
-             'work-experiences': WorkExperienceCard,
-             'company-card': CompanyCard,
-             'education-background': EducationBackgroundCard,
-             'school-card': SchoolCard,
-             'general-info': GeneralInfoVue,
-             'profile-cover-img': CoverAndProfileImgVue,
-          
-             
-        },  
-        data(){
-            return {
-                data: [],
-                workExp: [],
-                schoolBgData:[],
-                isFetch: false,
-                       
-            }
+import axios from '../../axios-http'
+import FormEditWorkExperViewVue from '../../components/profile/alumni/FormEditWorkExper.vue';
+import WorkExperienceCard from '../alumni/components/WorkExperienceCard.vue'
+import CompanyCard from '../alumni/components/CompanyCard.vue'
+import EducationBackgroundCard from '../alumni/components/EducationBackgroundCard.vue'
+import SchoolCard from '../alumni/components/SchoolCard.vue'
+import GeneralInfoVue from '../../components/profile/alumni/GeneralInfo.vue';
+import CoverAndProfileImgVue from '../../components/profile/alumni/CoverAndProfileImg.vue';
+export default {
+    components: { 
+        'work-experiences': WorkExperienceCard,
+        'company-card': CompanyCard,
+        'education-background': EducationBackgroundCard,
+        'school-card': SchoolCard,
+        'general-info': GeneralInfoVue,
+        'profile-cover-img': CoverAndProfileImgVue,     
+    },  
+    data(){
+        return {
+            data: [],
+            workExp: [],
+            schoolBgData:[],
+            isFetch: false,        
+        }
+    },
+    methods:{
+        async getAlumin(){
+            await axios.get('alumni/2')
+            .then(resp => {
+                this.data = resp.data;
+                this.isFetch = true;
+            })
         },
-        methods:{
-            async getAlumin(){
-                await axios.get('alumni/2')
-                .then(resp => {
-                    this.data = resp.data;
-                    this.isFetch = true;
-                    console.log('return data',this.data.user);   
-                })
-            },
-            async getAluminWorkExp(){
-                await axios.get('experiences/alumni/2')
-                .then(resp => {
-                    this.workExp = resp.data;
-                    this.isFetch = true;
-                })
-            },
-            async getSchoolBg(){
-                await axios.get('school').then(resp => {
-                    this.schoolBgData = resp.data;
-                    console.log('School data: ' ,this.schoolBgData);
-                })
-            },
-            closeFormschoolBg(value){
-                this.showSchoolEdit = !this.showSchoolEdit;
-                console.log(value)
-            }
+        async getAluminWorkExp(){
+            await axios.get('experiences/alumni/1')
+            .then(resp => {
+                this.workExp = resp.data;
+                this.isFetch = true;
+            })
         },
-        computed: {
-            alumniData(){
-                return this.data.user
-            },
-            batch(){
-                return this.data.batch
-            },
-            major(){
-                return this.data.major
-            },
-            workExperiences(){
-                return this.workExp
-            },
-
+        async getSchoolBg(){
+            await axios.get('school').then(resp => {
+                this.schoolBgData = resp.data;
+            })
         },
-        mounted() {
-            this.getAlumin();
-            this.getAluminWorkExp();
+        closeFormschoolBg(){
+            this.showSchoolEdit = !this.showSchoolEdit;
+            this.getSchoolBg();
+            console.log('hh')
+        },
+        addSchool(){
             this.getSchoolBg();
         },
-    }
+    },
+    computed: {
+        alumniData(){
+            return this.data.user
+        },
+        batch(){
+            return this.data.batch
+        },
+        major(){
+            return this.data.major
+        },
+        workExperiences(){
+            return this.workExp
+        },
+    },
+    mounted(){
+        this.getAlumin();
+        this.getAluminWorkExp();
+        this.getSchoolBg();
+    },
+}
 </script>
 
 

@@ -1,7 +1,7 @@
 <template>
-    <base-card>
+    <base-card >
         <template #logo>
-            <img :src="school.school_profile" alt="" class="w-[100px]">
+            <img :src="school.school_profile" alt="" class="w-full">
         </template>
         <template #main_title>
             {{school.school_name}}
@@ -40,7 +40,7 @@
     import FormEditSchoolBg from '../../../components/profile/alumni/FromEditSchoolBg.vue'
     export default {
         props: {
-            school:Array
+            school:Object
         },
         components: {
             'edit-school-form': FormEditSchoolBg
@@ -55,9 +55,9 @@
             showEditForm(){
                 this.showedit = !this.showedit;
             },
-            closeFormschoolBg(value){
+            closeFormschoolBg(){
                 this.showedit = !this.showedit;
-                console.log(value)
+                
             },
             getdata(){
                 return this.school
