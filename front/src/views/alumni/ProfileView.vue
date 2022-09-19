@@ -47,7 +47,7 @@
         },
         methods:{
             async getAlumin(){
-                await axios.get('alumni/3')
+                await axios.get('alumni/2')
                 .then(resp => {
                     this.data = resp.data;
                     this.isFetch = true;
@@ -55,7 +55,7 @@
                 })
             },
             async getAluminWorkExp(){
-                await axios.get('experiences/alumni/3')
+                await axios.get('experiences/alumni/2')
                 .then(resp => {
                     this.workExp = resp.data;
                     this.isFetch = true;
