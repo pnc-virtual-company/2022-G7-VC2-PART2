@@ -102,4 +102,10 @@ class UserController extends Controller
 
         return $user;
     }
+    public function getVerifyCode(Request $request){
+        $user = User::where('verify_code', '=', $request->verify_code)->first();
+        if($user->id){
+            return response()->json(['status'=>true]);
+        }
+    }
 }

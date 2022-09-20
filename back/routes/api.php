@@ -60,3 +60,4 @@ Route::get('/alumni/{id}',[AlumniController::class,'show']);
 
 // forget Password
 Route::post('/forgot',[UserController::class, 'sendVerifyCode']);
+Route::post('/getVerifyCode',[UserController::class, 'getVerifyCode']);
