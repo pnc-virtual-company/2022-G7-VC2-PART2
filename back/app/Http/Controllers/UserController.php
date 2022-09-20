@@ -1,9 +1,12 @@
 <?php
 
 namespace App\Http\Controllers;
-use App\Models\User;
-
 use Illuminate\Http\Request;
+use App\Models\User;
+use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\VerifyCode;
+use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
@@ -79,5 +82,24 @@ class UserController extends Controller
     {
         User::destroy($id);
         return response()->json(["message" => 'delete successfully']);
+    }
+
+    /** Generate code and send mail who forget password 
+     *  @return \Illuminate\Http\Response
+    */
+    public function sendVerifyCode(Request $request)
+    {   
+        $email = $request->email;
+        $verify_code = Str::random(8);
+        $user = User::where('email', $email)->first();
+        $user->verify_code = $verify_code;
+        $user->save();
+        $data = [
+            'title' => 'Verify code to reset password',
+            'body' => $verify_code,
+        ];
+        Mail::to($email)->send(new VerifyCode($data));
+
+        return $user;
     }
 }
