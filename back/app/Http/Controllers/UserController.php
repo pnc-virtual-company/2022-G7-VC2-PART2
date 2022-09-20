@@ -108,4 +108,14 @@ class UserController extends Controller
             return response()->json(['status'=>true]);
         }
     }
+    public function resetNewPassword(Request $request){
+        $user = User::where('email','=',$request->email)->first();
+        $user = User::where('verify_code','=', $request->verify_code)->first();
+        if($user){
+            $user->password =  Hash::make($request->new_password);
+            $user->save();
+            return $user;
+        }
+        return response()->json(['message'=>'must put the verify code','status'=>false,]);
+    }
 }
