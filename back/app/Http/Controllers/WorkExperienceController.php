@@ -46,3 +46,4 @@ class workExperienceController extends Controller
         return workExperience::where('alumni_id', '=', $id)->with('Company')->get();
     }
 }
+

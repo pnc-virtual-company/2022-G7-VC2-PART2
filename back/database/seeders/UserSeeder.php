@@ -17,13 +17,13 @@ class UserSeeder extends Seeder
     {
         $users = [
             [
-                'firstName' => 'Sophy',
-                'lastName' => 'Saeuy',
+                'first_name' => 'Sophy',
+                'last_name' => 'Saeuy',
+                'role' => 'alumni',
                 'email' => 'sophysaeuy@gmail.com',
-                'email_verified_at' => now(),
                 'password' => '12345678',
                 'phone' => 'string',
-                'gender' => 'gender',
+                'gender' => 'male',
                 'profile' => 'sophy.png',
                 'cover' => 'sp.png',
             ]

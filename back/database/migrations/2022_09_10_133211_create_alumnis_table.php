@@ -14,7 +14,6 @@ return new class extends Migration
     public function up()
     {
         Schema::create('alumnis', function (Blueprint $table) {
-            $table->id();
             $table->foreignId('batch_id')->constrained()->onDelete('CASCADE');
             $table->foreignId('major_id')->constrained()->onDelete('CASCADE');
             $table->foreignId('user_id')->constrained()->onDelete('CASCADE');
