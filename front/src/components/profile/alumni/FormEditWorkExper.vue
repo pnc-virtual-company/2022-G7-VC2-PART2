@@ -12,33 +12,36 @@
                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
                             <path stroke-linecap="round" stroke-linejoin="round" d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L10.582 16.07a4.5 4.5 0 01-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 011.13-1.897l8.932-8.931zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0115.75 21H5.25A2.25 2.25 0 013 18.75V8.25A2.25 2.25 0 015.25 6H10" />
                             </svg>
-                            <h2 class="ml-2 text-lg">WorkExperience Information</h2> 
+                            <h2 class="ml-2 text-lg"> Edit Work Experience Information</h2> 
                         </div>
                          <!-- cencel icon -->
                          <div class="w-[4%]">
                             <slot name="hidden-form">
                             </slot>
-                        </div>
-                        
+                        </div>  
                         </div>
                         <hr>
                         <div class="flex mt-4 ">
                         <span style='font-size:10px;' class="text-blue-500">&#9733;</span>
                         <p class="ml-1 text-slate-500 text-sm">Indicates required</p>
                         </div>
+                        <div class="w-[100%] mt-2">
+                            <br>
+                            <input type="checkbox" id="current" class="cursor-pointer mt-2" v-model="current">
+                            <label for="current" class="ml-3">currently is working at this role!</label>
+                        </div>
                         <div class="flex w-[100%]">
                             <div class="w-[50%] mt-2">
                                 <label for="startdate" class="text-slate-500 text-sm">Start_date</label> <sup class="star text-blue-500">*</sup> 
                                 <br>
-                                <input type="date" class="w-[97%] p-1 mt-1 outline-blue-500 border-solid border-[1px] border-gray-400" placeholder="e.g. Sophiem" v-model="start_date">
+                                <input type="date" class="w-[97%] p-1 mt-1 outline-blue-500 border-solid border-[1px] border-gray-400" placeholder="e.g. Sophiem"  v-model="start_year">
                             </div>
                             <div class="w-[50%] mt-2">
                                 <label for="enddate" class="text-slate-500 text-sm">End_date</label> <sup class="star text-blue-500">*</sup> 
                                 <br> 
-                                <input type="date" class="w-[97%] p-1 mt-1 outline-blue-500 border-solid border-[1px] border-gray-400" placeholder="e.g. Loem" v-model="end_date">
+                                <input type="date" class="w-[97%] p-1 mt-1 outline-blue-500 border-solid border-[1px] border-gray-400" placeholder="e.g. Loem" v-model="end_year">
                             </div>
                         </div>
-                            
                             <div class="w-[100%] mt-2">
                             <label for="position" class="text-slate-500 text-sm">Position</label> <sup class="star text-blue-500">*</sup> 
                             <br>
@@ -50,11 +53,6 @@
                                     <label for="name" class="text-slate-500 text-sm">Name</label> <sup class="star text-blue-500">*</sup> 
                                     <br>
                                     <input type="text" class="text-sm w-[97%] p-1 mt-1 outline-blue-500 border-solid border-[1px] border-gray-400" placeholder="e.g. ZINation" v-model="company">
-                                </div>
-                                <div class="w-[100%] mt-1">
-                                    <label for="address" class="text-slate-500 text-sm">Address</label> <sup class="star text-blue-500">*</sup> 
-                                    <br>
-                                    <input type="text" class="text-sm w-[97%] p-1 mt-1 outline-blue-500 border-solid border-[1px] border-gray-400" placeholder="e.g. PNC" v-model="address">
                                 </div>
                             </div>
 
@@ -86,14 +84,16 @@ export default {
     },
     data(){
         return { 
-            start_date: this.work.start_year,
-            end_date: this.work.end_year,
+            start_year:"",
+            end_year:"",
+            start_year: this.work.start_year,
+            end_year: this.work.end_year,
             company: this.work.company.name,
             position: this.work.position,
-            address: this.work.company.address,
             formid:this.work.id,
             companyid:this.work.company.id,
             image: this.work.company.image,
+            current:this.work.current,
             allowExtension : ["jpg", "png", "jpeg", "gif", "webp","jfif", "svg"],
         }
     },
@@ -109,17 +109,22 @@ export default {
             let formdata = new FormData();
             formdata.append('_method','PUT');
             formdata.append('name',this.company);
-            formdata.append('address',this.address);
             formdata.append('image',this.image);
+            console.log(formdata);
             axios.post("http://127.0.0.1:8000/api/companies/"+this.companyid,formdata).then((response)=>{
                 console.log('company data:',formdata)
             })
             let experiences = {
-                startYear: this.start_date,
-                endYear: this.end_date,
+                startYear: this.start_year,
+                endYear: this.end_year,
                 position: this.position, 
+                current:current,                
             }
-            console.log("work experiences",experiences);
+            if(this.current == true){
+                formdata.append('current',1);
+            }else{
+                formdata.append('current',0)
+            }
             axios.put('http://127.0.0.1:8000/api/experiences/'+this.formid,experiences).then((result) => {
                 return result.data;
             })

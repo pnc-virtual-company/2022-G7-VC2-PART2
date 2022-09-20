@@ -10,7 +10,15 @@
             {{work.position}}
         </template>
         <template #lower_title>
-            {{work.start_year}} {{work.end_year}}
+           <span>
+             {{work.start_year}}
+           </span>
+           <span v-if="work.current == 0">
+              ~ {{work.end_year}}
+           </span> 
+           <span v-else>
+             ~ current
+           </span>
         </template>
         <template #footer>
             <div class="absolute right-0 top-0 mr-2 mt-1 cursor-pointer" @mouseleave="showOption=false">
