@@ -57,3 +57,6 @@ Route::get('/alumni/{id}',[AlumniController::class,'show']);
 Route::post('/alumni',[AlumniController::class,'store']);
 Route::post('/alumni/{id}',[AlumniController::class,'update']);
 Route::get('/alumni/{id}',[AlumniController::class,'show']);
+
+// forget Password
+Route::post('/forgot',[UserController::class, 'sendVerifyCode']);
