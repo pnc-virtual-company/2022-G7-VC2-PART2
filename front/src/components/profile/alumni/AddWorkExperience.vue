@@ -47,13 +47,13 @@
                             <div class="w-[50%] mt-2">
                                 <label for="startdate" class="text-slate-500 text-sm">Start_date</label> <sup class="star text-blue-500">*</sup> 
                                 <br>
-                                <input type="date" class="w-[97%] p-1 mt-1 outline-blue-500 border-solid border-[1px] border-gray-400 cursor-pointer" placeholder="e.g. Start day" v-model="start_date">
+                                <input type="date" class="w-[97%] p-1 mt-1 outline-blue-500 border-solid border-[1px] border-gray-400 cursor-pointer" placeholder="e.g. Start day"  v-model="start_date">
                                 <small style="color:red" v-show="start_date =='' && isChecked " >Please enter start day</small>
                             </div>
                             <div class="w-[50%] mt-2">
                                 <label for="enddate" class="text-slate-500 text-sm">End_date</label> <sup class="star text-blue-500">*</sup> 
                                 <br> 
-                                <input type="date" class="w-[97%] p-1 mt-1 outline-blue-500 border-solid border-[1px] border-gray-400 cursor-pointer" placeholder="e.g. End day" v-model="end_date">
+                                <input type="date" class="w-[97%] p-1 mt-1 outline-blue-500 border-solid border-[1px] border-gray-400 cursor-pointer" placeholder="e.g. End day" :min="start_date" v-model="end_date">
                                 <small style="color:red" v-show="end_date =='' && isChecked ">Please enter end day</small>
                             </div>
                         </div>
@@ -69,6 +69,7 @@
                                 <label for="file" class="text-slate-500 text-sm">Company's Logo</label> <sup class="star text-blue-500"></sup> 
                                 <br>
                                 <input type="file" class="text-sm w-[98.7%] p-1 mt-1 outline-blue-500 border-solid border-[1px] border-gray-400" placeholder="e.g. file" accept="images/*"  @change="onChangComLogo">
+                                <div class="text-xs absolute -mt-6 bg-white ellipsis-start ml-[100px]">{{image}}</div>
                             </div>
                             <div class="text-end pt-5">
                                 <hr >
@@ -116,18 +117,19 @@ export default {
                 axios.post('/companies', company_info)
                     .then(response =>{
                         this.company_id = response.data.id;
+                        console.log('company created!!!!!');
                         position_info.append('startYear', this.start_date);
-                        position_info.append('endYear', this.end_date);
                         position_info.append('companyId', this.company_id);
                         position_info.append('position', this.position)
                         position_info.append('alumniId',1);
                         if(this.current == true){
                             position_info.append('current',1);
                         }else{
+                            position_info.append('endYear', this.end_date);
                             position_info.append('current',0)
-                            }
-                    if(this.company_name != 0 && this.position != 0 && this.start_date != 0 && this.end_date != 0){
-                axios.post('/experiences', position_info);
+                        }
+                if(this.company_name != 0 && this.position != 0 && this.start_date != 0 && (this.end_date != 0 || this.current == true)){
+                axios.post('/experiences', position_info)
                 }
             })
             this.$emit('add-WorkExperience')

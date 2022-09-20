@@ -47,6 +47,7 @@
                                <option value="Female">Female</option>
                                <option value="Other">Other</option>
                            </select>
+                           <small v-show="gender.length <= 0 && submit" style="color:red">Please enter your last name</small>
                        </div>
                        <div class="w-[50%]">
                            <label for="Batch" class="text-slate-500 text-sm">Batch</label> <sup class="star text-blue-500">*</sup> 
@@ -130,7 +131,7 @@
                    phone:this.phone,
                }
                this.submit = true;
-               if(this.firstname != 0 && this.lastname != 0 && this.email !=0 && this.phone){
+               if(this.firstname != 0 && this.lastname != 0 && this.email !=0 && this.phone != 0 && this.gender != 0 ){
                axios.put('http://127.0.0.1:8000/api/users/'+this.userId,userdata).then((response) =>{
                    return (response.data);
                })
