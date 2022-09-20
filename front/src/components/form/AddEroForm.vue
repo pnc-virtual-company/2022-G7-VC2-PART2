@@ -1,52 +1,47 @@
 <template>
-    <div class="flex flex-wrap items-center w-[90%] m-auto mt-[4%] bg-white shadow-md rounded-sm p-5">
-        <div class="w-6/12">
-            <img src="../../assets/form/add_user.svg" alt="" class="w-8/12">
+    <form class="w-[50%] bg-white shadow-md rounded-sm py-4 m-auto z-20 mt-5 px-5" @submit.prevent="addAcount" v-cloak>
+        <div class="text-primary font-bold text-2xl text-center">
+            Add ERO Account
         </div>
-        <form class="w-6/12 py-4 m-auto z-20" @submit.prevent="addAcount" v-cloak>
-            <div class="text-primary font-bold text-2xl text-center">
-                Add ERO Account
-            </div>
-            <div>
-                <div v-if="!isNotRealEmail">
-                    <input-field :isValidEmail="isNotRealEmail" :data="email" v-model="emailValue" />
-                    <span v-if="isNotRealEmail == false" class="text-red-500 text-sm flex items-center">
-                        <info-icon class="w-4" />
-                        Couldn't find your google account
-                    </span>
-                </div>
-                <div v-else>
-                    <input-field :isValidPw="isTheSamePassword" :data="password" v-model="passwordValue"/>
-                    <input-field :isValidPw="isTheSamePassword" :data="passwordConfirm" v-model="passwordConfirmValue"/>
-                </div>
-                <span v-if="isTheSamePassword == false" class="text-red-500 text-sm flex items-center">
+        <div>
+            <div v-if="!isNotRealEmail">
+                <input-field :isValidEmail="isNotRealEmail" :data="email" v-model="emailValue" />
+                <span v-if="isNotRealEmail == false" class="text-red-500 text-sm flex items-center">
                     <info-icon class="w-4" />
-                    Password must be the same
+                    Couldn't find your google account
                 </span>
             </div>
-            
-            <div class="text-gray-500  mt-3" v-if="isNotRealEmail">
-                <h2>Password Strength</h2>
-                <ul class="list-disc text-sm px-4">
-                    <li :class="{ 'text-green-500': samePassword }">The same password</li>
-                    <li :class="{ 'text-green-500': isNotValidLength }">8 Characters</li>
-                    <li :class="{ 'text-green-500': isContainNumber }">Contains Number</li>
-                    <li :class="{ 'text-green-500': isContainUpper }">Contains Uppercase</li>
-                    <li :class="{ 'text-green-500': isContainSpecailChar }">Contains Special Character</li>
-                </ul>
+            <div v-else>
+                <input-field :isValidPw="isTheSamePassword" :data="password" v-model="passwordValue"/>
+                <input-field :isValidPw="isTheSamePassword" :data="passwordConfirm" v-model="passwordConfirmValue"/>
             </div>
-    
-            <div class="w-full flex justify-center">
-                <base-button class="my-4 w-full">
-                    <template #name>
-                        <span v-if="isNotRealEmail">Add</span>
-                        <span v-else>Next</span>
-                    </template>
-                </base-button>
-            </div>
-            
-        </form>
-    </div>
+            <span v-if="isTheSamePassword == false" class="text-red-500 text-sm flex items-center">
+                <info-icon class="w-4" />
+                Password must be the same
+            </span>
+        </div>
+        
+        <div class="text-gray-500  mt-3" v-if="isNotRealEmail">
+            <h2>Password Strength</h2>
+            <ul class="list-disc text-sm px-4">
+                <li :class="{ 'text-green-500': samePassword }">The same password</li>
+                <li :class="{ 'text-green-500': isNotValidLength }">8 Characters</li>
+                <li :class="{ 'text-green-500': isContainNumber }">Contains Number</li>
+                <li :class="{ 'text-green-500': isContainUpper }">Contains Uppercase</li>
+                <li :class="{ 'text-green-500': isContainSpecailChar }">Contains Special Character</li>
+            </ul>
+        </div>
+
+        <div class="w-full flex justify-center">
+            <base-button class="my-4 w-full">
+                <template #name>
+                    <span v-if="isNotRealEmail">Add</span>
+                    <span v-else>Next</span>
+                </template>
+            </base-button>
+        </div>
+        
+    </form>
 </template>
 <script>
     import axios from '../../axios-http'

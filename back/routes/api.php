@@ -61,4 +61,7 @@ Route::group(['middleware'=>['auth:sanctum']], function(){
     Route::post('/alumni',[AlumniController::class,'store']);
     Route::post('/alumni/{id}',[AlumniController::class,'update']);
     Route::get('/alumni/user/{id}',[AlumniController::class,'getAlumniByUser']);
+    // ============== api for authentication ================ 
+    Route::post('/account/logout',[UserController::class,'loggedOut']);
+
 });

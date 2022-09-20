@@ -12,12 +12,6 @@
                         ERO
                     </template>
                 </base-button>
-                <base-button class="w-2/12 flex items-center justify-center ml-2">
-                    <template #name>
-                        <plus-icon />
-                        Alumni
-                    </template>
-                </base-button>
             </div>
         </div>
     </section>

@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
-
 use Illuminate\Http\Request;
 
 class UserController extends Controller
@@ -99,5 +98,11 @@ class UserController extends Controller
             'user' => $user,
             'token' => $token,
         ]);
+    } 
+
+    public function loggedOut(Request $request)
+    {
+        $request->user()->currentAccessToken()->delete();
+        return response()->json($request);
     }
 }

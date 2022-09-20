@@ -24,10 +24,10 @@
                 <span class="ml-2">Add User</span>
             </router-link>
 
-            <router-link class="flex items-center hover:text-white hover:fill-white hover:bg-secondary w-full p-2 cursor-pointer mt-2" to="/logout">
+            <div class="flex items-center hover:text-white hover:fill-white hover:bg-secondary w-full p-2 cursor-pointer mt-2" @click="logout">
                 <logout-icon />
                 <span class="ml-2">Logout</span>
-            </router-link>
+            </div>
             
         </nav>
         <main class="overflow-auto bg-bgColorWhite">
@@ -35,6 +35,18 @@
         </main>
     </section>
 </template>
+<script>
+import axios from '../../axios-http'
+export default {
+    methods: {
+        logout(){
+            this.$store.dispatch('logout')
+            axios.post('/account/logout')
+            this.$router.go()
+        }
+    }
+}
+</script>
 <style scoped>
     section{
         display: grid;
