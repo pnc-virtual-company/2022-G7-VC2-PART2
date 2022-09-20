@@ -1,5 +1,7 @@
 <template>
-    <Detail_card> </Detail_card>
+    <Detail_card>
+        
+    </Detail_card>
 </template>
 
 <script>

@@ -1,6 +1,6 @@
 import { createWebHistory, createRouter } from "vue-router";
 import ProfileView from '../views/alumni/ProfileView.vue'
-import AdminProfile from '../views/alumni/components/AdminComponents/CardDetail.vue'
+import AdminProfile from '../views/alumni/AdminProfile.vue'
 const routes = [
   {
     path: "/AdminProfile",
