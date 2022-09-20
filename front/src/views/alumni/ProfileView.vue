@@ -6,9 +6,9 @@
         </div>
         <div class="w-7/12 mr-[8.4%] absolute right-0 -mt-10">
             <general-info :alumniData="alumniData" :batch="batch" :major="major" />
-            <education-background @add-school="addSchool" @edit-school="editSchool">
+            <education-background @add-school="addSchool">
                 <template #card>
-                    <school-card v-for="(school, index) in schoolBgData" :key="index" :school="school"/>
+                    <school-card v-for="(school, index) in schoolBgData" :key="index" :school="school" @edit-school="editSchool" @remove-school="removeSchool" />
                 </template>
             </education-background>
             <work-experiences>
@@ -21,6 +21,7 @@
 </template>
 <script>
 import axios from '../../axios-http'
+import Swal from "sweetalert2";
 import FormEditWorkExperViewVue from '../../components/profile/alumni/FormEditWorkExper.vue';
 import WorkExperienceCard from '../alumni/components/WorkExperienceCard.vue'
 import CompanyCard from '../alumni/components/CompanyCard.vue'
@@ -61,22 +62,38 @@ export default {
             })
         },
         async getSchoolBg(){
-            await axios.get('http://127.0.0.1:8000/api/school').then(resp => {
+            await axios.get('school').then(resp => {
                 this.schoolBgData = resp.data;
             })
         },
-        closeFormschoolBg(){
-            this.showSchoolEdit = !this.showSchoolEdit;
-            this.getSchoolBg();
-            console.log('hh')
-        },
-        editSchool(){
-            console.log('\\-------')
-        },
         addSchool(){
             this.getSchoolBg();
-            console.log('pi')
         },
+        removeSchool(schoolid){ 
+            Swal.fire({
+            title: 'Are you sure?',
+            text: "Delete Education background can not be undo!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#d33',
+            cancelButtonColor: '#3085d6',
+            confirmButtonText: 'delete'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    axios.delete('school/'+schoolid);
+                    this.getSchoolBg();
+                    Swal.fire({
+                        title:'School deleted!'
+                    })
+                    this.getSchoolBg();
+                }
+            })
+        },
+        editSchool(){
+            this.showSchoolEdit = !this.showSchoolEdit;
+            this.getSchoolBg();
+            console.log('e3')
+        }
     },
     computed: {
         alumniData(){

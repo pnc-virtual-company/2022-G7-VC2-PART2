@@ -23,49 +23,55 @@
                         <span class="ml-1">Edit</span>
                     </div>
                     <div class="flex items-center hover:text-secondary text-slate-400 text-sm">
-                        <cancel-icon></cancel-icon>
+                        <cancel-icon @click="removeSc(school.id)" ></cancel-icon>
                         <span class="ml-1">Remove</span> 
                     </div>
                 </div>
             </div>
         </template>
     </base-card>
-    <edit-school-form :school="school" v-if="showedit" @closeFormschoolBg=closeFormschoolBg>
+    <edit-school-form :school="school" v-if="showedit" @edit-school="editSchool" >
         <template #hidden-form>
             <cancel-icon @click="showedit = !showedit"/>
         </template>
     </edit-school-form>
 </template>
-<script>   
-    import FormEditSchoolBg from '../../../components/profile/alumni/FromEditSchoolBg.vue'
-    export default {
-        emits:['edit-school'],
-        props: {
-            school:Object
-        },
-        components: {
-            'edit-school-form': FormEditSchoolBg
-        },
-        data(){
-            return {
-                showOption: false,
-                showedit: false
-            }
-        },
-        methods: {
-            showEditForm(){
-                this.showedit = !this.showedit;
-            },
-            closeFormschoolBg(){
-                this.showedit = !this.showedit;
-                this.$emit('edit-school');
-            },
-            getdata(){
-                return this.school
-            }
-        },
-        mounted(){
-            this.getdata();
+<script> 
+import axios from '../../../axios-http';
+import FormEditSchoolBg from '../../../components/profile/alumni/FromEditSchoolBg.vue'
+export default {
+    emits:['edit-school','remove-school'],
+    props: {
+        school:Object
+    },
+    components: {
+        'edit-school-form': FormEditSchoolBg
+    },
+    data(){
+        return {
+            showOption: false,
+            showedit: false
         }
+    },
+    methods: {
+        showEditForm(){
+            this.showedit = !this.showedit;
+        },
+        getdata(){
+            return this.school
+        },
+        removeSc(schoolid){
+            console.log('r1')
+            this.$emit('remove-school',schoolid);
+        },
+        editSchool(){
+            this.showedit = !this.showedit;
+            this.$emit('edit-school');
+            console.log('e2');
+        }
+    },
+    mounted(){
+        this.getdata();
     }
+}
 </script>
