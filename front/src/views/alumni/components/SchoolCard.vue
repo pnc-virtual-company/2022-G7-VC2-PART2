@@ -59,7 +59,7 @@
             },
             closeFormschoolForm(){
                 this.showEdit = !this.showEdit;
-                console.log('close')
+                console.log('close-form')
     
                 
                 

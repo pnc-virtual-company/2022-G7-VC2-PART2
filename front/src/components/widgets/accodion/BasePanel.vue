@@ -1,6 +1,6 @@
 <template>
   <!-- bg-white w-8 h-8 rounded-full flex justify-end cursor-pointer shadow-lg items-end -->
-  <div class="full m-auto bg-white rounded drop-shadow-lg p-4 my-2 duration-700 ease-in-out">
+  <div class="w-full m-auto bg-white rounded drop-shadow-lg p-4 my-2 duration-700 ease-in-out">
     <div class="flex items-center justify-between">
       <slot name="header"> </slot>
     </div>
@@ -41,7 +41,6 @@ export default {
     methods:{
       action(){
         this.active = !this.active
-
         this.$emit('action')
       }
     }
