@@ -9,6 +9,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\WorkExperienceController;
 use App\Http\Controllers\PositionController;
 use App\Http\Controllers\CompanyController;
+use App\Http\Controllers\EmailCheckerController;
 
 /*
 |--------------------------------------------------------------------------
@@ -23,6 +24,8 @@ use App\Http\Controllers\CompanyController;
 
 Route::post('/account/login',[UserController::class,'alumniLogin']);
 Route::post('/user',[UserController::class,'store']);
+// check email is real or not
+Route::post('/email/checker',[EmailCheckerController::class,'email_checker']);
 
 
 

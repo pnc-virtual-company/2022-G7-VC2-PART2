@@ -1,6 +1,7 @@
 import { createWebHistory, createRouter } from "vue-router";
 import ProfileView from '../views/alumni/ProfileView.vue'
 import LoginView from '../views/login/LoginView.vue'
+import AddUserView from '../views/admin/AddUserView.vue'
 import VueCookies from 'vue-cookies'
 import decryptData from "../helper/decrypt";
 const TOKEN_SCRET_KEY = import.meta.env.VITE_APP_TOKEN_KEY;
@@ -11,6 +12,11 @@ const routes = [
     path: "/",
     name: "profile",
     component: ProfileView,
+  },
+  {
+    path: "/add/user",
+    name: "addUser",
+    component: AddUserView,
   },
   {
     path: '/account/login',
@@ -33,7 +39,6 @@ router.beforeEach((to) => {
   console.log(decryptCookies);
 
   if(decryptCookies && !authRequired){
-    console.log('already authenticated');
     return '/'
   } 
   

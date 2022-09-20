@@ -32,6 +32,9 @@ import EyeClose from './components/widgets/IconWidgets/EyeClose.vue'
 import GroupUser from './components/widgets/IconWidgets/GroupUser.vue'
 import SingleUser from './components/widgets/IconWidgets/SingleUser.vue'
 import LogoutIcon from './components/widgets/IconWidgets/LogoutIcon.vue'
+import EroIcon from './components/widgets/IconWidgets/EroIcon.vue'
+import InfoIcon from './components/widgets/IconWidgets/InfoIcon.vue'
+import PlusIcon from './components/widgets/IconWidgets/PlusIcon.vue'
 
 
 
@@ -67,5 +70,8 @@ app.component('eye-close',EyeClose)
 app.component('group-user',GroupUser)
 app.component('single-user',SingleUser)
 app.component('logout-icon',LogoutIcon)
+app.component('ero-icon',EroIcon)
+app.component('info-icon',InfoIcon)
+app.component('plus-icon',PlusIcon)
 
 app.mount('#app')

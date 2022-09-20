@@ -30,7 +30,7 @@
             </router-link>
             
         </nav>
-        <main class="overflow-auto">
+        <main class="overflow-auto bg-bgColorWhite">
             <slot name="main"></slot>
         </main>
     </section>
@@ -53,7 +53,6 @@
     }
     main {
         width: 100%;
-        background: rgb(190, 26, 26);
         grid-area: main;
         overflow-y: scroll;
     }
@@ -62,5 +61,6 @@
         color: #fff;
         font-weight: bolder;
         fill: #fff;
+        box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;
     }
 </style>>
