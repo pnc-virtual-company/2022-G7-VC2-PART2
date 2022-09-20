@@ -30,13 +30,13 @@
                                 <label for="name" class="text-slate-500 text-sm">Name</label> <sup class="star text-blue-500">*</sup> 
                                     <br>
                                     <input type="text" class="text-sm w-[97%] p-1 mt-1 outline-blue-500 border-solid border-[1px] border-gray-400" placeholder="e.g. ZINation" v-model="company">
-                                    <small style="color:red" v-show="company =='' && isChecked " >Please enter company's name</small>
+                                    <small style="color :red" v-show="company.length <= 0 && submit">Please fill your company!</small>
                               </div>
                               <div class="w-[100%] mt-1">
                                     <label for="position" class="text-slate-500 text-sm">Position</label> <sup class="star text-blue-500">*</sup> 
                                     <br>
                                     <input type="text" class="text-sm w-[98.7%] p-1 mt-1 outline-blue-500 border-solid border-[1px] border-gray-400" placeholder="e.g. web developer" v-model="position">
-                                    <small style="color:red" v-show="position =='' && isChecked " >Please enter your position</small>
+                                    <small style="color:red" v-show="position.length <= 0 && submit">Please fill your position!</small>
                               </div>
                           </div>
                               <div class="w-[100%] mt-2">
@@ -48,14 +48,14 @@
                             <div class="w-[50%] mt-2">
                                 <label for="startdate" class="text-slate-500 text-sm">Start_date</label> <sup class="star text-blue-500">*</sup> 
                                 <br>
-                                <input type="date" class="w-[97%] p-1 mt-1 outline-blue-500 border-solid border-[1px] border-gray-400" placeholder="e.g. Sophiem"  v-model="start_year">
-                                <small style="color:red" v-show="start_date =='' && isChecked " >Please enter start day</small>
+                                <input type="date" class="w-[97%] p-1 mt-1 outline-blue-500 border-solid border-[1px] border-gray-400" placeholder="e.g. Start day"  v-model="start_year">
+                                <small style="color :red" v-show="start_year == 0 && submit"> Please fill your start date!</small>
                             </div>
                             <div class="w-[50%] mt-2">
                                 <label for="enddate" class="text-slate-500 text-sm">End_date</label> <sup class="star text-blue-500">*</sup> 
                                 <br> 
-                                <input type="date" class="w-[97%] p-1 mt-1 outline-blue-500 border-solid border-[1px] border-gray-400" placeholder="e.g. Loem" :min="start_year" v-model="end_year">
-                                <small style="color:red" v-show="end_date =='' && isChecked ">Please enter end day</small>
+                                <input type="date" class="w-[97%] p-1 mt-1 outline-blue-500 border-solid border-[1px] border-gray-400" placeholder="e.g. End date" :min="start_year" v-model="end_year">
+                                <small style="color :red" v-show="end_year == 0 && submit" > Please fill your end date!</small>
                             </div>
                         </div>
                         <div class="flex w-[100%]" v-else>
@@ -63,7 +63,7 @@
                                 <label for="startdate" class="text-slate-500 text-sm">Start_date</label> <sup class="star text-blue-500">*</sup> 
                                 <br>
                                 <input type="date" class="w-[97%] p-1 mt-1 outline-blue-500 border-solid border-[1px] border-gray-400" placeholder="e.g. Sophiem"  v-model="start_year">
-                                <small style="color:red" v-show="start_date =='' && isChecked " >Please enter start day</small>
+                                <small style="color :red" v-show="start_date == 0 && submit"> Please fill your start date!</small>
                             </div>
                         </div>
                               <div class="w-[100%] mt-1 relative">
@@ -84,8 +84,6 @@
     </div>
 </template>
 
-
-
 <script>
 import axios from '../../../axios-http';
 export default {
@@ -104,7 +102,7 @@ export default {
             companyid:this.work.company.id,
             image: this.work.company.image,
             current:this.work.current,
-            isChecked : false,
+            submit : false,
             allowExtension : ["jpg", "png", "jpeg", "gif", "webp","jfif", "svg"],
         }
     },
@@ -122,25 +120,21 @@ export default {
             formdata.append('name',this.company);
             formdata.append('image',this.image);
             console.log(formdata);
-            axios.post("http://127.0.0.1:8000/api/companies/"+this.companyid,formdata).then((response)=>{
-                console.log('company data:',formdata)
-            })
+            axios.post("http://127.0.0.1:8000/api/companies/"+this.companyid,formdata)
             let experiences = {
                 startYear: this.start_year,
                 endYear: this.end_year,
                 position: this.position, 
-                current:current,                
+                current:this.current,                
             }
-            if(this.current == true){
-                formdata.append('current',1);
-            }else{
-                formdata.append('current',0)
-            }
-            if (this.company != 0)
+          
+            this.submit = true;
+            if (this.company != 0 && this.position != 0 && this.start_year != 0 && this.end_year != 0){
             axios.put('http://127.0.0.1:8000/api/experiences/'+this.formid,experiences).then((result) => {
                 return result.data;
             })
             this.$emit('closeForm',true)
+            }
         }
     }
 }
