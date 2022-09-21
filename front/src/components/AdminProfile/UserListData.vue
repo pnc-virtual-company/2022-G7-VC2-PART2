@@ -101,25 +101,5 @@ export default {
   visibility: visible;
   color: black;
 }
-.form {
-  padding: 2px;
-  border: 1px solid rgb(167, 166, 166);
-  border-radius: 5px;
-  margin-top: 10px;
-  width: 65%;
-}
-  input[type="search"] {
-  border: none;
-  outline: none;
-  width: 90%;
-  background: transparent;
-  margin: 0;
-  padding: 7px 8px;
-  font-size: 14px;
-  border-radius: inherit;
-}
 
-input[type="search"]::placeholder {
-  color: rgb(40, 38, 38);
-}
 </style>

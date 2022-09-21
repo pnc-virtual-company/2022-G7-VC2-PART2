@@ -6,7 +6,7 @@
                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6 mt-2">
                                 <path fill-rule="evenodd" d="M10.5 3.75a6.75 6.75 0 100 13.5 6.75 6.75 0 000-13.5zM2.25 10.5a8.25 8.25 0 1114.59 5.28l4.69 4.69a.75.75 0 11-1.06 1.06l-4.69-4.69A8.25 8.25 0 012.25 10.5z" clip-rule="evenodd" />
                             </svg>
-                            <input type="search" id="gsearch" name="gsearch" class="w-[30%] p-2" placeholder="search name">
+                            <input type="text" class="w-[30%] p-2" placeholder="search name" v-model='searchValue'>
                     </span> 
                 </div>
                 <div class=" w-[15%] items-end flex">
@@ -30,7 +30,7 @@
                 </nav>
             </div>
             
-            <Card_Item_ERO>
+            <Card_Item_ERO v-for="item in FilterDataERO" :key="item" :eroData ='item'>
                 
             </Card_Item_ERO>
         </div>
@@ -39,22 +39,41 @@
 
 <script>
     import cardItemERO from './CardItemERO.vue'
+    import axios from '../../axios-http'
 export default {
     components:{
         'Card_Item_ERO':cardItemERO
     },
     data(){
         return{
-            EroData:[]
+            EroData:[],
+            searchValue:''
         }
     },
     methods:{
         getEroData(){
-            axios.get('alumni/2').then((res)=>{
-                console.log(res.data);
-                this.EroData
+            axios.get('users').then((res)=>{
+                this.EroData = res.data
+                console.log("Ero Data here",this.EroData);
             })
         }
+    },
+
+    computed:{
+        FilterDataERO(){
+            let EroFilter =[]
+            if(this.searchValue.trim().length >0){
+                return this.EroData.filter((search)=>(search.firstName+" "+search.lastName).toLowerCase().includes(this.searchValue.trim()))
+            }
+            else{
+                EroFilter = this.EroData;
+            }
+            return EroFilter;
+        }
+    },
+
+    mounted(){
+        this.getEroData();
     }
 }
 </script>
