@@ -92,9 +92,9 @@ class UserController extends Controller
         $user = User::where('email', $request->email)->first();
         if (!$user || !Hash::check($request->password,$user->password)) {
             if (!$user){
-                return response()->json(['message'=>"Email provided is not correct!"],401);
+                return response()->json(['message'=>"Couldn't find your account the system", 'email'=> true],401);
             }else {
-                return response()->json(['message' => 'Password provided is not correct'], 401);
+                return response()->json(['message' => 'Password provided is not correct', 'password'=> true], 401);
             }
         }
         $token = $user->createToken('mytoken')->plainTextToken;
