@@ -8,7 +8,8 @@ const decryptCookies = decryptData(user_id, USER_SCRET_KEY)
 
 export const store = new createStore({
   state: {
-    user_id: parseInt(decryptCookies)
+    user_id: parseInt(decryptCookies),
+    email: ''
   },
   actions: {
     logout(){

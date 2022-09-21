@@ -8,7 +8,7 @@ use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 
 
-class UserSeeder extends Seeder
+class AdminUserSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -17,7 +17,6 @@ class UserSeeder extends Seeder
      */
     public function run()
     {
-        User::create(['role'=>'alumni', 'email'=>'user@gmail.com',  'password'=> Hash::make('1234')]);
         User::create(['role'=>'admin', 'email'=>'admin@gmail.com',  'password'=> Hash::make('1234')]);
     }
 }

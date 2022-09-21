@@ -35,6 +35,8 @@ import LogoutIcon from './components/widgets/IconWidgets/LogoutIcon.vue'
 import EroIcon from './components/widgets/IconWidgets/EroIcon.vue'
 import InfoIcon from './components/widgets/IconWidgets/InfoIcon.vue'
 import PlusIcon from './components/widgets/IconWidgets/PlusIcon.vue'
+import FormWidget from './components/widgets/form/FormWidget.vue'
+import InputPasswordConfirm from './components/form/InputPasswordConfirm.vue'
 
 
 
@@ -73,5 +75,7 @@ app.component('logout-icon',LogoutIcon)
 app.component('ero-icon',EroIcon)
 app.component('info-icon',InfoIcon)
 app.component('plus-icon',PlusIcon)
+app.component('form-widget',FormWidget)
+app.component('input-pwConfirm',InputPasswordConfirm)
 
 app.mount('#app')

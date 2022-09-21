@@ -26,6 +26,10 @@ Route::post('/account/login',[UserController::class,'alumniLogin']);
 Route::post('/user',[UserController::class,'store']);
 // check email is real or not
 Route::post('/email/checker',[EmailCheckerController::class,'email_checker']);
+// send invite mail 
+Route::post('/invite/ero',[UserController::class,'inviteEro']);
+Route::post('/register/ero',[UserController::class,'eroRegister']);
+Route::post('/register/validation',[UserController::class,'checkBeforeRegister']);
 
 
 

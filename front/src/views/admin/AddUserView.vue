@@ -15,17 +15,23 @@
             </div>
         </div>
     </section>
-    <ero-form v-if="showEroForm" />
+    <ero-form v-if="showEroForm" @invite="getInvited" />
 </template>
 <script>
-    import AddEroFormVue from '../../components/form/AddEroForm.vue';
+    import InviteFormVue from '../../components/form/InviteForm.vue';
     export default {
         components: { 
-            'ero-form': AddEroFormVue
+            'ero-form': InviteFormVue
         },
         data(){
             return {
                 showEroForm: false
+            }
+        },
+        methods: {
+            getInvited(value){
+                console.log(value);
+                this.showEroForm = value
             }
         }
     }

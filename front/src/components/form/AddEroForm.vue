@@ -40,7 +40,6 @@
                 </template>
             </base-button>
         </div>
-        
     </form>
 </template>
 <script>
@@ -122,7 +121,7 @@
                 if(this.theSamePw && this.containsEighLength && this.containsNumber
                     && this.containsSpecialChar && this.containsUppercase){
                         return true;
-                    }
+                }
             }
         },
         computed: {

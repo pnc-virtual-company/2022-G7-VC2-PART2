@@ -3,7 +3,7 @@
         <header class="bg-primary">
             LOGO1 LOGO2
         </header>
-        <nav class="bg-primary w-full p-2">
+        <nav class="bg-primary w-full p-2 flex flex-col items-end">
             <div class="flex items-center p-2 text-white">
                 <img src="../../assets/schoollogos/pnc.svg" alt="">
                 <div class="break-words ml-2 w-[160px]">
@@ -24,7 +24,7 @@
                 <span class="ml-2">Add User</span>
             </router-link>
 
-            <div class="flex items-center hover:text-white hover:fill-white hover:bg-secondary w-full p-2 cursor-pointer mt-2" @click="logout">
+            <div class="flex items-center hover:text-white hover:fill-white hover:bg-secondary w-full p-2 cursor-pointer mt-2 my-auto" @click="logout">
                 <logout-icon />
                 <span class="ml-2">Logout</span>
             </div>

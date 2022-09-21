@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\Request;
+use App\Http\Controllers\SendMailController;
+use Illuminate\Support\Facades\Crypt;
+
 
 class UserController extends Controller
 {
@@ -26,12 +29,13 @@ class UserController extends Controller
     public function store(Request $request)
     {
         $user = new User();
-        $user->firstName = $request->firstName;
-        $user->lastName = $request->lastName;
+        $user->first_name = $request->firstName;
+        $user->last_name = $request->lastName;
         $user->email = $request->email;
         $user->password = Hash::make($request->password);
         $user->gender = $request->gender;
         $user->phone = $request->phone;
+        $user->role = 'alumni';
         $user->profile = $request->profile;
         $user->cover = $request->cover;
         $user->save();
@@ -59,8 +63,8 @@ class UserController extends Controller
     public function update(Request $request, $id)
     {
         $user = User::find($id);
-        $user->firstName = $request->firstName;
-        $user->lastName = $request->lastName;
+        $user->first_name = $request->first_name;
+        $user->last_name = $request->last_name;
         $user->email = $request->email;
         $user->password = Hash::make($request->password);
         $user->gender = $request->gender;
@@ -104,5 +108,42 @@ class UserController extends Controller
     {
         $request->user()->currentAccessToken()->delete();
         return response()->json($request);
+    }
+
+    public function inviteEro(Request $request){
+        (new SendMailController)->sendMailRegisterInfo($request);
+        $user = new User();
+        $user->role = 'ero';
+        $user->email = $request->email;
+        $user->save();
+    }
+
+    public function eroRegister(Request $request){
+        $email = Crypt::decryptString($request->email);
+        $request -> validate([
+            'first_name'=>'required|string|',
+            'last_name'=>'required|string|',
+            'password'=>'required|string|min:8',
+        ]);
+        $user = User::where('email', $email)->first();
+        $password = $user->password;
+        if(!empty($user) && empty($password)){
+            $user->first_name = $request->first_name;
+            $user->last_name = $request->last_name;
+            $user->password = Hash::make($request->password);
+            $user->save();
+        }
+        return response()->json(empty($user) && empty($password));
+    }
+
+    public function checkBeforeRegister(Request $request){
+        $email = Crypt::decryptString($request->email);
+        $user = User::where('email', $email)->first();
+        $password = $user->password;
+        // return !empty($user) && empty($password);
+        if(!empty($user) && empty($password)){
+            return response()->json(['status'=> true]);
+        }
+        return response()->json(['status'=> false]);
     }
 }
