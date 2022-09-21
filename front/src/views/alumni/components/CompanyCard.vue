@@ -36,11 +36,9 @@
             </div>
         </template>
     </base-card>
-    <edit-work-form :work="work" v-if="showedit"  @getWork="getWork">
+    <edit-work-form :work="work" v-if="showEdit"  @getWork="getWork">
         <template #hidden-form>
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-Width={1.5} stroke="currentColor" class="w-6 h-6 hover:bg-gray-200 rounded-full cursor-pointer" @click="showedit = !showedit" >
-                <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" class="text-end font-bold"/>
-            </svg>
+            <cancel-icon @click="showEdit =!showEdit"/>
         </template>
     </edit-work-form>
 </template>
@@ -58,15 +56,16 @@
         data(){
             return {
                 showOption: false,
-                showedit: false
+                showEdit: false
             }
         },
         methods: {
             showEditForm(){
-                this.showedit = !this.showedit;
+                this.showEdit = !this.showEdit;
             },
             getWork(){
-                this.showedit = !this.showedit;
+                this.showEdit = !this.showEdit;
+                console.log('close form');
                 this.$emit('getWork');
             },
             remove(){
@@ -74,6 +73,6 @@
                 this.$emit('getWork'); 
             }); 
             }
-        },
+    }
     }
 </script>

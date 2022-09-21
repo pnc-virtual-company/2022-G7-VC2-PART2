@@ -8,6 +8,8 @@ use App\Http\Controllers\AlumniController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\WorkExperienceController;
 use App\Http\Controllers\CompanyController;
+use App\Http\Controllers\SchoolController;
+use App\Http\Controllers\SkillController;
 
 /*
 |--------------------------------------------------------------------------
@@ -57,3 +59,15 @@ Route::get('/alumni/{id}',[AlumniController::class,'show']);
 Route::post('/alumni',[AlumniController::class,'store']);
 Route::post('/alumni/{id}',[AlumniController::class,'update']);
 Route::get('/alumni/{id}',[AlumniController::class,'show']);
+// ============ api alumni school ==================
+Route::post('/school',[SchoolController::class,'store']);
+Route::get('/school',[SchoolController::class,'index']);
+Route::get('/school/{id}',[SchoolController::class,'show']);
+Route::put('/school/{id}',[SchoolController::class,'update']);
+Route::delete('/school/{id}',[SchoolController::class,'destroy']);
+
+// ================= api for skill =============
+Route::get('/skills',[SkillController::class,'index']);
+Route::post('/skills',[SkillController::class,'store']);
+Route::delete('/skills/{id}',[SkillController::class,'destroy']);
+Route::get('/skills/alumni/{id}',[SkillController::class,'getSkillbyAlumin']);

@@ -84,7 +84,7 @@
 <script>
 import axios from '../../../axios-http';
 export default {
-    $emit:['getWork'],
+    emits:['getWork'],
     data(){
         return {
             start_date: "",
@@ -118,7 +118,7 @@ export default {
                             position_info.append('endYear', this.end_date);
                             position_info.append('current',0)
                         }
-                    if(this.company_name != 0 && this.position != 0 && this.start_date != 0 && (this.end_date != 0 || this.current == true)){
+                        if(this.company_name != 0 && this.position != 0 && this.start_date != 0 && (this.end_date != 0 || this.current == true)){
                         axios.post('/experiences', position_info).then((response) => {
                             this.$emit('getWork')
                         }
