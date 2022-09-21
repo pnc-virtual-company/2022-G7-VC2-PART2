@@ -6,19 +6,11 @@
     </div>
     <div class="w-7/12 mr-[8.4%] absolute right-0 -mt-10">
       <general-info :alumniData="alumniData" :batch="batch" :major="major" />
-  <!--========= education background======================================== -->
+      <!--========= education background======================================== -->
       <education-background @add-school="addSchool" :schools="schoolBgData">
-        <template #card>
-          <school-card
-            v-for="(school, index) in schoolBgData"
-            :key="index"
-            :school="school"
-          />
-        </template>
       </education-background>
-    
-      <!--==== form eidt schoool =================================================================-->
 
+      <!--==== form eidt schoool =================================================================-->
       <work-experiences>
         <template #card>
           <company-card
@@ -40,7 +32,7 @@ import EducationBackgroundCard from "../alumni/components/EducationBackgroundCar
 import SchoolCard from "../alumni/components/SchoolCard.vue";
 import GeneralInfoVue from "../../components/profile/alumni/GeneralInfo.vue";
 import CoverAndProfileImgVue from "../../components/profile/alumni/CoverAndProfileImg.vue";
-  import FormEditSchoolBg from '../../components/profile/alumni/FromEditSchoolBg.vue'
+import FormEditSchoolBg from "../../components/profile/alumni/FromEditSchoolBg.vue";
 export default {
   props: ["listSkill"],
   components: {
@@ -50,7 +42,7 @@ export default {
     "school-card": SchoolCard,
     "general-info": GeneralInfoVue,
     "profile-cover-img": CoverAndProfileImgVue,
-       'edit-school-form': FormEditSchoolBg
+    "edit-school-form": FormEditSchoolBg,
   },
   data() {
     return {
@@ -59,12 +51,30 @@ export default {
       schoolBgData: [],
       isFetch: false,
       skills: [],
-
+      isLimited:false
     };
   },
-  computed: {   
- 
-     alumniData() {
+  computed: {
+       schoolEdit() {
+      return this.schools.filter((school) => school.id == this.schoolId);
+    },
+
+    schoolFilter() {
+      let limit = 2;
+      let schoolData = [];
+      if (this.isLimited) {
+        schoolData = this.schoolBgData;
+      } else {
+        for (let i = 0; i < this.schoolBgData.length; i++) {
+          if (limit > 0) {
+            limit -= 1;
+            schoolData.push(this.schoolBgData[i]);
+          }
+        }
+      }
+      return schoolData;
+    },
+    alumniData() {
       return this.data.user;
     },
     batch() {
@@ -111,7 +121,7 @@ export default {
       });
     },
   },
- 
+
   mounted() {
     this.getAlumin();
     this.getAluminWorkExp();

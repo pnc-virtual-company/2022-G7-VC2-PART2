@@ -1,5 +1,5 @@
 <template>
-    <base-card >
+    <base-card>
         <template #logo>
             <img :src="school.school_profile" alt="" class="w-full">
         </template>
@@ -30,11 +30,13 @@
             </div>
         </template>
     </base-card>
+ <!-- form edit -->
     <edit-school-form :school="school" v-if="showEdit" @closeFormschoolBg="closeFormschoolForm">
         <template #hidden-form>
             <cancel-icon @click="showEdit =!showEdit"/>
         </template>
     </edit-school-form>
+
 </template>
 <script>   
     import FormEditSchoolBg from '../../../components/profile/alumni/FromEditSchoolBg.vue'
@@ -60,16 +62,10 @@
             closeFormschoolForm(){
                 this.showEdit = !this.showEdit;
                 console.log('close-form')
-    
-                
-                
             },
-            getdata(){
-                return this.school
-            }
         },
         mounted(){
-            this.getdata();
+
         }
     }
 </script>
