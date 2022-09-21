@@ -49,4 +49,10 @@ class workExperienceController extends Controller
     {
         return workExperience::where('alumni_id', '=', $id)->with('Company')->get();
     }
+    // ========= Delete workExperience data =========================
+    public function destroy($id)
+    {
+        workExperience::destroy($id);
+        return response()->json(["message" => 'delete successfully']);
+    }
 }

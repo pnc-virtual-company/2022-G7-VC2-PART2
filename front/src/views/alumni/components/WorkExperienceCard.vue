@@ -21,10 +21,10 @@
                 <slot name="card">
                     
                 </slot>
-            </div>
+            </div> 
         </template>
     </card-widget>
-    <addWorkExperienceVue v-if="showForm" @add-WorkExperience ="addWorkExperience">
+    <addWorkExperienceVue v-if="showForm" @getWork="getWork">
         <template #hidden-form>
             <svg xmlns="http://www.w3.org/2000/svg" @click="showForm = !showForm" fill="none" viewBox="0 0 24 24" stroke-Width={1.5} stroke="currentColor" class="w-6 h-6 hover:bg-gray-200 rounded-full cursor-pointer">
                 <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" class="text-end font-bold"/>
@@ -35,26 +35,28 @@
 <script>
 import AddWorkExperienceVue from '../../../components/profile/alumni/AddWorkExperience.vue';
 export default {
+    emits:['getWork'],
     components:{
         AddWorkExperienceVue,
     },
     data(){
         return{
             showForm: false,
-
         }
     },
     methods:{
-        addWorkExperience(){
+        getWork(){
             this.showForm = !this.showForm;
+            this.$emit('getWork');
         },
         closeAddWork(){
             this.showForm = !this.showForm;
+            this.$emit('getWork');
         },
+        cancelAddWorkExperience(){
+            this.$emit('getWork')
+        }
     },
-    cancelAddWorkExperience(){
-        this.$emit('add-WorkExperience')
-    }
 }
 </script>
 <style>

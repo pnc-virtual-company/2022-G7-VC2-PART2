@@ -11,9 +11,9 @@
                     <school-card/>
                 </template>
             </education-background>
-            <work-experiences>
+            <work-experiences @getWork="getAluminWorkExp">
                 <template #card>
-                    <company-card v-for="(work, index) in workExperiences" :key="index" :work="work" />
+                    <company-card v-for="(work, index) in workExperiences" :key="index" :work="work" @getWork="getAluminWorkExp" />
                 </template>
             </work-experiences>
         </div>
@@ -22,7 +22,6 @@
 
 <script>
     import axios from '../../axios-http';
-    import FormEditWorkExperViewVue from '../../components/profile/alumni/FormEditWorkExper.vue';
     import WorkExperienceCard from '../alumni/components/WorkExperienceCard.vue'
     import CompanyCard from '../alumni/components/CompanyCard.vue'
     import EducationBackgroundCard from '../alumni/components/EducationBackgroundCard.vue'
@@ -59,9 +58,10 @@
                 .then(resp => {
                     this.workExp = resp.data;
                     this.isFetch = true;
-
                 })
+                console.log('get')
             },
+            
         },
         computed: {
             alumniData(){

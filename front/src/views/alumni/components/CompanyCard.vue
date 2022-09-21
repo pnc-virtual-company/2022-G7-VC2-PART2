@@ -24,11 +24,11 @@
             <div class="absolute right-0 top-0 mr-2 mt-1 cursor-pointer" @mouseleave="showOption=false">
                 <point-icon @mouseover="showOption=true" ></point-icon>
                 <div v-if="showOption" @mouseleave="showOption=false" class="absolute bg-bgColorWhite space-y-1 p-1 rounded-md z-10"> 
-                    <div @click="showEditForm(work.id)" class="flex items-center hover:text-primary text-slate-400 text-sm">
+                    <div @click="showEditForm" class="flex items-center hover:text-primary text-slate-400 text-sm">
                         <edit-icon ></edit-icon>
                         <span class="ml-1">Edit</span>
                     </div>
-                    <div class="flex items-center hover:text-secondary text-slate-400 text-sm">
+                    <div :work="work" @click="remove" class="flex items-center hover:text-secondary text-slate-400 text-sm">
                         <cancel-icon></cancel-icon>
                         <span class="ml-1">Remove</span> 
                     </div>
@@ -36,7 +36,7 @@
             </div>
         </template>
     </base-card>
-    <edit-work-form :work="work" v-if="showedit"  @closeForm=closeForm>
+    <edit-work-form :work="work" v-if="showedit"  @getWork="getWork">
         <template #hidden-form>
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-Width={1.5} stroke="currentColor" class="w-6 h-6 hover:bg-gray-200 rounded-full cursor-pointer" @click="showedit = !showedit" >
                 <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" class="text-end font-bold"/>
@@ -46,12 +46,14 @@
 </template>
 <script>   
     import FormEditWorkExperViewVue from '../../../components/profile/alumni/FormEditWorkExper.vue'
+    import axios from '../../../axios-http'
     export default {
+        emits:['getWork'],
         components: {
             'edit-work-form': FormEditWorkExperViewVue
         },
         props: {
-            work: Array,
+            work: Object,
         },
         data(){
             return {
@@ -63,9 +65,14 @@
             showEditForm(){
                 this.showedit = !this.showedit;
             },
-            closeForm(value){
+            getWork(){
                 this.showedit = !this.showedit;
-                console.log(value)
+                this.$emit('getWork');
+            },
+            remove(){
+            axios.delete('/experiences/' + this.work.id).then(response=>{
+                this.$emit('getWork'); 
+            }); 
             }
         },
     }

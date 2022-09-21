@@ -69,7 +69,6 @@
                                 <label for="file" class="text-slate-500 text-sm">Company's Logo</label> <sup class="star text-blue-500"></sup> 
                                 <br>
                                 <input type="file" class="text-sm w-[98.7%] p-1 mt-1 outline-blue-500 border-solid border-[1px] border-gray-400" placeholder="e.g. file" accept="images/*"  @change="onChangComLogo">
-                                <div class="text-xs absolute -mt-6 bg-white ellipsis-start ml-[100px]">{{image}}</div>
                             </div>
                             <div class="text-end pt-5">
                                 <hr >
@@ -83,9 +82,9 @@
     </div>
 </template>
 <script>
-    import axios from '../../../axios-http';
+import axios from '../../../axios-http';
 export default {
-    emit:['add-WorkExperience'],
+    $emit:['getWork'],
     data(){
         return {
             start_date: "",
@@ -96,28 +95,19 @@ export default {
             company_logo: "",
             company_id: null,
             isChecked: false,
-            allowExtension: ["jpg", "png", "jpeg", "gif", "webp","jfif", "svg"],
-            
+            allowExtension: ["jpg", "png", "jpeg", "gif", "webp","jfif", "svg"], 
         }
     },
     methods: {
         addWorkExperience(){
-            console.log(this.start_date);
-            console.log(this.end_date);
-            console.log(this.company_name);
-            console.log(this.position);
-            console.log(this.current);
-            console.log(this.company_logo);
             this.isChecked = !this.isChecked;
             if(this.start_date != "" && this.position != "" && this.company_name != "" && (this.current != "" || this.end_date !="")){
                 let company_info = new FormData();
                 let position_info = new FormData()
                 company_info.append('name', this.company_name);
                 company_info.append('image', this.company_logo);
-                axios.post('/companies', company_info)
-                    .then(response =>{
+                axios.post('/companies', company_info).then(response =>{
                         this.company_id = response.data.id;
-                        console.log('company created!!!!!');
                         position_info.append('startYear', this.start_date);
                         position_info.append('companyId', this.company_id);
                         position_info.append('position', this.position)
@@ -128,22 +118,21 @@ export default {
                             position_info.append('endYear', this.end_date);
                             position_info.append('current',0)
                         }
-                if(this.company_name != 0 && this.position != 0 && this.start_date != 0 && (this.end_date != 0 || this.current == true)){
-                axios.post('/experiences', position_info)
-                }
-            })
-            this.$emit('add-WorkExperience')
-                
+                    if(this.company_name != 0 && this.position != 0 && this.start_date != 0 && (this.end_date != 0 || this.current == true)){
+                        axios.post('/experiences', position_info).then((response) => {
+                            this.$emit('getWork')
+                        }
+                        )
+                    }
+                })
             }
         },
         onChangComLogo(event) {
             let fileExtension = event.target.files[0].name.split(".").pop();
             if (this.allowExtension.includes(fileExtension.toLowerCase())) {
                 this.company_logo = event.target.files[0];
-                console.log(this.company_logo);
             }
         },
-        
     }
 }
 </script>
