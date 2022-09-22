@@ -7,9 +7,9 @@ use App\Http\Controllers\MajorController;
 use App\Http\Controllers\AlumniController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\WorkExperienceController;
-use App\Http\Controllers\PositionController;
 use App\Http\Controllers\CompanyController;
 use App\Http\Controllers\EmailCheckerController;
+use App\Http\Controllers\AuthenticationController;
 
 /*
 |--------------------------------------------------------------------------
@@ -22,14 +22,15 @@ use App\Http\Controllers\EmailCheckerController;
 |
 */
 
-Route::post('/account/login',[UserController::class,'alumniLogin']);
 Route::post('/user',[UserController::class,'store']);
 // check email is real or not
 Route::post('/email/checker',[EmailCheckerController::class,'email_checker']);
 // send invite mail 
-Route::post('/invite/ero',[UserController::class,'inviteEro']);
-Route::post('/register/ero',[UserController::class,'eroRegister']);
-Route::post('/register/validation',[UserController::class,'checkBeforeRegister']);
+Route::post('/account/login',[AuthenticationController::class,'alumniLogin']);
+Route::get('/account/getData',[AuthenticationController::class,'getInfoByToken']);
+Route::post('/invite/ero',[AuthenticationController::class,'inviteEro']);
+Route::post('/register/ero',[AuthenticationController::class,'eroRegister']);
+Route::post('/register/validation',[AuthenticationController::class,'checkBeforeRegister']);
 
 
 

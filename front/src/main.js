@@ -5,7 +5,10 @@ import router from './router'
 import './axios-http';
 import VueCookies from 'vue-cookies'
 import { store } from './stores/userInfo';
+import middleware from "vue-router-middleware-system"
 
+import BaseNavigationBar from './components/nav/BaseNavigationBar.vue'
+import UserNavigationBar from './components/nav/UserNavigationBar.vue'
 import EditIcon from './components/widgets/IconWidgets/EditIcon.vue'
 import AddIcon from './components/widgets/IconWidgets/AddIcon.vue'
 import CamaraIcon from './components/widgets/IconWidgets/CamaraIcon.vue'
@@ -45,7 +48,11 @@ const app = createApp(App)
 app.use(router)
 app.use(store)
 app.use(VueCookies, { expire: '1d'})
+router.beforeEach(middleware({ store }))
 
+
+app.component('base-nav', BaseNavigationBar)
+app.component('user-nav', UserNavigationBar)
 app.component('edit-icon', EditIcon)
 app.component('add-icon',AddIcon)
 app.component('camara-icon',CamaraIcon)

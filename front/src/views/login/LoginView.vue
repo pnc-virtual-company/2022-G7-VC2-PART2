@@ -1,5 +1,5 @@
 <template>
-    <form class="w-[50%] bg-white shadow-md rounded-sm py-4 m-auto z-20 mt-5 px-5" @submit.prevent="login" v-cloak>
+    <form class="w-[40%] bg-white shadow-md rounded-sm py-4 m-auto z-20 mt-5 px-5" @submit.prevent="login" v-cloak>
         <div class="text-primary font-bold text-3xl text-center">
             Login
         </div>
@@ -32,6 +32,7 @@
     import encryptData from '../../helper/encrypt'
     const TOKEN_SCRET_KEY = import.meta.env.VITE_APP_TOKEN_KEY;
     const USER_SCRET_KEY = import.meta.env.VITE_APP_USER_KEY;
+    const ROLE_SCRET_KEY = import.meta.env.VITE_APP_USER_ROLE_KEY;
 
     export default {
         data(){
@@ -61,8 +62,10 @@
                         console.log(response.data.user.id);
                         const token = encryptData(response.data.token, TOKEN_SCRET_KEY)
                         const user_id = encryptData(response.data.user.id.toString(), USER_SCRET_KEY)
+                        const user_role = encryptData(response.data.user.role, ROLE_SCRET_KEY)
                         this.$cookies.set('token', token, "1d") 
                         this.$cookies.set('user_id', user_id, "1d") 
+                        this.$cookies.set('user_role', user_role, "1d") 
                         this.$router.go()
                     })
                     .catch(error=>{
