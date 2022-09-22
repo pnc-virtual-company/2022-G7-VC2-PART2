@@ -58,11 +58,15 @@ class SchoolController extends Controller
     {
         return school::with('alumni')->find($id);
     }
+    public function getByAlumniId($id)
+    {
+        return school::with('alumni')->where('alumni_id','=',$id)->orderBy('id','desc')->get();
+    }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \Illuminate\Http\Request  $req   uest
      * @param  \App\Models\school  $school
      * @return \Illuminate\Http\Response
      */

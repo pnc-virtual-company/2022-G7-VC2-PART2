@@ -13,7 +13,8 @@ class workExperience extends Model
         'end_year',
         'company_id',
         'alumni_id',
-        'position'
+        'position',
+        'current'
     ];
     protected $hidden =[
         'created_at',

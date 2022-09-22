@@ -1,5 +1,5 @@
 <template>
-    <base-card >
+    <base-card>
         <template #logo>
             <img :src="school.school_profile" alt="" class="w-full">
         </template>
@@ -30,11 +30,13 @@
             </div>
         </template>
     </base-card>
-    <edit-school-form :school="school" v-if="showedit" @closeFormschoolBg=closeFormschoolBg>
+ <!-- form edit -->
+    <edit-school-form :school="school" v-if="showEdit" @closeFormschoolBg="closeFormschoolForm">
         <template #hidden-form>
-            <cancel-icon @click="showedit = !showedit"/>
+            <cancel-icon @click="showEdit =!showEdit"/>
         </template>
     </edit-school-form>
+
 </template>
 <script>   
     import FormEditSchoolBg from '../../../components/profile/alumni/FromEditSchoolBg.vue'
@@ -45,26 +47,25 @@
         components: {
             'edit-school-form': FormEditSchoolBg
         },
+        emmits:['action','close-form'],
         data(){
             return {
                 showOption: false,
-                showedit: false
+                showEdit: false
             }
         },
         methods: {
             showEditForm(){
-                this.showedit = !this.showedit;
+                this.showEdit = !this.showEdit;
+                this.$emit('action',this.school.id);
             },
-            closeFormschoolBg(){
-                this.showedit = !this.showedit;
-                
+            closeFormschoolForm(){
+                this.showEdit = !this.showEdit;
+                console.log('close-form')
             },
-            getdata(){
-                return this.school
-            }
         },
         mounted(){
-            this.getdata();
+
         }
     }
 </script>

@@ -105,7 +105,7 @@ export default {
                 formdata.append('end_date',this.end_date);
                 formdata.append('school_logo',this.school_profile);
                 formdata.append('degree',this.degree);
-                formdata.append('alumni_id',2);
+                formdata.append('alumni_id',4);
                 if (this.current==true){
                     formdata.append('current',1);
                 }else {

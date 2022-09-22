@@ -5,23 +5,19 @@
             <skill-content :listSkill="skills"  @getSkill="getSkillInfor"/>
         </div>
         <div class="w-7/12 mr-[8.4%] absolute right-0 -mt-10">
-            <general-info :alumniData="alumniData" :batch="batch" :major="major" />
-            <education-background @add-school="addSchool" >
+            <general-info :alumniData="alumniData"/>
+            <education-background @add-school="addSchool" :schools="schoolBgData">
                 <template #card>
                     <school-card v-for="(school, index) in schoolBgData" :key="index" :school="school"/>
                 </template>
             </education-background>
-            <work-experiences>
-                <template #card>
-                    <company-card v-for="(work, index) in workExperiences" :key="index" :work="work" />
-                </template>
+            <work-experiences :experiences="workExp">
             </work-experiences>
         </div>
     </section>
 </template>
 <script>
 import axios from '../../axios-http'
-import FormEditWorkExperViewVue from '../../components/profile/alumni/FormEditWorkExper.vue';
 import WorkExperienceCard from '../alumni/components/WorkExperienceCard.vue'
 import CompanyCard from '../alumni/components/CompanyCard.vue'
 import EducationBackgroundCard from '../alumni/components/EducationBackgroundCard.vue'
@@ -40,7 +36,7 @@ export default {
     },  
     data(){
         return {
-            data: [],
+            alumniData: [],
             workExp: [],
             schoolBgData:[],
             isFetch: false,      
@@ -51,7 +47,7 @@ export default {
         async getAlumin(){
             await axios.get('alumni/4')
             .then(resp => {
-                this.data = resp.data;
+                this.alumniData = resp.data;
                 this.isFetch = true;
             })
         },
@@ -83,20 +79,6 @@ export default {
                     // console.log(this.skills);
                 })
             },
-    },
-    computed: {
-        alumniData(){
-            return this.data.user
-        },
-        batch(){
-            return this.data.batch
-        },
-        major(){
-            return this.data.major
-        },
-        workExperiences(){
-            return this.workExp
-        },
     },
     mounted(){
         this.getAlumin();

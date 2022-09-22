@@ -19,7 +19,7 @@ class SkillController extends Controller
     }
     public function getSkillbyAlumin($id)
     {
-        return Skill::where('alumni_id', '=', $id)->with('alumni')->get();
+        return Skill::where('alumni_id', '=', $id)->with('alumni')->orderBy('id','desc')->get();
     }
 
     /**
