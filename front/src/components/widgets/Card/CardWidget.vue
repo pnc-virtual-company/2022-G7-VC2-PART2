@@ -8,7 +8,7 @@
     </div>
     <div class="footer">
       <div
-        @click="$emit('action')"
+        @click="action"
         class="mt-4 flex justify-end align-end cursor-pointer"
       >
         <div

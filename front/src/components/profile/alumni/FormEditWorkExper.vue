@@ -86,7 +86,7 @@
 <script>
 import axios from '../../../axios-http';
 export default {
-    emits:['edit-scbg'],
+    emits:['getWork'],
     props:{
         work:Object,
     },
@@ -120,7 +120,7 @@ export default {
             formdata.append('name',this.company);
             formdata.append('image',this.image);
             console.log(formdata);
-            axios.post("http://127.0.0.1:8000/api/companies/"+this.companyid,formdata)
+            axios.post("/companies/"+this.companyid,formdata)
             let experiences = {
                 startYear: this.start_year,
                 endYear: this.end_year,
@@ -130,12 +130,12 @@ export default {
           
             this.submit = true;
             if (this.company != 0 && this.position != 0 && this.start_year != 0 && this.end_year != 0){
-            axios.put('http://127.0.0.1:8000/api/experiences/'+this.formid,experiences).then((result) => {
-                return result.data;
+            axios.put('/experiences/'+this.formid,experiences).then((result) => {
+                this.$emit('getWork');
+                console.log('get work edit work form')
             })
-            this.$emit('closeForm',true)
             }
-        }
+        },
     }
 }
 </script>

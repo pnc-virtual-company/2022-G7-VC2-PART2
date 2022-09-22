@@ -7,7 +7,6 @@ use App\Http\Controllers\MajorController;
 use App\Http\Controllers\AlumniController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\WorkExperienceController;
-use App\Http\Controllers\PositionController;
 use App\Http\Controllers\CompanyController;
 use App\Http\Controllers\SchoolController;
 use App\Http\Controllers\SkillController;
@@ -39,7 +38,7 @@ Route::get('/experiences',[WorkExperienceController::class,'index']);
 Route::post('/experiences',[WorkExperienceController::class,'store']);
 Route::get('/experiences/{id}',[WorkExperienceController::class,'show']);
 Route::put('/experiences/{id}',[WorkExperienceController::class,'update']);
-Route::put('/experiences/{id}',[WorkExperienceController::class,'delete']);
+Route::delete('/experiences/{id}',[WorkExperienceController::class,'destroy']);
 Route::get('/experiences/alumni/{id}',[WorkExperienceController::class,'getWEbyAlumin']);
 // ===============api for company ============
 Route::get('/companies',[CompanyController::class,'index']);

@@ -1,5 +1,4 @@
 <template>
-  <div class="w-[100%] flex flex-wrap">
     <card-widget class="mt-6" @action="isLimited=!isLimited">
       <template #header>
         <header-card>
@@ -25,7 +24,7 @@
 
     <!-- add education background form -->
     <add-educ @add-school="addSc" v-if="hiddeaddedu" />
-  </div>
+
  
 
 </template>
