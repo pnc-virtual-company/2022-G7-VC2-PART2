@@ -80,7 +80,7 @@ export default {
                 await axios.get('/skills/alumni/4')
                 .then(res =>{
                     this.skills = res.data;
-                    console.log(this.skills);
+                    // console.log(this.skills);
                 })
             },
     },
