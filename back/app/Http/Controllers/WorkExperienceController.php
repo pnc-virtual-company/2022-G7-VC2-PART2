@@ -11,7 +11,7 @@ class workExperienceController extends Controller
     public function index()
     {
         // return workExperience::all();
-        return workExperience::with('Company')->get();
+        return workExperience::with('Company')->orderBy('id','desc')->get();
     }
     // ===========show specified data=============
     public function show($id)
@@ -47,7 +47,7 @@ class workExperienceController extends Controller
 
     public function getWEbyAlumin($id)
     {
-        return workExperience::where('alumni_id', '=', $id)->with('Company')->get();
+        return workExperience::where('alumni_id', '=', $id)->with('Company')->orderBy('id','desc')->get();
     }
 
     public function delete($id){
