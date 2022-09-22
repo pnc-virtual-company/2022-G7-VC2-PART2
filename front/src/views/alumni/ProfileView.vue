@@ -81,19 +81,19 @@ export default {
   },
   methods: {
     async getAlumin() {
-      await axios.get("alumni/1").then((resp) => {
+      await axios.get("alumni/4").then((resp) => {
         this.data = resp.data;
         this.isFetch = true;
       });
     },
     async getAluminWorkExp() {
-      await axios.get("experiences/alumni/1").then((resp) => {
+      await axios.get("experiences/alumni/4").then((resp) => {
         this.workExp = resp.data;
         this.isFetch = true;
       });
     },
     async getSchoolBg() {
-      await axios.get('school/alumni/2').then((resp) => {
+      await axios.get('school/alumni/4').then((resp) => {
         this.schoolBgData = resp.data;
       });
     },
@@ -107,7 +107,7 @@ export default {
     },
     //  get skill with specific alumni
     async getSkillInfor() {
-      await axios.get("/skills/alumni/1").then((res) => {
+      await axios.get("/skills/alumni/4").then((res) => {
         this.skills = res.data;
         console.log(this.skills);
       });
