@@ -481,7 +481,8 @@
                 })
 
                 axios.put('http://127.0.0.1:8000/api/experiences/5',{
-                    startYear:this.startdate,
+
+startYear:this.startdate,
                     endYear:this.enddate,
                     position:this.position
                 }).then((result) => {
