@@ -101,7 +101,7 @@ export default {
       });
     },
     async getSchoolBg() {
-      await axios.get("school").then((resp) => {
+      await axios.get('school/alumni/2').then((resp) => {
         this.schoolBgData = resp.data;
       });
     },

@@ -15,7 +15,7 @@
       <template #body>
         <div class="flex flex-wrap gap-2 py-4">
            <school-card
-            v-for="(school, index) in schoolFilter.slice().reverse()"
+            v-for="(school, index) in schoolFilter"
             :key="index"
             :school="school"
           />
