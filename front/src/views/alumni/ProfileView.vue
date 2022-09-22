@@ -49,21 +49,21 @@ export default {
     },
     methods:{
         async getAlumin(){
-            await axios.get('alumni/1')
+            await axios.get('alumni/4')
             .then(resp => {
                 this.data = resp.data;
                 this.isFetch = true;
             })
         },
         async getAluminWorkExp(){
-            await axios.get('experiences/alumni/1')
+            await axios.get('experiences/alumni/4')
             .then(resp => {
                 this.workExp = resp.data;
                 this.isFetch = true;
             })
         },
         async getSchoolBg(){
-            await axios.get('school').then(resp => {
+            await axios.get('school/alumni/4').then(resp => {
                 this.schoolBgData = resp.data;
             })
         },
