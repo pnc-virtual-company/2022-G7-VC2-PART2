@@ -2,6 +2,8 @@ import { createApp } from 'vue'
 import './style.css'
 import App from './App.vue'
 import router from './router'
+import './axios-http';
+
 import EditIcon from './components/widgets/IconWidgets/EditIcon.vue'
 import AddIcon from './components/widgets/IconWidgets/AddIcon.vue'
 import CamaraIcon from './components/widgets/IconWidgets/CamaraIcon.vue'
@@ -12,14 +14,18 @@ import MailIcon from './components/widgets/IconWidgets/MailIcon.vue'
 import PhoneIcon from './components/widgets/IconWidgets/PhoneIcon.vue'
 import PointIcon from './components/widgets/IconWidgets/PointIcon.vue'
 import CancelIcon from './components/widgets/IconWidgets/CancelIcon.vue'
-import CardWidget from './components/widgets/Card/cardWidget.vue'
+import CardWidget from './components/widgets/Card/CardWidget.vue'
 import BaseCard from './components/widgets/Card/BaseCard.vue'
 import NextIcon from './components/widgets/IconWidgets/NextIcon.vue'
 import BackIcon from './components/widgets/IconWidgets/BackIcon.vue'
 import GeneralInfo from './components/profile/alumni/GeneralInfo.vue'
 import HeaderCard from './components/widgets/Card/HeaderCard.vue'
 import SkillsContent from './components/profile/alumni/SkillsContent.vue'
-import './axios-http';
+import CopyIcon from "./components/widgets/IconWidgets/CopyIcon.vue"
+import InformationIcon from './components/widgets/IconWidgets/InformationIcon.vue'
+import CheckIcon from './components/widgets/IconWidgets/CheckIcon.vue'
+import MinusIcon from './components/widgets/IconWidgets/MinusIcon.vue'
+
 
 
 
@@ -43,5 +49,9 @@ app.component('back-icon',BackIcon)
 app.component('general-info-body',GeneralInfo)
 app.component('header-card',HeaderCard)
 app.component('skill-content',SkillsContent)
+app.component('copy-icon',CopyIcon)
+app.component('info-icon',InformationIcon)
+app.component('check-icon',CheckIcon)
+app.component('minus-icon',MinusIcon)
 
 .mount('#app')

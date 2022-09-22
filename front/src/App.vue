@@ -5,11 +5,9 @@
 
 <script>
 import TheNavigationBar from './components/nav/TheNavigationBar.vue'
-import Card from './components/WorkExperieces/CardView.vue'
 export default {
   components: {
     'nav-component': TheNavigationBar,
-    'cardview': Card
   },
 }
 </script>
