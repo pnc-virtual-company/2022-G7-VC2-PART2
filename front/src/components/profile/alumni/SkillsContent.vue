@@ -105,7 +105,7 @@
         methods:{
             addNewSkill(){
                 let skills = {name:this.skill ,type:this.radioType,alumni_id:4};
-                axios.post('/skills',skills).then(res=>{
+                axios.post('skills',skills).then(res=>{
                     this.$emit('getSkill')
                       console.log(res.data);
                     this.skill=""
