@@ -80,7 +80,7 @@
 <script>
 import axios from '../../../axios-http';
 import Swal from "sweetalert2";
-import CancelIcon from '../../../components/widgets/IconWidgets/CancelIcon.vue';
+import CancelIcon from '../../widgets/IconWidgets/CancelIcon.vue';
 export default {
   components: { CancelIcon },
     emits:['add-school'],
@@ -124,11 +124,11 @@ export default {
                 })
             }else {
                 Swal.fire({
-                        position: 'center',
-                        icon: 'error',
-                        title: 'Fail to add alumni school',
-                        showConfirmButton: false,
-                        timer: 1500,
+                    position: 'center',
+                    icon: 'error',
+                    title: 'Fail to add alumni school',
+                    showConfirmButton: false,
+                    timer: 1500,
                 })
             }
             this.$emit('add-school')

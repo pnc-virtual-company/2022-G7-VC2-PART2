@@ -14,25 +14,23 @@
                         Education Backgound
                     </template>
                     <template #action_icon>
-                        <add-icon class="text-primary" @click="openAddedu" />
+                        <add-icon class="text-primary" @click="openAddedu"/>
                     </template>
                 </header-card>
             </template>
             <template #body>
                 <div class="flex flex-wrap gap-2 py-4">
-                    <slot name="card">
-
+                    <slot name="card" @edit-school="editSchool">
                     </slot>
                 </div>
             </template>
         </card-widget>
-
         <!-- add education background form -->
         <add-educ @add-school="addSc" v-if="hiddeaddedu" />
     </div>
 </template>
 <script>
-import AddeducationbackgroundForm from "./AddedubgForm.vue";
+import AddeducationbackgroundForm from "../../../components/profile/alumni/AddedubgForm.vue";
 export default {
     emits:['add-school'],
     components:{
@@ -52,7 +50,9 @@ export default {
         openAddedu(){
             this.hiddeaddedu = !this.hiddeaddedu;
         },
-       
+        editSchool(){
+            this.$emit('add-school')
+        },
     },
 }
 </script>

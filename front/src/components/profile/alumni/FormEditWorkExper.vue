@@ -80,7 +80,7 @@
 <script>
 import axios from '../../../axios-http';
 export default {
-    emits:['edit-scbg'],
+    emits:['edit-schoolbg'],
     props:{
         work:Object,
     },

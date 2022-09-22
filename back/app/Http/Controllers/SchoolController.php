@@ -81,11 +81,15 @@ class SchoolController extends Controller
         }  
         if ($request->current==0){
             $school->end_date = $request->end_date;
+            $school->current = 0;;
+
+        }else  {
+            $school->end_date = null;
+            $school->current = $request->current;
         }
+        $school->degree = $request->degree;
         $school->school_name = $request->school_name;
         $school->start_date = $request->start_date;
-        $school->current = $request->current;
-        $school->degree = $request->degree;
         $school->save();
         return response()->json(['message'=>"Alumni School have been updated!"]);
     }
