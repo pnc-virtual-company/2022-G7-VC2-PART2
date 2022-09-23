@@ -10,8 +10,9 @@
         </div>
         <div class="flex mt-4">
             <phone-icon ></phone-icon>
-            <h1 class="-mt-1 ml-2 text-xl font-bold">{{alumniData.phone}}</h1>
-            <copy-icon class="ml-3 w-5 -mt-1 cursor-pointer"></copy-icon>
+            <h1 class="-mt-1 ml-2 text-xl font-bold">{{phoneNumber}}</h1>
+            <copy-icon class="ml-3 w-5 -mt-1 cursor-pointer" @click="copy"></copy-icon>
+            
         </div>
         <div class="flex items-center">
             <div class="flex items-center mt-4">
@@ -49,6 +50,7 @@ import CancelIcon from '../../widgets/IconWidgets/CancelIcon.vue';
 import DetailAlumniInfo from './DetailAlumniInfo.vue';
 import FormEditGeneralInfoVue from './FormEditGeneralInfo.vue';
 export default {
+    props: ['alumniData', 'batch', 'major'],
     components: {
         'detail-info': DetailAlumniInfo,
         'generalInfo-edit-form': FormEditGeneralInfoVue,
@@ -57,9 +59,19 @@ export default {
     data(){
         return {
         alumniDetailInfo: false,
-        showForm: false
+        showForm: false,
+        phoneNumber:this.alumniData.phone
         }
     },
-    props: ['alumniData', 'batch', 'major'],
+    methods: {
+        copy(){
+            try{
+                navigator.clipboard.writeText(this.phoneNumber)
+            }catch(copy){
+                throw copy
+            }
+            alert('phone number has been copied')
+        }
+    }
 }
 </script>
