@@ -11,8 +11,11 @@
         <div class="flex mt-4">
             <phone-icon ></phone-icon>
             <h1 class="-mt-1 ml-2 text-xl font-bold">{{phoneNumber}}</h1>
-            <copy-icon class="ml-3 w-5 -mt-1 cursor-pointer" @click="copy"></copy-icon>
             
+            <copy-icon class="ml-3 w-5 -mt-1 cursor-pointer" @click="copy"></copy-icon>
+            <span class="tooltiptext">
+                    copy
+            </span>
         </div>
         <div class="flex items-center">
             <div class="flex items-center mt-4">
