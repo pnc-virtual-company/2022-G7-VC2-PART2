@@ -11,11 +11,12 @@
         <div class="flex mt-4">
             <phone-icon ></phone-icon>
             <h1 class="-mt-1 ml-2 text-xl font-bold">{{phoneNumber}}</h1>
-            
-            <copy-icon class="ml-3 w-5 -mt-1 cursor-pointer" @click="copy"></copy-icon>
-            <span class="tooltiptext">
+            <div class="tooltip1">
+                <copy-icon class="ml-3 w-5 -mt-1 cursor-pointer" @click="copy"></copy-icon>
+                <span class="tooltiptext">
                     copy
-            </span>
+                </span>
+            </div>
         </div>
         <div class="flex items-center">
             <div class="flex items-center mt-4">
@@ -52,6 +53,7 @@
 import CancelIcon from '../../widgets/IconWidgets/CancelIcon.vue';
 import DetailAlumniInfo from './DetailAlumniInfo.vue';
 import FormEditGeneralInfoVue from './FormEditGeneralInfo.vue';
+import Swal from 'sweetalert2'
 export default {
     props: ['alumniData', 'batch', 'major'],
     components: {
@@ -63,7 +65,7 @@ export default {
         return {
         alumniDetailInfo: false,
         showForm: false,
-        phoneNumber:this.alumniData.phone
+        phoneNumber:this.alumniData.phone,
         }
     },
     methods: {
@@ -73,8 +75,58 @@ export default {
             }catch(copy){
                 throw copy
             }
-            alert('phone number has been copied')
+            let timerInterval
+Swal.fire({
+  title: 'phone number has been copied',
+  html: 'please wait <b></b> a minute.',
+  timer: 500,
+  timerProgressBar: true,
+  didOpen: () => {
+    Swal.showLoading()
+    const b = Swal.getHtmlContainer().querySelector('b')
+    timerInterval = setInterval(() => {
+      b.textContent = Swal.getTimerLeft()
+    }, 100)
+  },
+  willClose: () => {
+    clearInterval(timerInterval)
+  }
+}).then((result) => {
+  /* Read more about handling dismissals below */
+  if (result.dismiss === Swal.DismissReason.timer) {
+    console.log('I was closed by the timer')
+  }
+})
         }
     }
 }
 </script>
+
+<style >
+    .tooltip1 {
+    position: relative;
+    display: flex;
+    cursor: pointer;
+    }
+    
+    .tooltip1 .tooltiptext {
+      visibility: hidden;
+      width: 30px;
+      color:black;
+      text-align: center;
+      border-radius: 2.5px;
+      padding: 1px 0;
+      position: absolute;
+      z-index: 1;
+      bottom: 100%;
+      left: 50%;
+     
+      /* margin-left: -40px; */
+    }
+    
+    .tooltip1:hover .tooltiptext {
+      visibility: visible;
+      color: black;
+      /* background: rgb(217, 202, 202); */
+    }
+</style>
