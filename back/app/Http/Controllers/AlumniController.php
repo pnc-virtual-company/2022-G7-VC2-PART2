@@ -65,4 +65,7 @@ class AlumniController extends Controller
         return response()->json(['message'=>'updated']);
     }
 
+    /**
+     * loin Aluminai
+     */
 }

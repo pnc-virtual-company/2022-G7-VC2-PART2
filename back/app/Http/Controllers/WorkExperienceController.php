@@ -11,7 +11,7 @@ class workExperienceController extends Controller
     public function index()
     {
         // return workExperience::all();
-        return workExperience::with('Company')->get();
+        return workExperience::with('Company')->orderBy('id','desc')->get();
     }
     // ===========show specified data=============
     public function show($id)
@@ -27,6 +27,7 @@ class workExperienceController extends Controller
         $workExperience->company_id = $request->companyId;
         $workExperience->alumni_id = $request->alumniId;
         $workExperience->position = $request->position;
+        $workExperience->current = $request->current;
         $workExperience->save();
         return response()->json(['message'=>'Successfully for CreateData']);
     }
@@ -35,14 +36,23 @@ class workExperienceController extends Controller
     {
         $workExperience = workExperience::FindOrFail($id);
         $workExperience->start_year = $request->startYear;
+        if ($request->current==0){
         $workExperience->end_year = $request->endYear;
+        }
         $workExperience->position = $request->position;
+        $workExperience->current = $request->current;
         $workExperience->save();
         return response()->json(['message'=>'Successfully for UpdateData']);
     }
 
     public function getWEbyAlumin($id)
     {
-        return workExperience::where('alumni_id', '=', $id)->with('Company')->get();
+        return workExperience::where('alumni_id', '=', $id)->with('Company')->orderBy('id','desc')->get();
+    }
+    // ========= Delete workExperience data =========================
+    public function destroy($id)
+    {
+        workExperience::destroy($id);
+        return response()->json(["message" => 'delete successfully']);
     }
 }

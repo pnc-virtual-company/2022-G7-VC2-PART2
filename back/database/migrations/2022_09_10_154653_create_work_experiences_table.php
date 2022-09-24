@@ -16,8 +16,9 @@ return new class extends Migration
         Schema::create('work_experiences', function (Blueprint $table) {
             $table->id();
             $table->date('start_year');
-            $table->date('end_year');
+            $table->date('end_year')->nullable();
             $table->string('position');
+            $table->string('current');
             $table->foreignId('company_id')->constrained()->onDelete('CASCADE');
             $table->foreignId('alumni_id')->constrained()->onDelete('CASCADE');
             $table->timestamps();
