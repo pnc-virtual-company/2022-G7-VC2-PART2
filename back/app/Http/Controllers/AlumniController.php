@@ -13,7 +13,7 @@ class AlumniController extends Controller
      */
     public function index()
     {
-        return Alumni::all();
+        return Alumni::get();
     }
 
     /**
@@ -41,7 +41,7 @@ class AlumniController extends Controller
      */
     public function show($id)
     {
-        return Alumni::with('User','Batch','Major')->FindOrFail($id);
+        return Alumni::with('User','Batch','Major','schools')->find($id);
     }
 
 

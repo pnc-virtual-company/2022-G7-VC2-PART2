@@ -100,4 +100,38 @@ class UserController extends Controller
             'token' => $token,
         ]);
     }
+    /** 
+     *  Upadate profile,cover user with user id and stroe profile,cover image as a url
+     *  @param int $id
+     *  @return \Illuminate\Http\Response
+     */
+    public function updateUserimage(Request $request,$id){
+        $user = User::find($id);
+        $path = public_path('images');
+        if ( ! file_exists($path) ) {
+            mkdir($path, 0777, true);
+        }
+        if ($request->profile!=null){
+            $file = $request->file('profile');
+            $fileName = uniqid() . '_' . trim($file->getClientOriginalName());     
+            $file->move($path, $fileName);
+            $user->profile = asset('/images/'.$fileName);
+            $user->save();
+            return response()->json(['message'=>"User profile is updated successfully"]);
+        }else if($request->cover!=null) {
+            $file = $request->file('cover');
+            $fileName = uniqid() . '_' . trim($file->getClientOriginalName());     
+            $file->move($path, $fileName);
+            $user->cover = asset('/images/'.$fileName);
+            $user->save();
+            return response()->json(['message'=>"User cover is updated successfully"]);
+        }else {
+            if ($request->profile==null){
+                return response()->json(['message'=>"User Profile image provided null"]);
+            }else {
+                return response()->json(['message'=>"User Cover image provide null"]);
+            }
+        }
+    }
+
 }

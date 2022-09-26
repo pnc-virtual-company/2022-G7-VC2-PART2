@@ -24,7 +24,11 @@ import GeneralInfo from './components/profile/alumni/GeneralInfo.vue'
 import HeaderCard from './components/widgets/Card/HeaderCard.vue'
 import SkillsContent from './components/profile/alumni/SkillsContent.vue'
 import CopyIcon from "./components/widgets/IconWidgets/CopyIcon.vue"
+import ChevronIcon from "./components/widgets/IconWidgets/ChevronUpIcon.vue"
 import InformationIcon from './components/widgets/IconWidgets/InformationIcon.vue'
+import CheckIcon from './components/widgets/IconWidgets/CheckIcon.vue'
+import MinusIcon from './components/widgets/IconWidgets/MinusIcon.vue'
+import BasePanel from './components/widgets/accodion/BasePanel.vue';
 import InputField from './components/widgets/InputField/InputField.vue'
 import BaseButton from './components/widgets/Button/BaseButton.vue'
 import EyeOpen from './components/widgets/IconWidgets/EyeOpen.vue'
@@ -67,5 +71,9 @@ app.component('eye-close',EyeClose)
 app.component('group-user',GroupUser)
 app.component('single-user',SingleUser)
 app.component('logout-icon',LogoutIcon)
+app.component('check-icon',CheckIcon)
+app.component('minus-icon',MinusIcon)
+app.component('base-panel',BasePanel)
+app.component('chevron-up-icon',ChevronIcon)
 
 app.mount('#app')

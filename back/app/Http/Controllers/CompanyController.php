@@ -22,24 +22,27 @@ class CompanyController extends Controller
     public function store(Request $request){
         $company = new Company();
         $company->name = $request->name;
-        $company->address = $request->address;
-        $path = public_path('images');
+        $file = $request->file('image');
+        if ($file!=null){
+            $path = public_path('images');
             if(!file_exists($path)) {
                 mkdir($path, 0777,true);
             }
-            $file = $request->file('image');
-          
-            $fileName = uniqid().'_'.trim($file->getClientOriginalName());
-            $company->image = asset('/images/'.$fileName);
-            $file-> move($path,$fileName);
+        $file = $request->file('image');
+        $fileName = uniqid().'_'.trim($file->getClientOriginalName());
+        $company->image = asset('/images/'.$fileName);
+        $file-> move($path,$fileName);
+        }else {
+            $company->image = $company->image;
+        }
         $company->save();
-        return response()->json(['message' => 'Successfully to create company']);
+        return response()->json(['id' => $company->id]);
     }
+ 
 
     public function update(Request $request, $id){
         $company = Company::Find($id);
         $company->name = $request->name;
-        $company->address = $request->address;
         $file = $request->file('image');
         if ($file!=null){
             $path = public_path('images');
