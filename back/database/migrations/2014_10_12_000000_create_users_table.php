@@ -25,7 +25,8 @@ return new class extends Migration
             $table->string('profile')->nullable();
             $table->string('cover')->nullable();
             $table->boolean('invited')->default(false);
-            $table->string('verified_code')->nullable();
+            $table->string('otp')->nullable();
+            $table->string('otp_expires_time')->nullable();
             $table->rememberToken();
             $table->timestamps();
         });

@@ -6,6 +6,9 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\Request;
 use App\Http\Controllers\SendMailController;
 use Illuminate\Support\Facades\Crypt;
+use Illuminate\Support\Facades\Cache;
+use Carbon\Carbon;
+
 
 
 class AuthenticationController extends Controller
@@ -76,5 +79,45 @@ class AuthenticationController extends Controller
     public function getInfoByToken(){
         $info = auth('sanctum')->user();
         return Response()->json(['data'=>$info]);
+    }
+
+    // OTP
+    public function storeVerify(Request $request)
+    {
+        $request-> validate(['email' => 'required|email']);
+        $user = User::where([['email', '=', $request->email]])->first();
+        $otp = rand(100000,999999);
+        Cache::put([$otp], now()->addSeconds(120));
+        $otp_expires_time = Carbon::now('Asia/Phnom_Penh')->addSeconds(120);
+        Cache::put('otp_expires_time', $otp_expires_time);
+        if(empty($user)){
+            $user = new User();
+            $user->email = $request->email;
+            $user->otp = $otp;
+            $user->otp_expires_time = $otp_expires_time;
+            $user->role = 'alumni';
+            $user->save();
+            (new SendMailController)->sendOTP($user);
+            return response()->json(["status_success" => true]);
+        }else{
+            $user->otp = $otp;
+            $user->otp_expires_time = $otp_expires_time;
+            $user->update();
+            (new SendMailController)->sendOTP($user);
+            return response()->json(["status_success" => true]);
+        }
+            
+    }
+
+    // Check OTP 
+    public function checkVerify(Request $request)
+    {
+        $user = User::where([['email', '=', $request->email],['otp','=', $request->otp]])->first();
+        if($user->otp_expires_time < Carbon::now('Asia/Phnom_Penh'))
+        {
+            return response()->json(["false" => false]);
+        } else {
+            return response()->json(["status_success" => true]);
+        }
     }
 }

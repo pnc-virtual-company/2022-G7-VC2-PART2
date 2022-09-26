@@ -27,7 +27,11 @@ import GeneralInfo from './components/profile/alumni/GeneralInfo.vue'
 import HeaderCard from './components/widgets/Card/HeaderCard.vue'
 import SkillsContent from './components/profile/alumni/SkillsContent.vue'
 import CopyIcon from "./components/widgets/IconWidgets/CopyIcon.vue"
+import ChevronIcon from "./components/widgets/IconWidgets/ChevronUpIcon.vue"
 import InformationIcon from './components/widgets/IconWidgets/InformationIcon.vue'
+import CheckIcon from './components/widgets/IconWidgets/CheckIcon.vue'
+import MinusIcon from './components/widgets/IconWidgets/MinusIcon.vue'
+import BasePanel from './components/widgets/accodion/BasePanel.vue';
 import InputField from './components/widgets/InputField/InputField.vue'
 import BaseButton from './components/widgets/Button/BaseButton.vue'
 import EyeOpen from './components/widgets/IconWidgets/EyeOpen.vue'
@@ -40,6 +44,8 @@ import InfoIcon from './components/widgets/IconWidgets/InfoIcon.vue'
 import PlusIcon from './components/widgets/IconWidgets/PlusIcon.vue'
 import FormWidget from './components/widgets/form/FormWidget.vue'
 import InputPasswordConfirm from './components/form/InputPasswordConfirm.vue'
+import UserIcon from './components/widgets/IconWidgets/UserIcon.vue'
+import KeyIcon from './components/widgets/IconWidgets/KeyIcon.vue'
 
 
 
@@ -84,5 +90,11 @@ app.component('info-icon',InfoIcon)
 app.component('plus-icon',PlusIcon)
 app.component('form-widget',FormWidget)
 app.component('input-pwConfirm',InputPasswordConfirm)
+app.component('check-icon',CheckIcon)
+app.component('minus-icon',MinusIcon)
+app.component('base-panel',BasePanel)
+app.component('chevron-up-icon',ChevronIcon)
+app.component('user-icon',UserIcon)
+app.component('key-icon',KeyIcon)
 
 app.mount('#app')

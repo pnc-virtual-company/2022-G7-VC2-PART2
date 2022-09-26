@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
+use DateTimeInterface;
 
 class User extends Authenticatable
 {
@@ -27,7 +28,8 @@ class User extends Authenticatable
         'cover',
         'role',
         'gender',
-        'phone'
+        'phone',
+        
     ];
 
     /**
@@ -53,5 +55,9 @@ class User extends Authenticatable
     ];
     public function alumni(){
         return $this->hasMany(Alumni::class);
+    }
+    protected function serializeDate(DateTimeInterface $date)
+    {
+        return $date->format('d, l F Y H:i:s A');
     }
 }

@@ -5,13 +5,13 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\workExperience;
+use DateTimeInterface;
 
 class Company extends Model
 {
     use HasFactory;
     protected $fillable = [
         'name',
-        'address',
         'image'
     ];
     protected $hidden =[
@@ -20,5 +20,9 @@ class Company extends Model
     ];
     public function workExperience(){
         return $this->hasMany(workExperience::class);
+    }
+    protected function serializeDate(DateTimeInterface $date)
+    {
+        return $date->format('d, l F Y H:i:s A');
     }
 }

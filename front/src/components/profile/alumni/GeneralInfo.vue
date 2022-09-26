@@ -1,7 +1,7 @@
 <template>
     <div class="block -mt-4 text-neutral-700 font-poppins" ref="table">
         <div class="flex justify-between">
-            <h1 class="text-2xl font-extrabold">{{alumniData.firstName}} {{alumniData.lastName}}</h1>
+            <h1 class="text-2xl font-extrabold">{{alumniData.first_name}} {{alumniData.last_name}}</h1>
             <div >
                 <span  class="bg-white w-8 h-8 rounded-full flex justify-center cursor-pointer shadow-lg text-primary ">
                     <edit-icon @click="showForm = !showForm"></edit-icon>
@@ -41,26 +41,25 @@
             <template #hidden-form>
                 <cancel-icon @click="showForm = !showForm"/>
             </template>
-        </generalInfo-edit-form>
+        </generalInfo-edit-form>  
     </div>
 </template>
 <script>
 import CancelIcon from '../../widgets/IconWidgets/CancelIcon.vue';
-    import DetailAlumniInfo from './DetailAlumniInfo.vue';
-    import FormEditGeneralInfoVue from './FormEditGeneralInfo.vue';
-    export default {
-       components: {
+import DetailAlumniInfo from './DetailAlumniInfo.vue';
+import FormEditGeneralInfoVue from './FormEditGeneralInfo.vue';
+export default {
+    components: {
         'detail-info': DetailAlumniInfo,
         'generalInfo-edit-form': FormEditGeneralInfoVue,
-              CancelIcon
-       },
-       data(){
-          return {
-            alumniDetailInfo: false,
-            showForm: false
-          }
-       },
-       props: ['alumniData', 'batch', 'major'],
-       
-    }
+        CancelIcon,
+    },
+    data(){
+        return {
+        alumniDetailInfo: false,
+        showForm: false
+        }
+    },
+    props: ['alumniData', 'batch', 'major'],
+}
 </script>

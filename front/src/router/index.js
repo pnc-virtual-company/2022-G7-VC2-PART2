@@ -10,11 +10,8 @@ import { store } from '../stores/userInfo'
 import admin from "../middleware/admin";
 import ero from "../middleware/ero";
 import alumni from "../middleware/alumni";
-
-// Test Routes
-import AdminHome from '../views/admin/AdminHome.vue'
-import EroHome from '../views/ero/EroHome.vue'
-import Alumni from '../views/alumni/AlumniHome.vue'
+import AlumniRegister from '../views/register/AlumniRegister.vue'
+import WaitForAccept from '../views/alumni/WaitForAccept.vue'
 
 
 const registerPath = "/ero/register/" + store.state.email;
@@ -22,7 +19,14 @@ const routes = [
   {
     path: "/",
     name: "profile",
-    component: ProfileView,
+    component: () => {
+      if(store.state.permission == 'false'){
+        return WaitForAccept
+      }else{
+        return ProfileView
+      }
+    }
+    // component: ProfileView,
   },
   {
     path: "/invite/user",
@@ -38,32 +42,32 @@ const routes = [
     meta: { middleware: [ero] },
   },
   {
+    path: '/account/alumni/register',
+    name: "alumniRegister",
+    component: AlumniRegister,
+    props: true,
+    meta: { middleware: [alumni] },
+  },
+  {
+    path: '/account/alumni/register/requested',
+    name: "alumniRegisterRequested",
+    component: WaitForAccept,
+    meta: { middleware: [alumni] },
+  },
+  {
     path: '/account/login',
     name: 'login',
     component: LoginView,
   },
-  {
-    path: '/admin/home',
-    name: 'admin',
-    component: AdminHome,
-    meta: { middleware: [admin] },
-
-  },
-  {
-    path: '/ero/home',
-    name: 'ero',
-    component: EroHome,
-    meta: { middleware: [!alumni] },
-  },
-  {
-    path: '/alumni/home',
-    name: 'alumni',
-    component: Alumni,
-    meta: { middleware: [alumni] },
-  },
   { 
     path: '/:pathMatch(.*)*',
-    redirect: '/'
+    redirect: () => {
+      if(store.state.permission == 'false'){
+        return '/account/alumni/register/requested'
+      }else{
+        return '/'
+      }
+    }
   },
   
 ];
@@ -74,11 +78,12 @@ const router = createRouter({
 });
 
 router.beforeEach((to) => {
-  const publicPages = ['/account/login', registerPath];
+  const publicPages = ['/account/login', registerPath, '/account/alumni/register'];
   const authRequired = !publicPages.includes(to.path);
   const token = VueCookies.get('token')
   const decryptCookies = decryptData(token, TOKEN_SCRET_KEY)
   console.log(decryptCookies);
+  console.log(store.state.permission)
 
   if(decryptCookies && !authRequired){
     return '/'

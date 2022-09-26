@@ -29,8 +29,8 @@ class UserController extends Controller
     public function store(Request $request)
     {
         $user = new User();
-        $user->first_name = $request->firstName;
-        $user->last_name = $request->lastName;
+        $user->first_name = $request->first_name;
+        $user->last_name = $request->last_name;
         $user->email = $request->email;
         $user->password = Hash::make($request->password);
         $user->gender = $request->gender;
@@ -39,7 +39,7 @@ class UserController extends Controller
         $user->profile = $request->profile;
         $user->cover = $request->cover;
         $user->save();
-        return response()->json(["message" => 'User create successfully']);
+        return response()->json(["user_id" => $user->id, "status_success" => true]);
     }
 
     /**
@@ -60,17 +60,16 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function updateForRequest(Request $request)
     {
-        $user = User::find($id);
+        $user = User::where('email', '=', $request->email)->first();
         $user->first_name = $request->first_name;
         $user->last_name = $request->last_name;
-        $user->email = $request->email;
         $user->password = Hash::make($request->password);
         $user->gender = $request->gender;
         $user->phone = $request->phone;
         $user->save();
-        return response()->json(["message" => 'User generalinfo update successfully']);
+        return response()->json(["user_id" => $user->id, "status_success" => true]);
     }
 
     /**

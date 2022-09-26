@@ -24,7 +24,11 @@
                 </template>
             </base-button>
         </div>
-        <p class="text-center">Don’t have an account yet?, <span class="text-primary cursor-pointer">signup</span></p>
+        <p class="text-center">Don’t have an account yet?, 
+            <router-link to="/account/alumni/register">
+                <span class="text-primary cursor-pointer">signup</span>
+            </router-link>
+        </p>
     </form>
 </template>
 <script>
@@ -33,6 +37,7 @@
     const TOKEN_SCRET_KEY = import.meta.env.VITE_APP_TOKEN_KEY;
     const USER_SCRET_KEY = import.meta.env.VITE_APP_USER_KEY;
     const ROLE_SCRET_KEY = import.meta.env.VITE_APP_USER_ROLE_KEY;
+    const ACTIVATED_SCRET_KEY = import.meta.env.VITE_APP_ACTIVATED_KEY;
 
     export default {
         data(){
@@ -63,6 +68,16 @@
                         const token = encryptData(response.data.token, TOKEN_SCRET_KEY)
                         const user_id = encryptData(response.data.user.id.toString(), USER_SCRET_KEY)
                         const user_role = encryptData(response.data.user.role, ROLE_SCRET_KEY)
+                        if(response.data.user.role == 'alumni'){
+                            let permission = response.data.user.invited;
+                            if(permission == 0){
+                                permission = false
+                            }else{
+                                permission = true
+                            }
+                            const activated = encryptData(permission.toString(), ACTIVATED_SCRET_KEY)
+                            this.$cookies.set('activated', activated, "1d") 
+                        }
                         this.$cookies.set('token', token, "1d") 
                         this.$cookies.set('user_id', user_id, "1d") 
                         this.$cookies.set('user_role', user_role, "1d") 

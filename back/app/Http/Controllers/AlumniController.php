@@ -13,7 +13,7 @@ class AlumniController extends Controller
      */
     public function index()
     {
-        return Alumni::all();
+        return Alumni::get();
     }
 
     /**
@@ -30,7 +30,7 @@ class AlumniController extends Controller
         $alumni->major_id = $request->major_id;
         
         $alumni->save();
-        return response()->json(['message'=>'Created']);
+        return response()->json(['status_success'=>true]);
     }
 
     /**
@@ -41,7 +41,9 @@ class AlumniController extends Controller
      */
     public function show($id)
     {
-        return Alumni::with('User','Batch','Major')->FindOrFail($id);
+        // $alumni_id = Alumni::;
+        return Alumni::with('User','Batch','Major')->where('user_id','=', $id)->first();
+
     }
 
 
@@ -68,13 +70,21 @@ class AlumniController extends Controller
 
     public function getAlumniByUser($id)
     {
-        // GET alumni_id only by user id
-        $alumni_id = Alumni::where('user_id', $id)->select('id')->first();
-        return Alumni::with('User','Batch','Major')->FindOrFail($alumni_id);
-        // return Alumni::where('user_id', $id)->first()->with('Batch');
-        // return Alumni::where('user_id', $id)->with('user_id','Batch','Major')->first();
-        // return Alumni::with('user_id','Batch','Major')->whereIn('user_id', $id)->first();
-        // return response()->json(['message'=>'updated']);
+        return Alumni::with('User','Batch','Major')->where('user_id','=', $id)->first();
+    }
+
+    public function updateBatch(Request $request,$id)
+    {
+        $alumni = Alumni::where('user_id','=', $id)->first();
+        // $alumni->user_id = $request->user_id;
+        $request -> validate([
+            'batch_id' => 'required|numeric|'
+        ]);
+        $alumni->batch_id = $request->batch_id;
+        // $alumni->major_id = $request->major_id;
+        
+        $alumni->save();
+        return response()->json($alumni);
     }
 
 }

@@ -1,7 +1,7 @@
 <template>
     <section class="w-full">
         <header class="bg-primary">
-            <base-nav @logout="logout" />
+            <base-nav :firstName="firstName" :lastName="lastName" @logout="logout" />
         </header>
         <nav class="bg-blue-300 p-2 flex flex-col relative" v-if="$store.state.role == 'admin' || $store.state.role == 'ero'">
             <div class="flex items-center p-2 text-white flex-wrap justify-center text-center">

@@ -10,29 +10,29 @@
         <div @mouseover="isProfileShow = true" v-if="$store.state.role == 'alumni'">
             <div>
                 <div class="bg-secondary p-1 px-2 rounded-full font-bold text-white cursor-pointer relative flex">
-                    <span>Mengyi Yoeng</span>
+                    <span>{{firstName}} {{lastName}}</span>
                     <drop-down></drop-down>
                 </div>
             </div>
-            <div v-if="isProfileShow" class="mt-2 absolute z-20  -ml-2" @mouseleave="isProfileShow = false">
-                <card-widget >
+            <div v-if="isProfileShow" class="mt-2 absolute z-20  -ml-2 w-[200px]" @mouseleave="isProfileShow = false">
+                <card-widget>
                     <template #body>
-                        <div class="flex mt-1 hover:bg-gray-200 cursor-pointer">
-                            <profile-icon class="text-primary"></profile-icon>
-                            <span class="text-primary ml-1">Profile</span>
+                        <div class="flex mt-1 hover:text-primary cursor-pointer text-[14px] text-gray-400">
+                            <user-icon></user-icon>
+                            <span class="ml-1">Profile</span>
                         </div>
-                        <div class="flex mt-1 hover:bg-gray-200 cursor-pointer">
-                            <reset-icon class="text-rose-600 "></reset-icon>
-                            <span class="text-rose-600 ml-1">Reset Password</span>
+                        <div class="flex mt-1 hover:text-rose-600 text-gray-400 cursor-pointer  text-[14px]">
+                            <key-icon></key-icon>
+                            <span class="ml-1">Reset Password</span>
                         </div>
-                        <div class="flex mt-1 hover:bg-gray-200  cursor-pointer" @click="$emit('logout')">
-                            <logout-icon class="text-rose-600"></logout-icon>
-                            <span class="text-rose-600 ml-1">Logout</span>
+                        <div class="flex mt-1 hover:fill-rose-600 hover:text-rose-600 text-gray-400 fill-gray-400  cursor-pointer text-[14px]" @click="$emit('logout')">
+                            <logout-icon></logout-icon>
+                            <span class="ml-1">Logout</span>
                         </div>
-                        <div class="flex mt-1 hover:bg-gray-200 cursor-pointer">
+                        <!-- <div class="flex mt-1 hover:bg-gray-200 cursor-pointer">
                             <sitting-icon class="text-gray-500 "></sitting-icon>
                             <span class="text-gray-500 ml-1">Sitting</span>
-                        </div>
+                        </div> -->
                     </template>
                 </card-widget>
             </div>
@@ -43,6 +43,10 @@
 
 <script>
     export default{
+        props: {
+            firstName: String,
+            lastName: String,
+        },
         data(){
             return{
                 isProfileShow:false

@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use DateTimeInterface;
 
 class workExperience extends Model
 {
@@ -13,7 +14,8 @@ class workExperience extends Model
         'end_year',
         'company_id',
         'alumni_id',
-        'position'
+        'position',
+        'current'
     ];
     protected $hidden =[
         'created_at',
@@ -24,5 +26,9 @@ class workExperience extends Model
     }
     public function alumni(){
         return $this->belongsTo(Alumni::class);
+    }
+    protected function serializeDate(DateTimeInterface $date)
+    {
+        return $date->format('d, l F Y H:i:s A');
     }
 }

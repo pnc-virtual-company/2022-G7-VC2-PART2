@@ -40,8 +40,6 @@
                 isNotRealEmail: null,
                 error: false,
                 pwValid: null,
-                testE: 'mengyi@gmail.com',
-                testP: 'mengyi@gmail.com',
                 theSamePw: false,
                 containsEighLength: false,
                 containsNumber: false,
