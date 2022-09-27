@@ -230,7 +230,6 @@
 </template>
 
 <script>
-<<<<<<< HEAD
     import axios from '../../../axios-http';
     export default {
         props:{
@@ -284,83 +283,6 @@
             this.getData();
         },
     }
-=======
-import axios from "../../../axios-http";
-export default {
-  props: {
-    userData: Object,
-    batch: Object,
-  },
-  data() {
-    return {
-      userId: 1,
-      batchid: 16,
-      gender: "",
-      firstname: "",
-      lastname: "",
-      generation: "",
-      email: "",
-      phone: "",
-      batchdata: [],
-      submit: false,
-    };
-  },
-  methods: {
-    getData() {
-      this.firstname = this.userData.firstName;
-      this.lastname = this.userData.lastName;
-      this.email = this.userData.email;
-      this.phone = this.userData.phone;
-      this.gender = this.userData.gender;
-      this.generation = this.batch.generation;
-    },
-    getBatch() {
-      axios.get("http://127.0.0.1:8000/api/batches").then((result) => {
-        this.batchdata = result.data;
-      });
-    },
-    editinfo() {
-      let userdata = {
-        firstName: this.firstname,
-        lastName: this.lastname,
-        email: this.email,
-        password: "pupd",
-        gender: this.gender,
-        phone: this.phone,
-      };
-      this.submit = true;
-      if (
-        this.firstname != 0 &&
-        this.lastname != 0 &&
-        this.email != 0 &&
-        this.phone != 0 &&
-        this.gender != 0
-      ) {
-        axios
-          .put("http://127.0.0.1:8000/api/users/" + this.userId, userdata)
-          .then((response) => {
-            return response.data;
-          });
-        axios
-          .put("http://127.0.0.1:8000/api/batches/" + this.batchid, {
-            generation: this.generation,
-          })
-          .then((response) => {
-            return response.data;
-          });
-        this.showModal = !this.showModal;
-        this.$forceUpdate();
-        this.$emit("closeDiloag");
-        this.$emit("refreshData");
-      }
-    },
-  },
-  mounted() {
-    this.getData();
-    this.getBatch();
-  },
-};
->>>>>>> e00cca62f1549098c94293559e0351be8843de98
 </script>
 
 <style scoped>

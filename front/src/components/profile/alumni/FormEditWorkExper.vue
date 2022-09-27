@@ -1,33 +1,6 @@
 <template>
     <!-- form edit work experience  -->
     <div class="modal-mask">
-<<<<<<< HEAD
-      <div class="modal-wrapper">
-          <div class="modal-container rounded">
-              <form @submit.prevent="editworkexperience">  
-                    <div class="card_form text-start w-[50%] m-auto p-5">
-                        <div class="bg-white p-5 rounded-md">
-                        <div class="flex justify-between items-start text-sky-500/80 font-bold">
-                        <div class="flex ">
-                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L10.582 16.07a4.5 4.5 0 01-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 011.13-1.897l8.932-8.931zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0115.75 21H5.25A2.25 2.25 0 013 18.75V8.25A2.25 2.25 0 015.25 6H10" />
-                            </svg>
-                            <h2 class="ml-2 text-lg">Work Experience Information</h2> 
-                        </div>
-                         <!-- cencel icon -->
-                         <div class="w-[4%]">
-                            <slot name="hidden-form">
-                            </slot>
-                        </div>
-                        
-                        </div>
-                        <hr>
-                        <div class="flex mt-4 ">
-                        <span style='font-size:10px;' class="text-blue-500">&#9733;</span>
-                        <p class="ml-1 text-slate-500 text-sm">Indicates required</p>
-                        </div>
-                        <div class="flex w-[100%]">
-=======
         <div class="modal-wrapper">
             <div class="modal-container rounded">
                 <form @submit.prevent="editworkexperience">  
@@ -72,7 +45,6 @@
                                     <label for="current" class="ml-3">currently is working at this role!</label>
                               </div>
                               <div class="flex w-[100%]" v-if="current==false">
->>>>>>> e00cca62f1549098c94293559e0351be8843de98
                             <div class="w-[50%] mt-2">
                                 <label for="startdate" class="text-slate-500 text-sm">Start_date</label> <sup class="star text-blue-500">*</sup> 
                                 <br>
