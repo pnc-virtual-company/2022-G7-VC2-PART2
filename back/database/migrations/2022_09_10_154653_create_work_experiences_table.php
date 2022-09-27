@@ -18,9 +18,10 @@ return new class extends Migration
             $table->date('start_year');
             $table->date('end_year')->nullable();
             $table->string('position');
-            $table->string('current');
-            $table->foreignId('company_id')->constrained()->onDelete('CASCADE');
-            $table->foreignId('alumni_id')->constrained()->onDelete('CASCADE');
+            $table->string('current')->nullable();
+            $table->foreignId('company_id')->nullable()->constrained('companies')->cascadeOnUpdate()->nullOnDelete();
+            // $table->foreignId('alumni_id')->nullable()->constrained('alumnis')->cascadeOnUpdate()->nullOnDelete();
+            $table->foreignId('user_id')->constrained()->onDelete('CASCADE');
             $table->timestamps();
         });
     }

@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use DateTimeInterface;
 
 class Batch extends Model
 {
@@ -18,4 +19,8 @@ class Batch extends Model
         'created_at',
         'updated_at'
     ];
+    protected function serializeDate(DateTimeInterface $date)
+    {
+        return $date->format('d, l F Y H:i:s A');
+    }
 }

@@ -94,6 +94,7 @@ export default {
             school_profile:"",
             allowExtension:["jpg", "png", "jpeg", "gif", "webp","jfif", "svg"],
             disable:false,
+            user_id: this.$store.state.user_id,
         }
     },
     methods:{
@@ -105,7 +106,7 @@ export default {
                 formdata.append('end_date',this.end_date);
                 formdata.append('school_logo',this.school_profile);
                 formdata.append('degree',this.degree);
-                formdata.append('alumni_id',4);
+                formdata.append('alumni_id', this.user_id);
                 if (this.current==true){
                     formdata.append('current',1);
                 }else {

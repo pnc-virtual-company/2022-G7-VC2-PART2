@@ -21,7 +21,8 @@ return new class extends Migration
             $table->string('school_name');
             $table->string('school_profile')->nullable();
             $table->boolean('current');
-            $table->foreignId('alumni_id')->constrained()->onDelete('CASCADE');
+            // $table->foreignId('alumni_id')->nullable()->constrained('alumnis')->cascadeOnUpdate()->nullOnDelete();
+            $table->foreignId('user_id')->constrained()->onDelete('CASCADE');
             $table->timestamps();
         });
     }

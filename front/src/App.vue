@@ -1,37 +1,50 @@
 <template>
-  <section v-if="role=='alumni'">
-    <alumni-nav></alumni-nav>
-    <router-view></router-view>
-  </section>
-  <section v-if="role=='admin'">
-    <admin-nav>
+  <section>
+    <user-nav>
         <template #main>
           <router-view></router-view>
         </template>
-    </admin-nav>
+    </user-nav>
   </section>
-</template>
 
+</template>
 <script>
-import TheNavigationBar from './components/nav/TheNavigationBar.vue'
-import AdminNavigationBar from './components/nav/AdminNavigationBar.vue';
-export default {
-  components: {
-    'alumni-nav': TheNavigationBar,
-    'admin-nav': AdminNavigationBar,
-  },
-  data(){
-    return {
-      role: 'admin'
+  export default {
+    data(){
+      return {
+        firstName: '',
+        lastName: '',
+      }
+    },
+    methods: {
+      async getData(){
+            await axios.get('/account/getData').then(response=>{
+                this.firstName = response.data.data.first_name
+                this.lastName = response.data.data.last_name
+                console.log('alumni created!!!')
+                console.log(response.data.data)
+            })
+        }
+    },
+    mouted(){
+      this.getData();
     }
   }
-}
 </script>
-
 <style>
   @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap');
 body {
   background: #F6F8F9;
   font-family: 'Poppins', sans-serif;
 }
+*::-webkit-scrollbar:horizontal {
+  height: 1px;
+  }
+  *::-webkit-scrollbar {
+      width: 3px;
+  }
+  *::-webkit-scrollbar-thumb {
+    background-color: #0081CA;
+    border-radius: 20px;
+  }
 </style>

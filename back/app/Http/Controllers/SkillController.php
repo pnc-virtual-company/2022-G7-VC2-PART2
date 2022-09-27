@@ -19,7 +19,7 @@ class SkillController extends Controller
     }
     public function getSkillbyAlumin($id)
     {
-        return Skill::where('alumni_id', '=', $id)->with('alumni')->orderBy('id','desc')->get();
+        return Skill::where('user_id', '=', $id)->with('alumni')->orderBy('id','desc')->get();
     }
 
     /**
@@ -33,7 +33,7 @@ class SkillController extends Controller
         $skill = new Skill();
         $skill->name = $request->name;
         $skill->type = $request->type;
-        $skill->alumni_id = $request->alumni_id;
+        $skill->user_id = $request->alumni_id;
 
         $skill->save();
         return response()->json(["message" => 'Create Skill Successfuly!']);

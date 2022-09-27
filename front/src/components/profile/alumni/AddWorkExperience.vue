@@ -96,6 +96,7 @@ export default {
             company_id: null,
             isChecked: false,
             allowExtension: ["jpg", "png", "jpeg", "gif", "webp","jfif", "svg"], 
+            user_id: this.$store.state.user_id,
         }
     },
     methods: {
@@ -111,7 +112,7 @@ export default {
                         position_info.append('startYear', this.start_date);
                         position_info.append('companyId', this.company_id);
                         position_info.append('position', this.position)
-                        position_info.append('alumniId',4);
+                        position_info.append('alumniId', this.user_id);
                         if(this.current == true){
                             position_info.append('current',1);
                         }else{

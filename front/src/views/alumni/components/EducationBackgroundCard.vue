@@ -1,5 +1,17 @@
 <template>
-    <card-widget class="mt-6" @action="isLimited=!isLimited">
+    <card-widget class="mt-4" v-if="schools.length <= 0">
+        <template #body>
+            <div @click="openAddedu" class="border-dashed flex justify-center h-[20vh] items-center border-2 rounded-[2.5px] border-primary hover:bg-blue-100 cursor-pointer">
+                <div class="text-center flex flex-col py-3">
+                    <div class="">
+                      <img src="../../../assets/default_img/education_bg.png" alt="" class="m-auto w-[60px]">
+                    </div>
+                    <h1 class="font-bold">Add education background here</h1>
+                </div>
+            </div>
+        </template>
+      </card-widget>
+    <card-widget  v-else :isHideShow="true" class="mt-6" @action="isLimited=!isLimited">
       <template #header>
         <header-card>
           <template #icon>
@@ -24,9 +36,6 @@
 
     <!-- add education background form -->
     <add-educ @add-school="addSc" v-if="hiddeaddedu" />
-
- 
-
 </template>
 <script>
 import SchoolCard from '../components/SchoolCard.vue'    ;
@@ -67,6 +76,7 @@ export default {
   methods: {
     addSc() {
       this.hiddeaddedu = !this.hiddeaddedu;
+      this.$emit('getSchoolBg')
     },
     openAddedu() {
       this.hiddeaddedu = !this.hiddeaddedu;

@@ -1,7 +1,7 @@
 <template>
     <div class="block -mt-4 text-neutral-700 font-poppins" ref="table">
         <div class="flex justify-between">
-            <h1 class="text-2xl font-extrabold">{{alumniData.firstName}} {{alumniData.lastName}}</h1>
+            <h1 class="text-2xl font-extrabold">{{alumniData.first_name}} {{alumniData.last_name}}</h1>
             <div >
                 <span  class="bg-white w-8 h-8 rounded-full flex justify-center cursor-pointer shadow-lg text-primary ">
                     <edit-icon @click="showForm = !showForm"></edit-icon>

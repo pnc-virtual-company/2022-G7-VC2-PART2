@@ -6,7 +6,7 @@
     <div>
       <slot name="body"> </slot>
     </div>
-    <div class="footer">
+    <div class="footer" v-if="isHideShow">
       <div
         @click="action"
         class="mt-4 flex justify-end align-end cursor-pointer"
@@ -32,6 +32,9 @@
 
 <script>
 export default {
+    props: {
+      isHideShow: Boolean,
+    },
     data(){
         return{
             active:false

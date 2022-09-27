@@ -43,7 +43,7 @@ class SchoolController extends Controller
         $school->start_date = $request->start_date;
         $school->degree = $request->degree;
         $school->current = $request->current;
-        $school->alumni_id = $request->alumni_id;
+        $school->user_id = $request->alumni_id;
         $school->save();
         return response()->json(['message'=>"Alumni School have been created!"]);
     }
@@ -60,7 +60,7 @@ class SchoolController extends Controller
     }
     public function getByAlumniId($id)
     {
-        return school::with('alumni')->where('alumni_id','=',$id)->orderBy('id','desc')->get();
+        return school::with('alumni')->where('user_id','=',$id)->orderBy('id','desc')->get();
     }
 
     /**

@@ -1,77 +1,67 @@
 <template>
-    <section class="w-10/12 m-auto" v-if="isFetch" v-cloak>
-        <profile-cover-img />
-        <div class="w-3/12 h-[100vh] absolute mt-20 px-5">
-            <skill-content :listSkill="skills"  @getSkill="getSkillInfor"/>
-        </div>
-        <div class="w-7/12 mr-[8.4%] absolute right-0 -mt-10">
-            <general-info :alumniData="alumniData"/>
-            <education-background @add-school="addSchool" :schools="schoolBgData">
-                <template #card>
-                    <school-card v-for="(school, index) in schoolBgData" :key="index" :school="school"/>
-                </template>
-            </education-background>
-            <work-experiences :experiences="workExp">
-            </work-experiences>
-        </div>
+  <section class="w-10/12 m-auto" v-if="isFetch" v-cloak>
+    <profile-cover-img :images="user" />
+    <div class="w-3/12 h-[100vh] absolute mt-20 px-5">
+      <skill-content :listSkill="skills" @getSkill="getSkillInfor"/>
+    </div>
+    <div class="w-7/12 mr-[8.4%] absolute right-0 -mt-10">
+      <general-info :alumniData="user" :batch="batch" :major="major" />
+      <!-- ========= education background======================================== -->
+      <education-background @add-school="addSchool" @getSchoolBg="getSchoolBg" :schools="schoolBgData">
+      </education-background>
 
-        <edit-work-form :work="workToEdit" v-if="showedit" @closeForm = closeForm>
-            <template #hidden-form>
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-Width={1.5} stroke="currentColor" class="w-6 h-6 hover:bg-gray-200 rounded-full cursor-pointer" @click="showedit = !showedit" >
-                    <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" class="text-end font-bold"/>
-                </svg>
-            </template>
-        </edit-work-form>
-    </section>
+      <!--==== form eidt schoool =================================================================-->
+      <work-experiences :experiences="workExp" @getWork="getAluminWorkExp">
+      </work-experiences>
+    </div>
+  </section>
 </template>
 <script>
-import axios from '../../axios-http'
-import WorkExperienceCard from '../alumni/components/WorkExperienceCard.vue'
-import CompanyCard from '../alumni/components/CompanyCard.vue'
-import EducationBackgroundCard from '../alumni/components/EducationBackgroundCard.vue'
-import SchoolCard from '../alumni/components/SchoolCard.vue'
-import GeneralInfoVue from '../../components/profile/alumni/GeneralInfo.vue';
-import CoverAndProfileImgVue from '../../components/profile/alumni/CoverAndProfileImg.vue';
-export default {
-    props:['listSkill'],
-    components: { 
-        'work-experiences': WorkExperienceCard,
-        'company-card': CompanyCard,
-        'education-background': EducationBackgroundCard,
-        'school-card': SchoolCard,
-        'general-info': GeneralInfoVue,
-        'profile-cover-img': CoverAndProfileImgVue,     
-    },  
-    data(){
-        return {
-            alumniData: [],
-            workExp: [],
-            schoolBgData:[],
-            isFetch: false,      
-            skills:[],  
-             user_id: this.$store.state.user_id,
+<<<<<<<<< Temporary merge branch 1
+    import axios from '../../axios-http';
+    import FormEditWorkExperViewVue from '../../components/profile/alumni/FormEditWorkExper.vue';
+    import WorkExperienceCard from '../alumni/components/WorkExperienceCard.vue'
+    import CompanyCard from '../alumni/components/CompanyCard.vue'
+    import EducationBackgroundCard from '../alumni/components/EducationBackgroundCard.vue'
+    import SchoolCard from '../alumni/components/SchoolCard.vue'
+    import GeneralInfoVue from '../../components/profile/alumni/GeneralInfo.vue';
+    import CoverAndProfileImgVue from '../../components/profile/alumni/CoverAndProfileImg.vue';
+    export default {
+        components: { 
+             'work-experiences': WorkExperienceCard,
+             'company-card': CompanyCard,
+             'education-background': EducationBackgroundCard,
+             'school-card': SchoolCard,
+             'general-info': GeneralInfoVue,
+             'profile-cover-img': CoverAndProfileImgVue
+        },  
+        data(){
+            return {
+                data: [],
+                workExp: [],
+                isFetch: false,   
+                user_id: this.$store.state.user_id,
                 alumni_id: null        
-        }
-    },
-    methods:{
-        async getAlumin(){
-            await axios.get('alumni/4')
-            .then(resp => {
-                this.alumniData = resp.data;
-                this.isFetch = true;
-            })
+            }
         },
-        async getAluminWorkExp(){
-            await axios.get('experiences/alumni/4')
-            .then(resp => {
-                this.workExp = resp.data;
-                this.isFetch = true;
-            })
-        },
-        async getSchoolBg(){
-            await axios.get('school/alumni/4').then(resp => {
-                this.schoolBgData = resp.data;
-            })
+        methods:{
+            async getAlumin(){
+                await axios.get('/alumni/user/'+this.user_id)
+                .then(resp=>{
+                    console.log(resp.data[0].id);
+                    this.data = resp.data[0]
+                    this.alumni_id = resp.data[0].id
+                    this.isFetch = true;
+                    this.getAluminWorkExp();
+                })
+            },
+            async getAluminWorkExp(){
+                await axios.get('/experiences/alumni/'+this.alumni_id)
+                .then(resp => {
+                    this.workExp = resp.data;
+                    this.isFetch = true;
+                })
+            },
         },
         computed: {
             alumniData(){
@@ -87,13 +77,149 @@ export default {
                 return this.workExp
             },
 
-        },
-        mounted() {
-            this.getAlumin();
-            this.getAluminWorkExp();
-        },
-    }
-    }
+
+
+    "education-background": EducationBackgroundCard,
+    "school-card": SchoolCard,
+    "general-info": GeneralInfoVue,
+    "profile-cover-img": CoverAndProfileImgVue,
+    "edit-school-form": FormEditSchoolBg,
+  },
+  data() {
+    return {
+      data: [],
+      workExp: [],
+      schoolBgData: [],
+      isFetch: false,
+      skills: [],
+      isLimited:false
+    };
+  },
+  computed: {
+       schoolEdit() {
+      return this.schools.filter((school) => school.id == this.schoolId);
+    },
+
+    schoolFilter() {
+      let limit = 2;
+      let schoolData = [];
+      if (this.isLimited) {
+        schoolData = this.schoolBgData;
+      } else {
+        for (let i = 0; i < this.schoolBgData.length; i++) {
+          if (limit > 0) {
+            limit -= 1;
+            schoolData.push(this.schoolBgData[i]);
+          }
+        }
+      }
+      return schoolData;
+    },
+    alumniData() {
+      return this.data.user;
+    },
+    batch() {
+      return this.data.batch;
+    },
+    major() {
+      return this.data.major;
+    },
+    workExperiences() {
+      return this.workExp;
+    },
+  },
+  methods: {
+    async getAlumin() {
+      await axios.get("alumni/4").then((resp) => {
+        this.data = resp.data;
+        this.isFetch = true;
+      });
+    },
+    async getAluminWorkExp() {
+      await axios.get("experiences/alumni/4").then((resp) => {
+        this.workExp = resp.data;
+        this.isFetch = true;
+      });
+    },
+    async getSchoolBg() {
+      await axios.get('school/alumni/4').then((resp) => {
+        this.schoolBgData = resp.data;
+      });
+    },
+    closeFormschoolBg() {
+      this.showSchoolEdit = !this.showSchoolEdit;
+      this.getSchoolBg();
+      console.log("hh");
+    },
+    addSchool() {
+      this.getSchoolBg();
+    },
+    //  get skill with specific alumni
+    async getSkillInfor() {
+      await axios.get("/skills/alumni/4").then((res) => {
+        this.skills = res.data;
+        console.log(this.skills);
+      });
+    },
+  },
+
+  mounted() {
+    this.getAlumin();
+    this.getAluminWorkExp();
+    this.getSchoolBg();
+    // this.getSkillInfor();
+  },
+};
 </script>
 
 
+<style>
+    .modal-mask {
+        position: fixed;
+        z-index: 10;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.5);
+        display: table;
+        transition: opacity 0.3s ease;
+    }
+    .modal-wrapper {
+        display: table-cell;
+        vertical-align: middle;
+    }
+    .modal-container {
+        padding: 15px 28px;
+        border-radius: 2px;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.33);
+        transition: all 0.3s ease;
+        font-family: Helvetica, Arial, sans-serif;
+        z-index: 10;
+    }
+    .modal-body {
+        margin: 20px 0;
+    }
+    .modal-default-button {
+        float: right;
+    }
+    .modal-enter-from, .modal-leave-to {
+        opacity: 0;
+    }
+    .modal-enter-active .modal-container,
+    .modal-leave-active .modal-container {
+        -webkit-transform: scale(1.1);
+        transform: scale(1.1);
+    };
+    form {
+        width: 95%;
+    }
+    .ellipsis-start {
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        width: 150px;
+        direction: rtl;
+        text-align: left;
+    }
+</style>

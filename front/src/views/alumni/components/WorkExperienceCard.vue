@@ -1,6 +1,18 @@
 <template>
     <div class="w-[100%] flex flex-wrap">
-        <card-widget class="mt-4" @action="isLimited = !isLimited">
+      <card-widget class="mt-4" v-if="experiences.length <= 0">
+        <template #body>
+            <div @click="showForm = !showForm" class="flex border-dashed justify-center items-center border-2 rounded-[2.5px] border-primary hover:bg-blue-100 cursor-pointer">
+                <div class="text-center flex flex-col py-3">
+                    <div class="">
+                      <img src="../../../assets/default_img/work-place.png" alt="" class="m-auto w-[60px]">
+                    </div>
+                    <h1 class="font-bold">Add work experiences here</h1>
+                </div>
+            </div>
+        </template>
+      </card-widget>
+        <card-widget v-else :isHideShow="true" class="mt-4" @action="isLimited = !isLimited">
           <template #header>
             <header-card>
               <template #icon>
@@ -23,7 +35,6 @@
             </div>
           </template>
         </card-widget>
-
     </div>
   <add-work-form v-if="showForm" @getWork="getWork">
     <template #hidden-form>

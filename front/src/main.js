@@ -5,7 +5,10 @@ import router from './router'
 import './axios-http';
 import VueCookies from 'vue-cookies'
 import { store } from './stores/userInfo';
+import middleware from "vue-router-middleware-system"
 
+import BaseNavigationBar from './components/nav/BaseNavigationBar.vue'
+import UserNavigationBar from './components/nav/UserNavigationBar.vue'
 import EditIcon from './components/widgets/IconWidgets/EditIcon.vue'
 import AddIcon from './components/widgets/IconWidgets/AddIcon.vue'
 import CamaraIcon from './components/widgets/IconWidgets/CamaraIcon.vue'
@@ -36,6 +39,13 @@ import EyeClose from './components/widgets/IconWidgets/EyeClose.vue'
 import GroupUser from './components/widgets/IconWidgets/GroupUser.vue'
 import SingleUser from './components/widgets/IconWidgets/SingleUser.vue'
 import LogoutIcon from './components/widgets/IconWidgets/LogoutIcon.vue'
+import EroIcon from './components/widgets/IconWidgets/EroIcon.vue'
+import InfoIcon from './components/widgets/IconWidgets/InfoIcon.vue'
+import PlusIcon from './components/widgets/IconWidgets/PlusIcon.vue'
+import FormWidget from './components/widgets/form/FormWidget.vue'
+import InputPasswordConfirm from './components/form/InputPasswordConfirm.vue'
+import UserIcon from './components/widgets/IconWidgets/UserIcon.vue'
+import KeyIcon from './components/widgets/IconWidgets/KeyIcon.vue'
 
 
 
@@ -44,7 +54,11 @@ const app = createApp(App)
 app.use(router)
 app.use(store)
 app.use(VueCookies, { expire: '1d'})
+router.beforeEach(middleware({ store }))
 
+
+app.component('base-nav', BaseNavigationBar)
+app.component('user-nav', UserNavigationBar)
 app.component('edit-icon', EditIcon)
 app.component('add-icon',AddIcon)
 app.component('camara-icon',CamaraIcon)
@@ -71,9 +85,16 @@ app.component('eye-close',EyeClose)
 app.component('group-user',GroupUser)
 app.component('single-user',SingleUser)
 app.component('logout-icon',LogoutIcon)
+app.component('ero-icon',EroIcon)
+app.component('info-icon',InfoIcon)
+app.component('plus-icon',PlusIcon)
+app.component('form-widget',FormWidget)
+app.component('input-pwConfirm',InputPasswordConfirm)
 app.component('check-icon',CheckIcon)
 app.component('minus-icon',MinusIcon)
 app.component('base-panel',BasePanel)
 app.component('chevron-up-icon',ChevronIcon)
+app.component('user-icon',UserIcon)
+app.component('key-icon',KeyIcon)
 
 app.mount('#app')

@@ -25,7 +25,7 @@ class workExperienceController extends Controller
         $workExperience->start_year = $request->startYear;
         $workExperience->end_year = $request->endYear;
         $workExperience->company_id = $request->companyId;
-        $workExperience->alumni_id = $request->alumniId;
+        $workExperience->user_id = $request->alumniId;
         $workExperience->position = $request->position;
         $workExperience->current = $request->current;
         $workExperience->save();
@@ -45,9 +45,9 @@ class workExperienceController extends Controller
         return response()->json(['message'=>'Successfully for UpdateData']);
     }
 
-    public function getWEbyAlumin($id)
+    public function getWorkByAlumin($id)
     {
-        return workExperience::where('alumni_id', '=', $id)->with('Company')->orderBy('id','desc')->get();
+        return workExperience::where('user_id', '=', $id)->with('Company')->orderBy('id','desc')->get();
     }
     // ========= Delete workExperience data =========================
     public function destroy($id)
