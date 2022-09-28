@@ -64,7 +64,7 @@ export default {
                             showConfirmButton: false,
                             timer: 1200,
                         });
-                        this.getUserimage();
+                        this.getData();
                     }else {
                         Swal.fire({
                             position: 'center',
@@ -93,7 +93,7 @@ export default {
                             showConfirmButton: false,
                             timer: 1200,
                         });
-                        this.getUserimage();
+                        this.getData();
                     }else {
                         Swal.fire({
                             position: 'center',
@@ -106,16 +106,20 @@ export default {
                 })
             }
         },
-        getUserimage(){
-            axios.get('users').then((response)=>{
-                this.profileurl = response.data[0].profile;
-                this.coverurl = response.data[0].cover;
+        async getData(){
+            await axios.get('/account/getData').then(response=>{
+                this.profileurl = response.data.data.profile;
+                this.coverurl = response.data.data.cover;
 
+                console.log('admin created!!!')
+                console.log(response.data.data)
+            }).catch(error=>{
+                this.$store.dispatch('logout')
             })
-        }
+        },
     },
     mounted(){
-        this.getUserimage();
+        this.getData();
     }
 }
 </script>

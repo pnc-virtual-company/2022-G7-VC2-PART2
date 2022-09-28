@@ -133,7 +133,6 @@ export default {
   width: 65%;
 }
   input[type="text"] {
-  border: none;
   outline: none;
   width: 90%;
   background: transparent;

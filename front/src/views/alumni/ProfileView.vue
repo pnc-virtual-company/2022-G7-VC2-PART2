@@ -52,14 +52,7 @@ export default {
         this.major = resp.data.major;
         this.isFetch = true;
         console.log(resp.data);
-      });
-    },
-    async getUser() {
-      await axios.get('/account/getData').then(response=>{
-        this.user = response.data.data;
-        this.isFetch = true;
-        console.log(response.data.data);
-      })
+      }); 
     },
     //  get skill with specific alumni
     async getSkillInfor() {
