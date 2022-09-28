@@ -47,12 +47,6 @@ export default {
         this.isFetch = true;
       });
     },
-
-    async getSchoolBg() {
-      await axios.get("school/alumni/1").then((resp) => {
-        this.schoolBgData = resp.data;
-      });
-    },
     //  get skill with specific alumni
     async getSkillInfor() {
       await axios.get("/skills/alumni/1").then((res) => {
@@ -67,7 +61,6 @@ export default {
 
   mounted() {
     this.getAlumin();
-    this.getSchoolBg();
     this.getSkillInfor();
   },
 };
