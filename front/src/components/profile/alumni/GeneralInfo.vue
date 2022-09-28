@@ -1,7 +1,7 @@
 <template>
     <div class="block -mt-4 text-neutral-700 font-poppins" ref="table">
         <div class="flex justify-between">
-            <h1 class="text-2xl font-extrabold">{{alumniData.firstName}} {{alumniData.lastName}}</h1>
+            <h1 class="text-2xl font-extrabold">{{alumniData.user.firstName}} {{alumniData.user.lastName}}</h1>
             <div >
                 <span  class="bg-white w-8 h-8 rounded-full flex justify-center cursor-pointer shadow-lg text-primary ">
                     <edit-icon @click="showForm = !showForm"></edit-icon>
@@ -10,7 +10,7 @@
         </div>
         <div class="flex mt-4">
             <phone-icon ></phone-icon>
-            <h1 class="-mt-1 ml-2 text-xl font-bold">{{phoneNumber}}</h1>
+            <h1 class="-mt-1 ml-2 text-xl font-bold">{{alumniData.user.phone}}</h1>
             <div class="tooltip1">
                 <copy-icon class="ml-3 w-5 -mt-1 cursor-pointer" @click="copy"></copy-icon>
                 <span class="tooltiptext">
@@ -33,7 +33,7 @@
                 <span class="ml-3">Gender</span>
                 <background-widget >
                     <template #value>
-                        <span>{{alumniData.gender}}</span>
+                        <span>{{alumniData.user.gender}}</span>
                     </template>
                 </background-widget>
                 <div @click="alumniDetailInfo = !alumniDetailInfo"  class="ml-10 text-sky-500 underline cursor-pointer">
@@ -65,7 +65,7 @@ export default {
         return {
         alumniDetailInfo: false,
         showForm: false,
-        phoneNumber:this.alumniData.phone,
+        phoneNumber:this.alumniData.user.phone,
         }
     },
     methods: {

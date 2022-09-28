@@ -12,7 +12,7 @@
             <template #body>
                 <div class="flex mt-4">
                     <mail-icon class="w-6 h-6"></mail-icon>
-                    <span class=" ml-3">{{alumniData.email}}</span>
+                    <span class=" ml-3">{{alumniData.user.email}}</span>
                 </div>
             </template>
                 
