@@ -1,5 +1,5 @@
 <template>
-    <section class="w-10/12 m-auto" v-if="isFetch" v-cloak>
+    <section class="w-10/12 m-auto overflow-auto" v-if="isFetch" v-cloak>
         <profile-cover-img :userId="userId"/>
         <div class="flex justify-between">
         <div class="w-3/12 h-[100vh] mt-20 px-5">
