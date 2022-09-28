@@ -29,16 +29,11 @@
                             <logout-icon></logout-icon>
                             <span class="ml-1">Logout</span>
                         </div>
-                        <!-- <div class="flex mt-1 hover:bg-gray-200 cursor-pointer">
-                            <sitting-icon class="text-gray-500 "></sitting-icon>
-                            <span class="text-gray-500 ml-1">Sitting</span>
-                        </div> -->
                     </template>
                 </card-widget>
             </div>
         </div>
     </nav>
-
 </template>
 
 <script>

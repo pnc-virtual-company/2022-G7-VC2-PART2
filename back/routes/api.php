@@ -30,9 +30,12 @@ Route::post('/alumni',[AlumniController::class,'store']);
 // check email is real or not
 Route::post('/email/checker',[EmailCheckerController::class,'email_checker']);
 // send invite mail 
-Route::post('/account/login',[AuthenticationController::class,'alumniLogin']);
+Route::post('/account/login',[AuthenticationController::class,'login']);
 Route::get('/account/getData',[AuthenticationController::class,'getInfoByToken']);
+
 Route::post('/invite/ero',[AuthenticationController::class,'inviteEro']);
+Route::post('/invite/alumni',[AuthenticationController::class,'inviteAlumni']);
+
 Route::post('/register/ero',[AuthenticationController::class,'eroRegister']);
 Route::post('/register/validation',[AuthenticationController::class,'checkBeforeRegister']);
 Route::post('/register/info',[AuthenticationController::class,'storeVerify']);
@@ -45,6 +48,7 @@ Route::post('/register/info/check',[AuthenticationController::class,'checkVerify
 Route::group(['middleware'=>['auth:sanctum']], function(){
     //===========Api user routes ===============
     Route::get('/users',[UserController::class,'index']);
+    Route::get('/ero',[UserController::class,'getEro']);
     // Route::post('/users',[UserController::class,'store']);
     Route::get('/users/{id}',[UserController::class,'show']);
     Route::put('/users/{id}',[UserController::class,'update']);

@@ -6,6 +6,7 @@ import './axios-http';
 import VueCookies from 'vue-cookies'
 import { store } from './stores/userInfo';
 import middleware from "vue-router-middleware-system"
+import ClickOutside from './helper/click-outside'
 
 import BaseNavigationBar from './components/nav/BaseNavigationBar.vue'
 import UserNavigationBar from './components/nav/UserNavigationBar.vue'
@@ -46,6 +47,9 @@ import FormWidget from './components/widgets/form/FormWidget.vue'
 import InputPasswordConfirm from './components/form/InputPasswordConfirm.vue'
 import UserIcon from './components/widgets/IconWidgets/UserIcon.vue'
 import KeyIcon from './components/widgets/IconWidgets/KeyIcon.vue'
+import TotalUserIcon from './components/widgets/IconWidgets/TotalUserIcon.vue'
+import ShowDetailCard from './components/widgets/Card/ShowDetailCard.vue'
+import AlumniIcon from './components/widgets/IconWidgets/AlumniIcon.vue'
 
 
 
@@ -53,6 +57,7 @@ import KeyIcon from './components/widgets/IconWidgets/KeyIcon.vue'
 const app = createApp(App)
 app.use(router)
 app.use(store)
+app.use(ClickOutside)
 app.use(VueCookies, { expire: '1d'})
 router.beforeEach(middleware({ store }))
 
@@ -96,5 +101,8 @@ app.component('base-panel',BasePanel)
 app.component('chevron-up-icon',ChevronIcon)
 app.component('user-icon',UserIcon)
 app.component('key-icon',KeyIcon)
+app.component('total-user-icon',TotalUserIcon)
+app.component('user-detail-card',ShowDetailCard)
+app.component('alumni-icon',AlumniIcon)
 
 app.mount('#app')

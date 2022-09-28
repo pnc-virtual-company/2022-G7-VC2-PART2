@@ -29,17 +29,14 @@
         </div>
     </div>
 </template>
-<script>
-    export default {
-        props: {
-            images:Object,
-        }
-    }
-</script>
+
 <script>
 import axios from "../../../axios-http";
 import Swal from "sweetalert2";
 export default {
+    props: {
+        images:Object,
+    },
     data(){
         return {
             profileurl:"",

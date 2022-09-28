@@ -16,10 +16,10 @@
         <div class="flex items-center">
             <div class="flex items-center mt-4">
                 <academic-icon></academic-icon>
-                <span class=" ml-2">{{alumniData.batch.generation}}</span>
+                <span class=" ml-2">{{batch.generation}}</span>
                 <background-widget>
                     <template #value>
-                        <span class="text-center">{{alumniData.major.name}}</span>
+                        <span class="text-center">{{major.name}}</span>
                     </template>
                 </background-widget>
             </div>

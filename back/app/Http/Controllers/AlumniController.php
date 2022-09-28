@@ -13,7 +13,8 @@ class AlumniController extends Controller
      */
     public function index()
     {
-        return Alumni::get();
+        // return Alumni::get();
+        return Alumni::with('User','Batch','Major')->get();
     }
 
     /**

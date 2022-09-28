@@ -136,4 +136,9 @@ class UserController extends Controller
         }
     }
 
+
+    public function getEro()
+    {
+        return User::where('role', '=', 'ero')->get();
+    }
 }
