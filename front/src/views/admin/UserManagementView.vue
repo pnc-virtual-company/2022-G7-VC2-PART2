@@ -1,7 +1,7 @@
 <template>
     <div class="w-full m-auto p-3 rounded-lg ">
         <h1 class="text-xl ml-6 font-bold text-primary py-4">User Management</h1>
-        <Card_Detail> </Card_Detail>
+        <!-- <Card_Detail> </Card_Detail> -->
         <User_List_Data> </User_List_Data>
     </div>
 </template>

@@ -7,13 +7,13 @@
             <div class="flex items-center p-2 text-white flex-wrap justify-center text-center">
                 <img src="../../assets/schoollogos/pnc.svg" alt="" class="w-[30%]">
                 <div class="ml-2 break-words max-w-[200px] text-left">
-                    <h1 class="font-bold text-xl">
+                    <h1 class="font-bold text-xl text-center">
                         <span>
                             {{firstName}} {{lastName}}
                         </span>
                         <span v-if="$store.state.role == 'admin'">Admin</span>
                     </h1>
-                    <span class="w-full text-[12px]">{{email}}</span>
+                    <span class="w-full text-[12px] text-center">{{email}}</span>
                 </div>
             </div>
 
