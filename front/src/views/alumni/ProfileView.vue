@@ -1,20 +1,17 @@
 <template>
-  <section class="w-10/12 m-auto" v-if="isFetch" v-cloak>
-    <profile-cover-img :images="user" />
-    <div class="w-3/12 h-[100vh] absolute mt-20 px-5">
-      <skill-content :listSkill="skills" @getSkill="getSkillInfor"/>
-    </div>
-    <div class="w-7/12 mr-[8.4%] absolute right-0 -mt-10">
-      <general-info :alumniData="user" :batch="batch" :major="major" />
-      <!-- ========= education background======================================== -->
-      <education-background @add-school="addSchool" @getSchoolBg="getSchoolBg" :schools="schoolBgData">
-      </education-background>
-
-      <!--==== form eidt schoool =================================================================-->
-      <work-experiences :experiences="workExp" @getWork="getAluminWorkExp">
-      </work-experiences>
-    </div>
-  </section>
+    <section class="w-10/12 m-auto" v-if="isFetch" v-cloak>
+        <profile-cover-img />
+        <div class="w-3/12 h-[100vh] absolute mt-20 px-5">
+            <skill-content :listSkill="skills"  @getSkill="getSkillInfor"/>
+        </div>
+        <div class="w-7/12 mr-[8.4%] absolute right-0 -mt-10">
+            <general-info :alumniData="alumniData"/>
+            <education-background>
+            </education-background>
+            <work-experiences>
+            </work-experiences>
+        </div>
+    </section>
 </template>
 <script>
 import axios from '../../axios-http';
@@ -43,27 +40,8 @@ export default {
       user_id: this.$store.state.user_id
     };
   },
-  computed: {
-       schoolEdit() {
-      return this.schools.filter((school) => school.id == this.schoolId);
-    },
+ 
 
-    schoolFilter() {
-      let limit = 2;
-      let schoolData = [];
-      if (this.isLimited) {
-        schoolData = this.schoolBgData;
-      } else {
-        for (let i = 0; i < this.schoolBgData.length; i++) {
-          if (limit > 0) {
-            limit -= 1;
-            schoolData.push(this.schoolBgData[i]);
-          }
-        }
-      }
-      return schoolData;
-    },
-  },
   methods: {
     async getAlumin() {
       await axios.get("alumni/"+this.user_id).then((resp) => {
@@ -74,28 +52,6 @@ export default {
         console.log(resp.data);
       }).catch(err => {console.log(err);})
     },
-    async getUser() {
-      await axios.get('/account/getData').then(response=>{
-        this.user = response.data.data;
-        this.isFetch = true;
-      })
-    },
-    async getAluminWorkExp() {
-      await axios.get("experiences/alumni/" + this.user_id).then((resp) => {
-        this.workExp = resp.data;
-        this.isFetch = true;
-      });
-    },
-    async getSchoolBg() {
-      await axios.get('school/alumni/' + this.user_id).then((resp) => {
-        this.schoolBgData = resp.data;
-      });
-    },
-    closeFormschoolBg() {
-      this.showSchoolEdit = !this.showSchoolEdit;
-      this.getSchoolBg();
-      console.log("hh");
-    },
     //  get skill with specific alumni
     async getSkillInfor() {
       await axios.get("/skills/alumni/" + this.user_id).then((res) => {
@@ -103,13 +59,15 @@ export default {
         console.log(this.skills);
       });
     },
+        closeFormschoolBg() {
+          this.showSchoolEdit = !this.showSchoolEdit;
+          this.getSchoolBg();
+        },
   },
 
   mounted() {
     this.getAlumin();
-    this.getAluminWorkExp();
-    this.getSchoolBg();
-    // this.getSkillInfor();
+    this.getSkillInfor();
   },
 };
 </script>

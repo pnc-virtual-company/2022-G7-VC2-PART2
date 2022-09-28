@@ -20,7 +20,7 @@
               </template>
               <template #title> Work Experience </template>
               <template #action_icon>
-                <add-icon class="text-primary" @click="showForm = !showForm" />
+                <add-icon class="text-primary" @click="isShowForm = !isShowForm" />
               </template>
             </header-card>
           </template>
@@ -30,17 +30,18 @@
                 v-for="(work, index) in experiencesFilter"
                 :key="index"
                 :work="work"
-                @getWork="getWork"
+                @refresh-data="load"
+              
               />
             </div>
           </template>
         </card-widget>
     </div>
-  <add-work-form v-if="showForm" @getWork="getWork">
+  <add-work-form v-if="isShowForm"  @refresh-data="formAction">
     <template #hidden-form>
       <svg
         xmlns="http://www.w3.org/2000/svg"
-        @click="showForm = !showForm"
+        @click="isShowForm = !isShowForm"
         fill="none"
         viewBox="0 0 24 24"
         stroke-Width="{1.5}"
@@ -58,19 +59,20 @@
   </add-work-form>
 </template>
 <script>
+import Swal from "sweetalert2";
+import axios from '../../../axios-http';
 import AddWorkExperienceVue from "../../../components/profile/alumni/AddWorkExperience.vue";
 import CompanyCard from "./CompanyCard.vue";
 export default {
-  props: ["experiences"],
-  emits: ["getWork"],
   components: {
     "add-work-form": AddWorkExperienceVue,
     "company-card": CompanyCard,
   },
   data() {
     return {
-      showForm: false,
+      isShowForm: false,
       isLimited: false,
+      workExp: [],
     };
   },
   computed: {
@@ -78,12 +80,12 @@ export default {
       let limit = 2;
       let workExperiences = [];
       if (this.isLimited) {
-        workExperiences = this.experiences;
+        workExperiences = this.workExp;
       } else {
-        for (let i = 0; i < this.experiences.length; i++) {
+        for (let i = 0; i < this.workExp.length; i++) {
           if (limit > 0) {
             limit -= 1;
-            workExperiences.push(this.experiences[i]);
+            workExperiences.push(this.workExp[i]);
           }
         }
       }
@@ -91,11 +93,22 @@ export default {
     },
   },
   methods: {
-    getWork() {
-      this.showForm = false;
-      this.$emit("getWork");
+       async getAluminWorkExp() {
+      await axios.get("experiences/alumni/1").then((resp) => {
+        this.workExp = resp.data;
+      })
     },
+    formAction(){
+      this.isShowForm =!this.isShowForm;
+      this.getAluminWorkExp();
+    },
+    load() {
+      this.getAluminWorkExp();
+    }
   },
+  mounted() {
+    this.getAluminWorkExp();
+  }
 };
 </script>
 <style>

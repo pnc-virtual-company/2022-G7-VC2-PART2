@@ -19,7 +19,7 @@
           </template>
           <template #title> Education Backgound </template>
           <template #action_icon>
-            <add-icon class="text-primary" @click="openAddedu" />
+            <add-icon class="text-primary" @click="isShowForm=!isShowForm" />
           </template>
         </header-card>
       </template>
@@ -28,6 +28,8 @@
            <school-card
             v-for="(school, index) in schoolFilter"
             :key="index"
+            @removeSchool="removeSchool"
+            @reload-data="reload"
             :school="school"
           />
         </div>
@@ -35,24 +37,26 @@
     </card-widget>
 
     <!-- add education background form -->
-    <add-educ @add-school="addSc" v-if="hiddeaddedu" />
+    <add-educ  v-if="isShowForm" @close-form="formAction" />
+
+ 
+
 </template>
 <script>
+import Swal from "sweetalert2";
+import axios from '../../../axios-http';
 import SchoolCard from '../components/SchoolCard.vue'    ;
-import AddeducationbackgroundForm from "./AddedubgForm.vue";
+import AddeducationbackgroundForm from "../../../components/profile/alumni/AddedubgForm.vue";
 export default {
   components: {
     "add-educ": AddeducationbackgroundForm,
      'school-card': SchoolCard,
-  
   },
-  props:['schools'],
   data() {
     return {
-      hiddeaddedu: false,
       isLimited:false,
-      isShow:false,
-      schoolId:null
+      isShowForm:false,
+      schoolData:[]
   
     };
   },
@@ -61,12 +65,12 @@ export default {
       let limit = 2;
       let schoolData = [];
       if (this.isLimited) {
-        schoolData = this.schools;
+        schoolData = this.schoolData;
       } else {
-        for (let i = 0; i < this.schools.length; i++) {
+        for (let i = 0; i < this.schoolData.length; i++) {
           if (limit > 0) {
             limit -= 1;
-            schoolData.push(this.schools[i]);
+            schoolData.push(this.schoolData[i]);
           }
         }
       }
@@ -74,15 +78,44 @@ export default {
     },
   },
   methods: {
-    addSc() {
-      this.hiddeaddedu = !this.hiddeaddedu;
-      this.$emit('getSchoolBg')
+      async getSchoolBg() {
+      await axios.get("school/alumni/1").then((resp) => {
+        this.schoolData = resp.data;
+      });
     },
-    openAddedu() {
-      this.hiddeaddedu = !this.hiddeaddedu;
-    },
+       removeSchool(schoolId){ 
+            Swal.fire({
+            title: 'Are you sure?',
+            text: "Delete Education background can not be undo!",
+            icon: 'warning',
+            showCancelButton: true,
+            width: 400,
+            confirmButtonColor: '#d33',
+            cancelButtonColor: '#3085d6',
+            confirmButtonText: 'Delete'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    axios.delete('school/'+schoolId).then((resp) => {
+                      this.reload();
 
+                    }),
+                    Swal.fire({
+                        title:'School deleted!'
+                    })
+                }
+            })
+        },
+        formAction(){
+          this.isShowForm=!this.isShowForm;
+          this.reload();
+        },
+        reload(){
+          this.getSchoolBg();
+        }
   },
+  mounted() {
+    this.getSchoolBg();
+  }
   
 };
 </script>

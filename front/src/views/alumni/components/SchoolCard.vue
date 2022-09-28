@@ -23,7 +23,7 @@
                         <span class="ml-1">Edit</span>
                     </div>
                     <div class="flex items-center hover:text-secondary text-slate-400 text-sm">
-                        <cancel-icon></cancel-icon>
+                        <cancel-icon @click="$emit('removeSchool',school.id)" ></cancel-icon>
                         <span class="ml-1">Remove</span> 
                     </div>
                 </div>
@@ -31,7 +31,7 @@
         </template>
     </base-card>
  <!-- form edit -->
-    <edit-school-form :school="school" v-if="showEdit" @closeFormschoolBg="closeFormschoolForm">
+    <edit-school-form v-if="showEdit" :school="school"  @close-form="closeFormschoolForm">
         <template #hidden-form>
             <cancel-icon @click="showEdit =!showEdit"/>
         </template>
@@ -39,7 +39,7 @@
 
 </template>
 <script>   
-    import FormEditSchoolBg from '../../../components/profile/alumni/FromEditSchoolBg.vue'
+    import FormEditSchoolBg from '../../../components/profile/alumni/FormEditSchoolBg.vue'
     export default {
         props: {
             school:Object
@@ -61,11 +61,14 @@
             },
             closeFormschoolForm(){
                 this.showEdit = !this.showEdit;
-                console.log('close-form')
+                this.$emit('reload-data');
             },
-        },
-        mounted(){
-
+        editSchool(){
+            this.showedit = !this.showedit;
+            this.$emit('edit-school');
+        }
         }
     }
+
+
 </script>

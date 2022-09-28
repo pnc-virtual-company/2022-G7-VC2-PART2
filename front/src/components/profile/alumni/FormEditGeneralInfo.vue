@@ -266,11 +266,11 @@
                     gender:this.gender,
                     phone:this.phone,
                 }
-                axios.put('http://127.0.0.1:8000/api/users/'+this.userId,userdata).then((response) =>{
+                axios.put('users/'+this.userId,userdata).then((response) =>{
                     return (response.data);
                 })
                
-                axios.put('http://127.0.0.1:8000/api/batches/'+this.batchid,{ generation:this.generation}).then((response) =>{
+                axios.put('batches/'+this.batchid,{ generation:this.generation}).then((response) =>{
                     return (response.data);
                 })
                 this.showModal = !this.showModal;

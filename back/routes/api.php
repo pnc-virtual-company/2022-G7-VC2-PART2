@@ -60,7 +60,7 @@ Route::put('/users/updateimage/{id}',[UserController::class,"updateUserimage"]);
     Route::get('/experiences/{id}',[WorkExperienceController::class,'show']);
     Route::put('/experiences/{id}',[WorkExperienceController::class,'update']);
     Route::delete('/experiences/{id}',[WorkExperienceController::class,'destroy']);
-Route::get('/experiences/alumni/{id}',[WorkExperienceController::class,'getWEbyAlumin']);
+Route::get('/experiences/alumni/{id}',[WorkExperienceController::class,'getWorkByAlumin']);
     // ===============api for company ============
     Route::get('/companies',[CompanyController::class,'index']);
     Route::post('/companies',[CompanyController::class,'store']);
@@ -102,4 +102,3 @@ Route::get('/experiences/alumni/{id}',[WorkExperienceController::class,'getWEbyA
 
 Route::get('/batches',[BatchController::class,'index']);
 Route::get('/majors',[MajorController::class,'index']);
-
