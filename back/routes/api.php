@@ -66,7 +66,7 @@ Route::get('/school',[SchoolController::class,'index']);
 Route::get('/school/{id}',[SchoolController::class,'show']);
 Route::put('/school/{id}',[SchoolController::class,'update']);
 Route::delete('/school/{id}',[SchoolController::class,'destroy']);
-
+Route::get('/school/alumni/{id}',[SchoolController::class,'getByAlumniId']);
 // ================= api for skill =============
 Route::get('/skills',[SkillController::class,'index']);
 Route::post('/skills',[SkillController::class,'store']);
