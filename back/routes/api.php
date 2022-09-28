@@ -46,6 +46,7 @@ Route::post('/register/info/check',[AuthenticationController::class,'checkVerify
 Route::group(['middleware'=>['auth:sanctum']], function(){
     //===========Api user routes ===============
     Route::get('/users',[UserController::class,'index']);
+    Route::get('/ero',[UserController::class,'getEro']);
     // Route::post('/users',[UserController::class,'store']);
     Route::get('/users/{id}',[UserController::class,'show']);
     Route::put('/users/{id}',[UserController::class,'update']);

@@ -22,11 +22,6 @@
                 <span class="ml-2">User Management</span>
             </router-link>
 
-            <router-link class="flex items-center hover:text-white transition w-full p-2 cursor-pointer mt-2" to="/invite/user">
-                <single-user />
-                <span class="ml-2">Add User</span>
-            </router-link>
-
             <div class="flex items-center hover:text-white hover:fill-white p-2 cursor-pointer mt-2 my-auto absolute bottom-0 transition" @click="logout">
                 <logout-icon />
                 <span class="ml-2">Logout</span>

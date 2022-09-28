@@ -1,7 +1,6 @@
 import { createWebHistory, createRouter } from "vue-router";
 import ProfileView from '../views/alumni/ProfileView.vue'
 import LoginView from '../views/login/LoginView.vue'
-import AddUserView from '../views/admin/AddUserView.vue'
 import EroRegisterView from '../views/register/EroRegisterView.vue'
 import VueCookies from 'vue-cookies'
 import decryptData from "../helper/decrypt";
@@ -13,6 +12,8 @@ import alumni from "../middleware/alumni";
 import adminAndEro from "../middleware/adminAndEro"
 import AlumniRegister from '../views/register/AlumniRegister.vue'
 import WaitForAccept from '../views/alumni/WaitForAccept.vue'
+import UserManagementView from '../views/admin/UserManagementView.vue'
+
 
 
 const registerPath = "/ero/register/" + store.state.email;
@@ -21,19 +22,18 @@ const routes = [
     path: "/",
     name: "profile",
     component: () => {
-      if(store.state.permission == 'false'){
-        return WaitForAccept
-      }else{
-        return ProfileView
+      if(store.state.role == 'alumni'){
+        if(store.state.permission == 'false'){
+          return WaitForAccept
+        }else{
+          return ProfileView
+        }
+      }
+      else if(store.state.role == 'admin'){
+          return UserManagementView
       }
     }
     // component: ProfileView,
-  },
-  {
-    path: "/invite/user",
-    name: "inviteUser",
-    component: AddUserView,
-    meta: { middleware: [adminAndEro] },
   },
   {
     path: registerPath,
@@ -69,8 +69,7 @@ const routes = [
         return '/'
       }
     }
-  },
-  
+  }
 ];
 
 const router = createRouter({

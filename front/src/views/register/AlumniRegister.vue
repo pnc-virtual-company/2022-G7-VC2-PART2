@@ -17,10 +17,10 @@
         <template v-else-if="secondStep" #body>
             <div class="flex flex-wrap justify-between">
                 <div class="w-full">
-                    <input-field :data="verify" :validData="validPhone" v-model="verifyCodeValue"  @keyup.enter="checkValidOTP()" />
+                    <input-field :data="verify" :validData="validVerifyCode" v-model="verifyCodeValue"  @keyup.enter="checkValidOTP()" />
                     <small v-if="!validPhone" class="text-red-400 flex items-center mt-1">
                         <info-icon class="w-[1rem]" />
-                        Please input your phone number
+                        Please input your verify number
                     </small>
                 </div>
             </div>
@@ -232,6 +232,12 @@
             validPhone(){
                 if(this.isNext){
                     return this.phoneValue.trim().length > 0;
+                }
+                return true
+            },
+            validVerifyCode(){
+                if(this.isNext){
+                    return this.verifyCodeValue.trim().length > 0;
                 }
                 return true
             },

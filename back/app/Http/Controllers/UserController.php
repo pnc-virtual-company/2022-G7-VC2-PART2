@@ -83,4 +83,9 @@ class UserController extends Controller
         User::destroy($id);
         return response()->json(["message" => 'Delete user successfully']);
     }
+
+    public function getEro()
+    {
+        return User::where('role', '=', 'ero')->get();
+    }
 }

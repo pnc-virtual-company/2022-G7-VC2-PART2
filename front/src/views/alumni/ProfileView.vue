@@ -17,24 +17,18 @@
   </section>
 </template>
 <script>
-import axios from "../../axios-http";
-import WorkExperienceCard from "../alumni/components/WorkExperienceCard.vue";
-
-import EducationBackgroundCard from "../alumni/components/EducationBackgroundCard.vue";
-import SchoolCard from "../alumni/components/SchoolCard.vue";
+import axios from '../../axios-http';
+import WorkExperienceCard from '../alumni/components/WorkExperienceCard.vue'
+import EducationBackgroundCard from '../alumni/components/EducationBackgroundCard.vue'
 import GeneralInfoVue from "../../components/profile/alumni/GeneralInfo.vue";
 import CoverAndProfileImgVue from "../../components/profile/alumni/CoverAndProfileImg.vue";
-import FormEditSchoolBg from "../../components/profile/alumni/FromEditSchoolBg.vue";
 export default {
   props: ["listSkill"],
   components: {
     "work-experiences": WorkExperienceCard,
- 
     "education-background": EducationBackgroundCard,
-    "school-card": SchoolCard,
     "general-info": GeneralInfoVue,
     "profile-cover-img": CoverAndProfileImgVue,
-    "edit-school-form": FormEditSchoolBg,
   },
   data() {
     return {
