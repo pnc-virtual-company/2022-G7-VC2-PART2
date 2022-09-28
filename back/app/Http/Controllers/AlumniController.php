@@ -46,11 +46,6 @@ class AlumniController extends Controller
         return Alumni::with('User','Batch','Major')->where('user_id','=', $id)->first();
 
     }
-
-
-
-
-
     /**
      * Update the specified resource in storage.
      *

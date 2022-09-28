@@ -5,7 +5,7 @@
                 <total-user-icon />
             </template>
             <template #amount>
-                1502
+                {{amountOfUser}}
             </template>
             <template #decription>
                 Total
@@ -16,7 +16,7 @@
                 <ero-icon />
             </template>
             <template #amount>
-                1
+                {{amountOfEro}}
             </template>
             <template #decription>
                 ERO
@@ -27,7 +27,7 @@
                 <alumni-icon />
             </template>
             <template #amount>
-                1500
+                {{amountOfUser + amountOfEro}}
             </template>
             <template #decription>
                 Alumni
@@ -37,8 +37,32 @@
 </template>
 
 <script>
+import axios from '../../../axios-http'
 export default {
-
+    data(){
+        return {
+            user: []
+        }
+    },
+    methods: {
+        getUser(){
+            axios.get('users').then(response=>{
+                this.user = response.data
+                console.log(response.data);
+            })
+        }
+    },
+    computed: {
+        amountOfUser(){
+            return this.user.filter(data=>(data.role == 'alumni')).length
+        },
+        amountOfEro(){
+            return this.user.filter(data=>(data.role == 'ero')).length
+        }
+    },
+    mounted(){
+        this.getUser();
+    }
 }
 </script>
 
