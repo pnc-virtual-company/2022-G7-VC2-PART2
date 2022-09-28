@@ -105,7 +105,7 @@ export default {
                 formdata.append('end_date',this.end_date);
                 formdata.append('school_logo',this.school_profile);
                 formdata.append('degree',this.degree);
-                formdata.append('alumni_id',4);
+                formdata.append('alumni_id',1);
                 if (this.current==true){
                     formdata.append('current',1);
                 }else {
@@ -131,7 +131,7 @@ export default {
                     timer: 1500,
                 })
             }
-            this.$emit('add-school')
+            this.$emit('close-form');
         },
         onchangeScprofile(event){
             let fileExtension = event.target.files[0].name.split(".").pop();
@@ -141,9 +141,8 @@ export default {
             }
         },
         cancleAdd(){
-            this.$emit('add-school');
+            this.$emit('close-form');
         },
-        
     },
 }
 </script>

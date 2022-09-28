@@ -6,7 +6,7 @@
         </div>
         <div class="w-7/12 mr-[8.4%] absolute right-0 -mt-10">
             <general-info :alumniData="alumniData"/>
-            <education-background @add-school="addSchool" :schools="schoolBgData">
+            <education-background>
             </education-background>
             <work-experiences :experiences="workExp">
             </work-experiences>
@@ -14,7 +14,7 @@
     </section>
 </template>
 <script>
-import axios from '../../axios-http'
+import axios from '../../axios-http';
 import WorkExperienceCard from '../alumni/components/WorkExperienceCard.vue'
 import CompanyCard from '../alumni/components/CompanyCard.vue'
 import EducationBackgroundCard from '../alumni/components/EducationBackgroundCard.vue'
@@ -42,40 +42,20 @@ export default {
     },
 
   methods: {
-     removeSchool(schoolid){ 
-            Swal.fire({
-            title: 'Are you sure?',
-            text: "Delete Education background can not be undo!",
-            icon: 'warning',
-            showCancelButton: true,
-            confirmButtonColor: '#d33',
-            cancelButtonColor: '#3085d6',
-            confirmButtonText: 'delete'
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    axios.delete('school/'+schoolid);
-                    this.getSchoolBg();
-                    Swal.fire({
-                        title:'School deleted!'
-                    })
-                    this.getSchoolBg();
-                }
-            })
-        },
     async getAlumin() {
-      await axios.get("alumni/4").then((resp) => {
+      await axios.get("alumni/1").then((resp) => {
         this.alumniData = resp.data;
         this.isFetch = true;
       });
     },
     async getAluminWorkExp() {
-      await axios.get("experiences/alumni/4").then((resp) => {
+      await axios.get("experiences/alumni/1").then((resp) => {
         this.workExp = resp.data;
         this.isFetch = true;
       })
     },
     async getSchoolBg() {
-      await axios.get("school/alumni/4").then((resp) => {
+      await axios.get("school/alumni/1").then((resp) => {
         this.schoolBgData = resp.data;
       });
     },
@@ -83,12 +63,9 @@ export default {
       this.showSchoolEdit = !this.showSchoolEdit;
       this.getSchoolBg();
     },
-    addSchool() {
-      this.getSchoolBg();
-    },
     //  get skill with specific alumni
     async getSkillInfor() {
-      await axios.get("/skills/alumni/4").then((res) => {
+      await axios.get("/skills/alumni/1").then((res) => {
         this.skills = res.data;
       });
     },

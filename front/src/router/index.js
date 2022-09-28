@@ -2,7 +2,7 @@ import { createWebHistory, createRouter } from "vue-router";
 import ProfileView from '../views/alumni/ProfileView.vue'
 const routes = [
   {
-    path: "/profile",
+    path: "/",
     name: "profile",
     component: ProfileView,
   },

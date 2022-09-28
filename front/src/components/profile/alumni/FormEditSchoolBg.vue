@@ -123,7 +123,7 @@ export default {
                 formdata.append('school_logo',this.school_profile);
                 formdata.append('current',this.current);
                 console.log(this.current)
-                axios.post("http://127.0.0.1:8000/api/school/"+this.schoolId,formdata).then((response)=>{
+                axios.post("/school/"+this.schoolId,formdata).then((response)=>{
                     if (response.status==200){
                         Swal.fire({
                             position: 'center',
@@ -133,7 +133,7 @@ export default {
                             timer: 1500,
                         });
                     }
-                    this.$emit('edit-school');
+                    this.$emit('close-form');
                 })
            }else {
                 Swal.fire({

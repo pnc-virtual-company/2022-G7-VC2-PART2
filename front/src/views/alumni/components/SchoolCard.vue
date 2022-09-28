@@ -23,7 +23,7 @@
                         <span class="ml-1">Edit</span>
                     </div>
                     <div class="flex items-center hover:text-secondary text-slate-400 text-sm">
-                        <cancel-icon @click="removeSc(school.id)" ></cancel-icon>
+                        <cancel-icon @click="$emit('removeSchool',school.id)" ></cancel-icon>
                         <span class="ml-1">Remove</span> 
                     </div>
                 </div>
@@ -31,7 +31,7 @@
         </template>
     </base-card>
  <!-- form edit -->
-    <edit-school-form :school="school" v-if="showEdit" @closeFormschoolBg="closeFormschoolForm">
+    <edit-school-form v-if="showEdit" :school="school"  @close-form="closeFormschoolForm">
         <template #hidden-form>
             <cancel-icon @click="showEdit =!showEdit"/>
         </template>
@@ -61,19 +61,12 @@
             },
             closeFormschoolForm(){
                 this.showEdit = !this.showEdit;
-                console.log('close-form')
+                this.$emit('reload-data');
             },
-            removeSc(schoolid){
-            this.$emit('remove-school',schoolid);
-        },
         editSchool(){
             this.showedit = !this.showedit;
             this.$emit('edit-school');
         }
-        },
-        mounted(){
-
-            this.getdata();
         }
     }
 
