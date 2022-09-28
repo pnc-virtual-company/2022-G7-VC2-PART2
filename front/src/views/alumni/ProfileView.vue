@@ -1,5 +1,5 @@
 <template>
-  <section class="w-10/12 m-auto" v-if="isFetch" v-cloak>
+  <section class="w-10/12 m-auto overflow-auto" v-if="isFetch" v-cloak>
     <profile-cover-img :images="user" />
     <div class="w-3/12 h-[100vh] absolute mt-20 px-5">
       <skill-content :listSkill="skills" @getSkill="getSkillInfor"/>
@@ -78,7 +78,6 @@ export default {
       await axios.get('/account/getData').then(response=>{
         this.user = response.data.data;
         this.isFetch = true;
-
         console.log(response.data.data);
       })
     },
@@ -114,7 +113,7 @@ export default {
     this.getAlumin();
     this.getAluminWorkExp();
     this.getSchoolBg();
-    // this.getSkillInfor();
+    console.log(this.$route.params.user_id)
   },
 };
 </script>

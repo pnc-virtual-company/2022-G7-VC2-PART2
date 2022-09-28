@@ -33,8 +33,6 @@ Route::post('/email/checker',[EmailCheckerController::class,'email_checker']);
 Route::post('/account/login',[AuthenticationController::class,'login']);
 Route::get('/account/getData',[AuthenticationController::class,'getInfoByToken']);
 
-Route::post('/invite/ero',[AuthenticationController::class,'inviteEro']);
-Route::post('/invite/alumni',[AuthenticationController::class,'inviteAlumni']);
 
 Route::post('/register/ero',[AuthenticationController::class,'eroRegister']);
 Route::post('/register/validation',[AuthenticationController::class,'checkBeforeRegister']);
@@ -44,6 +42,11 @@ Route::post('/register/info/check',[AuthenticationController::class,'checkVerify
 
 
 Route::group(['middleware'=>['auth:sanctum']], function(){
+    // Invite Route
+    Route::post('/invite/ero',[AuthenticationController::class,'inviteEro']);
+    Route::post('/invite/alumni',[AuthenticationController::class,'inviteAlumni']);
+    // AcceptAlumni
+    Route::post('/alumni/accept',[AuthenticationController::class,'AcceptAlumni']);
     //===========Api user routes ===============
     Route::get('/users',[UserController::class,'index']);
     Route::get('/ero',[UserController::class,'getEro']);

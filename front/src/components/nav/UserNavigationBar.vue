@@ -3,10 +3,10 @@
         <header class="bg-primary">
             <base-nav :firstName="firstName" :lastName="lastName" @logout="logout" />
         </header>
-        <nav class="bg-blue-300 p-2 flex flex-col relative" v-if="$store.state.role == 'admin' || $store.state.role == 'ero'">
+        <nav class="bg-primary p-2 flex flex-col" v-if="$store.state.role == 'admin' || $store.state.role == 'ero'">
             <div class="flex items-center p-2 text-white flex-wrap justify-center text-center">
                 <img src="../../assets/schoollogos/pnc.svg" alt="" class="w-[30%]">
-                <div class="ml-2 break-words max-w-[200px]">
+                <div class="ml-2 break-words max-w-[200px] text-left">
                     <h1 class="font-bold text-xl">
                         <span>
                             {{firstName}} {{lastName}}
@@ -26,7 +26,6 @@
                 <logout-icon />
                 <span class="ml-2">Logout</span>
             </div>
-            
         </nav>
         <main class="overflow-auto bg-bgColorWhite">
             <slot name="main"></slot>
@@ -56,6 +55,8 @@ export default {
                 this.lastName = response.data.data.last_name
                 console.log('admin created!!!')
                 console.log(response.data.data)
+            }).catch(error=>{
+                this.$store.dispatch('logout')
             })
         }
     },

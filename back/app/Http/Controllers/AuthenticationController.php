@@ -56,7 +56,7 @@ class AuthenticationController extends Controller
     }
 
     public function inviteAlumni(Request $request){
-        (new SendMailController)->sendMailRegisterInfo($request);
+        (new SendMailController)->sendMailRegisterAlumni($request);
         $user = new User();
         $user->role = 'alumni';
         $user->email = $request->email;
@@ -136,5 +136,12 @@ class AuthenticationController extends Controller
         } else {
             return response()->json(["status_success" => true]);
         }
+    }
+
+    public function AcceptAlumni(Request $request)
+    {
+        $alumni = User::where('email', '=', $request->email)
+        ->update(['invited'=>true]);
+
     }
 }

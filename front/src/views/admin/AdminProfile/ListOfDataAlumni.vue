@@ -13,25 +13,32 @@
                 <span class="w-[60%]">
                     <select name="filter" id="1" class=" w-[90%] bg-white border-gray-400 border" v-model="major">
                         <option value="Major">Major</option>
-                        <option value="WEB">WEB</option>
-                        <option value="SNA">SNA</option>
+                        <option v-for="major in majorData" :key="major" :value="major.id">{{major.name}}</option>
                     </select>
                 </span>
                 <span class="w-[60%]">
                     <select name="filter" id="1" class="w-[90%] bg-white border-gray-400 border" v-model="batch">
-                        <option value="Batch">Batch</option>
-                        <option value="PNC2022"> PNC2022</option>
-                        <option value="PNC2023">PNC2023</option>
+                        <option value="Batch" selected>Batch</option>
+                        <option v-for="batch in batchData" :key="batch" :value="batch.id">{{batch.generation}}</option>
                     </select>
                 </span>
             </div>
         </div>
 
         <div class="w-[95%] m-auto shadow-md items-center rounded-sm pb-[10%]">
-            <div class="w-full m-auto text-gray-600 p-2 border-b">
+            <div v-if="this.$store.state.role == 'admin'" class="w-full m-auto text-gray-600 p-2 border-b">
                 <nav class="w-[60%] text-gray-600 flex justify-between align-center ml-3 text-[14px]">
                     <h3>Email</h3>
                     <h3 class="mr-[12%]">Batch</h3>
+                </nav>
+            </div>
+
+            <div v-else class="w-full m-auto text-gray-600 p-2 border-b">
+                <nav class="w-full text-gray-600 flex justify-between align-center ml-3 text-[14px] relative">
+                    <h3>Fullname</h3>
+                    <h3 class="absolute left-[20%]">Phone</h3>
+                    <h3 class="absolute left-[44%]">Batch</h3>
+                    <h3 class="absolute left-[65%]">Gender</h3>
                 </nav>
             </div>
             <card_item_alumni v-for="alumni in BatchFilter" :key="alumni" :alumniDatas="alumni.user" :batch="alumni.batch" :major="alumni.major" :id="alumni.id">
@@ -56,7 +63,9 @@ export default {
             searchValue:'',
             filterDataAlumni : [],
             sortDirection: 'unchanged',
-            orderBy:''
+            orderBy:'',
+            batchData: [],
+            majorData: [],
         }
     },
     methods:{
@@ -65,10 +74,22 @@ export default {
                 this.alumniData=res.data
             })
         },
+        getBatch(){
+            axios.get('batches').then(result=>{
+                this.batchData=result.data
+            })
+        },
+        getMajor(){
+            axios.get('majors').then(result=>{
+                this.majorData=result.data
+            })
+        },
        
     },
     mounted(){
         this.getAlumniData();
+        this.getBatch();
+        this.getMajor();
     },
     computed:{
         BatchFilter(){
@@ -79,7 +100,7 @@ export default {
                 this.filterDataAlumni = this.alumniData;
             }
             else if(this.major =="Major" && this.batch != ""){
-                this.filterDataAlumni = this.alumniData.filter(batch=>(batch.batch.generation == this.batch))
+                this.filterDataAlumni = this.alumniData.filter(batch=>(batch.batch.id == this.batch))
             }
             else if(this.batch =="Batch" && this.major != ""){
                 this.filterDataAlumni = this.alumniData.filter(major=>(major.major.name == this.major))

@@ -21,8 +21,9 @@
             await axios.get('/account/getData').then(response=>{
                 this.firstName = response.data.data.first_name
                 this.lastName = response.data.data.last_name
-                console.log('alumni created!!!')
-                console.log(response.data.data)
+            }).catch(error=>{
+              this.$store.dispatch('logout')
+              this.$router.go()
             })
         }
     },

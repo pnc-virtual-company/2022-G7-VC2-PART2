@@ -31,9 +31,10 @@ const routes = [
       }
       else if(store.state.role == 'admin'){
           return UserManagementView
+      }else{
+        return UserManagementView
       }
     }
-    // component: ProfileView,
   },
   {
     path: registerPath,
@@ -59,6 +60,12 @@ const routes = [
     path: '/account/login',
     name: 'login',
     component: LoginView,
+  },
+  {
+    path: '/profile/alumni/:user_id',
+    name: 'alumniProfile',
+    component: ProfileView,
+    props: true
   },
   { 
     path: '/:pathMatch(.*)*',

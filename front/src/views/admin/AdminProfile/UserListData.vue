@@ -10,10 +10,16 @@
                     <h1 class="ml-2 font-bold text-xl">List of users</h1>
                 </span>
                 <span class="flex text-white font-bold" @click="showEroForm=!showEroForm">
-                    <base-button class="px-3 flex items-center justify-center">
+                    <base-button v-if="this.$store.state.role == 'admin'" class="px-3 flex items-center justify-center">
                         <template #name>
                             <plus-icon />
                             Invite ERO
+                        </template>
+                    </base-button>
+                    <base-button v-else class="px-3 flex items-center justify-center">
+                        <template #name>
+                            <plus-icon />
+                            Invite Alumni
                         </template>
                     </base-button>
                 </span>
@@ -21,13 +27,16 @@
         </div>
         <div class=" mt-3 ml-5 flex ">
             <button class="mr-4" :class="{'text-primary font-bold':showAlunmi}" @click="showAlunmilist">Alumni</button>
-            <button :class="{'text-primary font-bold':showERO}" @click="showEROList" >ERO</button>
+            <button v-if="this.$store.state.role == 'admin'" :class="{'text-primary font-bold':showERO}" @click="showEROList" >ERO</button>
+            <button v-if="this.$store.state.role == 'ero'" :class="{'text-primary font-bold': showAlumniRequest}" @click="showAlumniRequestList" >Request</button>
         </div>
         <hr>
         <list_alumni v-if="showAlunmi">
         </list_alumni>
         <list_ERO v-if="showERO">
         </list_ERO>
+        <list_alumni_request v-if="showAlumniRequest">
+        </list_alumni_request>
     </div>
     <div v-if="showEroForm" class="z-50 top-0 flex justify-center items-center w-full h-full bg-[rgba(105,105,105,0.57)] absolute left-0">
         <ero-form v-click-outside="hideForm" class="m-10" @invite="getInvited" />
@@ -38,10 +47,12 @@
 <script>
 import ListOfDataAlumni from './ListOfDataAlumni.vue'
 import ListOfDataERO from './ListOfDataERO.vue'
+import ListOfDataAlumniRequest from './ListOfDataAlumniRequest.vue';
 import InviteFormVue from '../../../components/form/InviteForm.vue';
 export default {
     components:{
         'list_alumni':ListOfDataAlumni,
+        'list_alumni_request':ListOfDataAlumniRequest,
         'list_ERO':ListOfDataERO,
         'ero-form': InviteFormVue
     },
@@ -49,17 +60,25 @@ export default {
         return{
             showAlunmi:true,
             showERO:false,
-            showEroForm: false
+            showEroForm: false,
+            showAlumniRequest: false
         }
     },
     methods:{
         showAlunmilist(){
             this.showERO = false,
             this.showAlunmi=true
+            this.showAlumniRequest=false,
             this.color = 'text-red-500'
         },
         showEROList(){
             this.showERO=true,
+            this.showAlunmi=false
+            this.color='text-red-500'
+        },
+        showAlumniRequestList(){
+            this.showAlumniRequest=true,
+            this.showERO=false,
             this.showAlunmi=false
             this.color='text-red-500'
         },

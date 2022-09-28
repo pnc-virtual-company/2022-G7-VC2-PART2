@@ -1,7 +1,10 @@
 <template>
     <form-widget>
-        <template #header>
+        <template v-if="this.$store.state.role == 'admin'" #header>
             Add ERO Account
+        </template>
+        <template v-else #header>
+            Add Alumni Account
         </template>
         <template #body>
             <div v-if="!isNotRealEmail">
@@ -31,7 +34,7 @@
             return {
                 email: {
                     label: 'Email',
-                    placeholder: 'e.g. ero@gmail.com',
+                    placeholder: 'e.g. user@gmail.com',
                     type: "email"
                 },
                 emailValue: '',
@@ -41,18 +44,28 @@
         methods: {
             InviteAcount(){
                 console.log(this.emailValue);
-                let linkToRegister = new URL(location.href).origin + '/ero/register/?user='
-                let linkToWeb = new URL(location.href).origin
                 let data = {}
                 data.email = this.emailValue;
-                data.link = linkToRegister;
+                let linkToWeb = new URL(location.href).origin
                 data.linkWeb = linkToWeb;
-                console.log(data)
-                axios.post('/invite/ero', data).then(response => {
-                    this.$emit('invite', false)
-                }).catch(error=>{
-                    window.alert('Error: ')
-                })
+                if(this.$store.state.role == 'admin'){
+                    let linkToRegister = new URL(location.href).origin + '/ero/register/?user='
+                    data.link = linkToRegister;
+                    axios.post('/invite/ero', data).then(response => {
+                        this.$emit('invite', false)
+                    }).catch(error=>{
+                        window.alert('Email not found!')
+                    })
+                }else{
+                    let linkToRegister = new URL(location.href).origin + '/account/alumni/register'
+                    data.link = linkToRegister;
+                    axios.post('/invite/alumni', data).then(response => {
+                        this.$emit('invite', false)
+                    }).catch(error=>{
+                        window.alert('Email not found!')
+                    })
+
+                }
                 // axios.get( checkMailValidationURI + this.emailValue)
                 // .then(response=>{
                 //     console.log(response.data.is_smtp_valid.value)
