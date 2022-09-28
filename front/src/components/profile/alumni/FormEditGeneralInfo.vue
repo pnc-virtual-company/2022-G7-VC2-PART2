@@ -260,7 +260,7 @@ export default {
       this.generation = this.batch.generation;
     },
     getBatch() {
-      axios.get("http://127.0.0.1:8000/api/batches").then((result) => {
+      axios.get("batches").then((result) => {
         this.batchdata = result.data;
       });
     },
@@ -282,12 +282,12 @@ export default {
         this.gender != 0
       ) {
         axios
-          .put("http://127.0.0.1:8000/api/users/" + this.userId, userdata)
+          .put("users/" + this.userId, userdata)
           .then((response) => {
             return response.data;
           });
         axios
-          .put("http://127.0.0.1:8000/api/batches/" + this.batchid, {
+          .put("batches/" + this.batchid, {
             generation: this.generation,
           })
           .then((response) => {
