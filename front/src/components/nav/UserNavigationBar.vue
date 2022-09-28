@@ -50,7 +50,7 @@ export default {
             this.$router.go()
         },
         async getData(){
-            await axios.get('/account/getData').then(response=>{
+            await axios.get('account/getData').then(response=>{
                 this.firstName = response.data.data.first_name
                 this.email = response.data.data.email
                 this.lastName = response.data.data.last_name

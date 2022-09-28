@@ -104,7 +104,7 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
 .form {
   border: 1px solid rgb(167, 166, 166);
   border-radius: 2.5px;

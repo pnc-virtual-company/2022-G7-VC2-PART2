@@ -1,7 +1,7 @@
 <template>
-    <card-widget class="mt-4" v-if="schools.length <= 0">
+    <card-widget class="mt-4" v-if="schoolData.length <= 0">
         <template #body>
-            <div @click="openAddedu" class="border-dashed flex justify-center h-[20vh] items-center border-2 rounded-[2.5px] border-primary hover:bg-blue-100 cursor-pointer">
+            <div @click="isShowForm=!isShowForm" class="border-dashed flex justify-center h-[20vh] items-center border-2 rounded-[2.5px] border-primary hover:bg-blue-100 cursor-pointer">
                 <div class="text-center flex flex-col py-3">
                     <div class="">
                       <img src="../../../assets/default_img/education_bg.png" alt="" class="m-auto w-[60px]">
@@ -52,6 +52,7 @@ export default {
     "add-educ": AddeducationbackgroundForm,
      'school-card': SchoolCard,
   },
+  props:["alumniId"],
   data() {
     return {
       isLimited:false,
@@ -79,7 +80,7 @@ export default {
   },
   methods: {
       async getSchoolBg() {
-      await axios.get("school/alumni/1").then((resp) => {
+      await axios.get("school/alumni/"+this.alumniId).then((resp) => {
         this.schoolData = resp.data;
       });
     },

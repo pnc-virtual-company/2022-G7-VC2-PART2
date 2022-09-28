@@ -2,24 +2,24 @@
     <div class="m-auto rounded-[5px]">
         <div class="mt-4 relative font-poppins">
             <div class="bg-profile relative">
-                <img v-if="images.cover" :src="images.cover" alt="bg-profile">
+                <img v-if="coverurl" :src="coverurl" alt="bg-profile">
                 <div v-else class="w-full h-[250px] bg-gray-200 p-3 rounded-sm">
                     <label for="bg-profile" class="w-full h-full flex items-center justify-center cursor-pointer rounded-sm border-dashed border-2 border-primary">
-                        <div class="w-[200px]">
+                        <div class="w-[200px] ">
                             <img src="../../../assets/default_img/image.png" alt="" class="w-[60px] m-auto">
                             <h1 class="font-bold">Upload your image here</h1>
                         </div>
                     </label>
                 </div>
-                <label v-if="images.cover" for="bg-profile" class="rounded-full w-8 h-8 absolute items-center flex justify-center top-0 right-0 m-3 cursor-pointer shadow-lg bg-white">                     
+                <label v-if="coverurl" for="bg-profile" class="rounded-full w-8 h-8 absolute items-center flex justify-center top-0 right-0 m-3 cursor-pointer shadow-lg bg-white">                     
                     <camara-icon class="w-6 h-6 text-primary"/>
                 </label>
                 <input id="bg-profile" hidden type="file" accept="image/*" @change="changeCover" />
             </div>
             <div class="flex w-full relative" >
                 <div class="w-[16%] relative ml-16 -mt-20">
-                    <img  v-if="images.cover == null" class="rounded-full border-4 border-white ml-1" src="../../../assets/default_img/user.svg" alt="cover-img">
-                    <img v-else class="rounded-full border-4 border-white ml-1" :src="images.cover" alt="cover-img">
+                    <img  v-if="profileurl == null" class="rounded-full border-4 border-white ml-1" src="../../../assets/default_img/user.svg" alt="cover-img">
+                    <img v-else class="rounded-full border-4 border-white ml-1" :src="profileurl" alt="cover-img">
                     <label for="cover-img" class="rounded-full w-8 h-8 absolute items-center flex justify-center bottom-1 cursor-pointer shadow-lg bg-white right-0 mr-5">                     
                         <camara-icon class="w-6 h-6 text-primary"/>
                     </label>
@@ -36,11 +36,12 @@ import Swal from "sweetalert2";
 export default {
     props: {
         images:Object,
+        userId:String,
     },
     data(){
         return {
             profileurl:"",
-            coverurl:"",
+            coverurl:null,
             profileimg:"",
             coverimg:"",
             allowExtension:["jpg", "png", "jpeg", "gif", "webp","jfif", "svg"]
@@ -54,7 +55,7 @@ export default {
                 let formdata = new FormData();
                 formdata.append('_method','PUT');
                 formdata.append('profile',this.profileimg);
-                axios.post('users/updateimage/1',formdata).then((response)=>{
+                axios.post('users/updateimage/'+this.userId,formdata).then((response)=>{
                     if (response.status==200){
                         Swal.fire({
                             position: 'center',
@@ -83,7 +84,7 @@ export default {
                 let formdata = new FormData();
                 formdata.append('_method','PUT');
                 formdata.append('cover',this.coverimg);
-                axios.post('users/updateimage/1',formdata).then((response)=>{
+                axios.post('users/updateimage/'+this.userId,formdata).then((response)=>{
                     if (response.status==200){
                         Swal.fire({
                             position: 'center',

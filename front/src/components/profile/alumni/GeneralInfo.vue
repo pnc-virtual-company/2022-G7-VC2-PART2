@@ -1,5 +1,5 @@
 <template>
-    <div class="block -mt-4 text-neutral-700 font-poppins" ref="table">
+    <div class="block -mt-2 relative text-neutral-700 font-poppins" ref="table">
         <div class="flex justify-between">
             <h1 class="text-2xl font-extrabold">{{alumniData.first_name}} {{alumniData.last_name}}</h1>
             <div >
@@ -65,7 +65,7 @@ export default {
         return {
         alumniDetailInfo: false,
         showForm: false,
-        phoneNumber:this.alumniData.user.phone,
+        phoneNumber:this.alumniData.phone,
         }
     },
     methods: {

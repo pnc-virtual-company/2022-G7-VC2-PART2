@@ -100,7 +100,7 @@ export default {
         }
     },
     methods: {
-        addWorkExperience(){
+        addWorkExperience(){ 
             this.isChecked = !this.isChecked;
             if(this.start_date != "" && this.position != "" && this.company_name != "" && (this.current != "" || this.end_date !="")){
                 let company_info = new FormData();
