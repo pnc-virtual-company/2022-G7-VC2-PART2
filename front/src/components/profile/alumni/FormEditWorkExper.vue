@@ -132,7 +132,7 @@ export default {
             this.submit = true;
             if (this.company != 0 && this.position != 0 && this.start_year != 0 && this.end_year != 0){
             axios.put('/experiences/'+this.formid,experiences).then((result) => {
-                this.$emit('getWork');
+                this.$emit('close-form');
                 console.log('get work edit work form')
             })
             }

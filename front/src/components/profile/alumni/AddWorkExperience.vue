@@ -120,7 +120,7 @@ export default {
                         }
                         if(this.company_name != 0 && this.position != 0 && this.start_date != 0 && (this.end_date != 0 || this.current == true)){
                         axios.post('/experiences', position_info).then((response) => {
-                            this.$emit('getWork')
+                            this.$emit('refresh-data')
                         }
                         )
                     }

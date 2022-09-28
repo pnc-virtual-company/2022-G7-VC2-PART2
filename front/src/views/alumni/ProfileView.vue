@@ -8,7 +8,7 @@
             <general-info :alumniData="alumniData"/>
             <education-background>
             </education-background>
-            <work-experiences :experiences="workExp">
+            <work-experiences>
             </work-experiences>
         </div>
     </section>
@@ -34,7 +34,6 @@ export default {
     data(){
         return {
             alumniData: [],
-            workExp: [],
             schoolBgData:[],
             isFetch: false,      
             skills:[],  
@@ -48,20 +47,11 @@ export default {
         this.isFetch = true;
       });
     },
-    async getAluminWorkExp() {
-      await axios.get("experiences/alumni/1").then((resp) => {
-        this.workExp = resp.data;
-        this.isFetch = true;
-      })
-    },
+
     async getSchoolBg() {
       await axios.get("school/alumni/1").then((resp) => {
         this.schoolBgData = resp.data;
       });
-    },
-    closeFormschoolBg() {
-      this.showSchoolEdit = !this.showSchoolEdit;
-      this.getSchoolBg();
     },
     //  get skill with specific alumni
     async getSkillInfor() {
@@ -69,11 +59,14 @@ export default {
         this.skills = res.data;
       });
     },
+        closeFormschoolBg() {
+          this.showSchoolEdit = !this.showSchoolEdit;
+          this.getSchoolBg();
+        },
   },
 
   mounted() {
     this.getAlumin();
-    this.getAluminWorkExp();
     this.getSchoolBg();
     this.getSkillInfor();
   },
