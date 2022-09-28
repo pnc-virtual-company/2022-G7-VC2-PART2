@@ -110,7 +110,6 @@ export default {
             await axios.get('/account/getData').then(response=>{
                 this.profileurl = response.data.data.profile;
                 this.coverurl = response.data.data.cover;
-
                 console.log('admin created!!!')
                 console.log(response.data.data)
             }).catch(error=>{
