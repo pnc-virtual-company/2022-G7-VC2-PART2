@@ -10,6 +10,7 @@ import { store } from '../stores/userInfo'
 import admin from "../middleware/admin";
 import ero from "../middleware/ero";
 import alumni from "../middleware/alumni";
+import adminAndEro from "../middleware/adminAndEro"
 import AlumniRegister from '../views/register/AlumniRegister.vue'
 import WaitForAccept from '../views/alumni/WaitForAccept.vue'
 
@@ -32,7 +33,7 @@ const routes = [
     path: "/invite/user",
     name: "inviteUser",
     component: AddUserView,
-    meta: { middleware: [admin] },
+    meta: { middleware: [adminAndEro] },
   },
   {
     path: registerPath,

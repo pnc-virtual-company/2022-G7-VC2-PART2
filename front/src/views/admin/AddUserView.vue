@@ -12,6 +12,12 @@
                         ERO
                     </template>
                 </base-button>
+                <base-button class="w-2/12 flex items-center justify-center" @click="showEroForm=!showEroForm">
+                    <template #name>
+                        <plus-icon />
+                        Alumni
+                    </template>
+                </base-button>
             </div>
         </div>
     </section>

@@ -1,7 +1,10 @@
 <template>
     <form class="w-[50%] bg-white shadow-md rounded-sm py-4 m-auto z-20 mt-5 px-5" @submit.prevent="addAcount" v-cloak>
-        <div class="text-primary font-bold text-2xl text-center">
-            Add ERO Account
+        <div v-if="this.$store.state.role == 'admin'" class="text-primary font-bold text-2xl text-center">
+            Invite ERO
+        </div>
+        <div v-else class="text-primary font-bold text-2xl text-center">
+            Invite Alumni
         </div>
         <div>
             <div v-if="!isNotRealEmail">

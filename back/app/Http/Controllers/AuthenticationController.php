@@ -17,7 +17,7 @@ class AuthenticationController extends Controller
      * Alumni will be able to login by their email and password
      * @return token
      */
-    public function alumniLogin(Request $request){
+    public function login(Request $request){
         $user = User::where('email', $request->email)->first();
         if (!$user || !Hash::check($request->password,$user->password)) {
             if (!$user){
@@ -26,7 +26,15 @@ class AuthenticationController extends Controller
                 return response()->json(['message' => 'Password provided is not correct', 'password'=> true], 401);
             }
         }
-        $token = $user->createToken('mytoken')->plainTextToken;
+        // $token = $user->createToken('mytoken')->plainTextToken;
+        if($user->role == 'alumni'){
+            $token = $user->createToken('myToken', ['alumni'])->plainTextToken;
+        }elseif($user->role == 'admin'){
+            $token = $user->createToken('myToken', ['admin'])->plainTextToken;
+        }else{
+            $token = $user->createToken('myToken', ['ero'])->plainTextToken;
+        }
+
         return response()->json([
             'user' => $user,
             'token' => $token,
@@ -44,6 +52,15 @@ class AuthenticationController extends Controller
         $user = new User();
         $user->role = 'ero';
         $user->email = $request->email;
+        $user->save();
+    }
+
+    public function inviteAlumni(Request $request){
+        (new SendMailController)->sendMailRegisterInfo($request);
+        $user = new User();
+        $user->role = 'alumni';
+        $user->email = $request->email;
+        $user->invited = true;
         $user->save();
     }
 
