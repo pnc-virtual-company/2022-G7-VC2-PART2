@@ -6,7 +6,7 @@
                     <h3>Fullname</h3>
                     <h3 class="absolute left-[20%]">Phone</h3>
                     <h3 class="absolute left-[44%]">Batch</h3>
-                    <h3 class="absolute left-[65%]">Gender</h3>
+                    <h3 class="absolute left-[65%]  ">Gender</h3>
                 </nav>
             </div>
             <card_item_alumni v-for="alumni in getAlumniRequest" :key="alumni" :alumniDatas="alumni.user" :batch="alumni.batch" :major="alumni.major" :id="alumni.id" :requestCheck="requestCheck">

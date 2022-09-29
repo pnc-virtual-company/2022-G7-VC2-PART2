@@ -17,6 +17,7 @@ class MajorSeeder extends Seeder
         $major = [
             [
                 'name' => "WEB",
+                'name' => "SNA",
             ]
         ];
         foreach ($major as $key => $value) {

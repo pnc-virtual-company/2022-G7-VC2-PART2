@@ -2,11 +2,11 @@
     <div class="block -mt-8 relative text-neutral-700 font-poppins" ref="table">
         <div class="flex justify-between">
             <h1 class="text-2xl font-extrabold">{{alumniData.first_name}} {{alumniData.last_name}}</h1>
-            <div >
+            <!-- <div >
                 <span  class="bg-white w-8 h-8 rounded-full flex justify-center cursor-pointer shadow-lg text-primary ">
                     <edit-icon @click="showForm = !showForm"></edit-icon>
                 </span>
-            </div>
+            </div> -->
         </div>
         <div class="flex mt-4">
             <phone-icon ></phone-icon>
@@ -36,9 +36,9 @@
                         <span>{{alumniData.gender}}</span>
                     </template>
                 </background-widget>
-                <div @click="alumniDetailInfo = !alumniDetailInfo"  class="ml-10 text-sky-500 underline cursor-pointer">
+                <!-- <div @click="alumniDetailInfo = !alumniDetailInfo"  class="ml-10 text-sky-500 underline cursor-pointer">
                     <span class="text-primary">Details</span>
-                </div>
+                </div> -->
                 <detail-info :alumniData="alumniData" v-if="alumniDetailInfo"/>
             </div>
         </div>
